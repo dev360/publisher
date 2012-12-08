@@ -2,12 +2,10 @@
 
 {% block content %} 
 
-  <div class="well">
-    Filter by category:
-    
-  </div>
+<div class="well">Filter by category:</div>
 
-  <div class="feeds">
+<div class="feeds">
+  {% for feed in feeds %}
     <div class="feed-item">
       <div class="wrap">
         <div class="image">
@@ -24,7 +22,8 @@
         <a href="#" class="btn">Like</a>
       </div>
     </div>
-    <hr />
-  </div>
+  {% endfor %}
+  <hr />
+</div>
 
 {% endblock %}

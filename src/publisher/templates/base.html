@@ -12,14 +12,13 @@
 
     <!-- Le styles -->
     <link href="/static/css/bootstrap.css" rel="stylesheet">
-    <link href="/static/css/screen.css" rel="stylesheet">
+    <link href="/static/css/styles.css" rel="stylesheet">
     <style type="text/css">
       body {
         padding-top: 60px;
         padding-bottom: 40px;
       }
     </style>
-    <link href="/static/css/bootstrap-responsive.css" rel="stylesheet">
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
     <!--[if lt IE 9]>
@@ -43,13 +42,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Publisher</a>
+          <a class="brand" href="/">Publisher</a>
 
           <div class="nav pull-right">
             <ul class="nav">
-              <li class="active"><a href="#">Channels</a></li>
+              <li><a href="#">Channels</a></li>
               {% if request.user.is_authenticated %}
-              <li><a href="#">Logout</a></li>
+              <li><a href="{% url auth_logout %}">Signout</a></li>
+              {% else %}
+              <li><a href="{% url auth_login %}">{% trans "Login" %}</a></li>
               {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
@@ -92,24 +93,9 @@
     {% scripts "app.js" %}
       js/lib/json2.js
       js/lib/html5.js
-      js/lib/backbone.tastypie.js
       js/lib/html5.js
       js/lib/bootstrap.min.js
       js/lib/bootstrap-tab.js
-
-      js/application.js
-
-      js/app/models/address.js
-      js/app/models/phonenumber.js
-      js/app/models/profile.js
-
-      js/app/views/profile.js
-
-      js/app/forms/base.js
-      js/app/forms/account.js
-
-      js/app/routers/account.js
-      js/app/routers/base.js
       
       js/common.js
     {% endscripts %}

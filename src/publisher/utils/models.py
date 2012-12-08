@@ -1,14 +1,14 @@
-import uuid 
+import uuid
 
 from django.core import serializers
-from django.contrib.gis.db import models
+from django.db import models
 from django.utils import simplejson
 
 
 class GUIDModel(models.Model):
-    """ A base model that uses GUIDs instead of 
+    """ A base model that uses GUIDs instead of
     auto-incrementing integers. """
-    
+
     id = models.CharField(primary_key=True, max_length=40, editable=False)
 
     def ensure_id(self):

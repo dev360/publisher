@@ -5,6 +5,11 @@
             {{ field }}
             {{ field.label }}
           </label>
+
+        {% elif field|field_type:"radioselect" %}
+        
+            {{ field.label }}
+            {{ field }}
         {% else %}
           {{ field }}
         {% endif %}

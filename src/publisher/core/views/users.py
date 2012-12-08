@@ -32,7 +32,16 @@ def user_share(request):
     """
     User detail view
     """
+    user = get_object_or_404(User, id=request.user.id)
+
     form = CreateFeedForm()
+
+    if request.method == 'POST':
+        form = CreateFeedForm(request.POST)
+
+        if form.is_valid():
+            feed = form.save(user=user)
+            raise Exception(feed)
 
     return render_to_response('core/users/share.html', {
         'form': form,

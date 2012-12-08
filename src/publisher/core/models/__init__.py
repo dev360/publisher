@@ -17,7 +17,7 @@ class Feed(models.Model):
         (5, _('$5')),
     )
 
-    publisher = models.ForeignKey(User, verbose_name=_('publisher'))
+    publisher = models.ForeignKey(User, verbose_name=_('publisher'), blank=True)
     title = models.CharField(_('channel name'), max_length=70) # NEVER CHANGE: for twitter
     slug = models.CharField(_('slug'), max_length=200, editable=False)
     description = models.TextField(_('channel description'))

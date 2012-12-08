@@ -475,6 +475,9 @@ svg .title {
   color: #005580;
   text-decoration: underline;
 }
+.control-group ul li {
+  list-style-type: none;
+}
 .chart .chart-type {
   margin-left: 10px;
 }

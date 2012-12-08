@@ -3,6 +3,7 @@ South==0.7.6
 aino-jstools==0.1.0.6
 django-registration==0.8
 django-shrink==0.0.3.3
+django-storages==1.1.5
 psycopg2==2.4.5
 pyScss==1.0.6
 virtualenv==1.7.1.2

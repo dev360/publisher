@@ -1,0 +1,12 @@
+{% extends "base_full.html" %}
+
+{% block primary %} 
+
+<ul class="nav nav-tabs">
+  <li {% if page == 'feeds' %}class="active"{% endif %}><a href="#">Feeds</a></li>
+  <li {% if page == 'create-content' %}class="active"{% endif %}><a href="#">Create Content</a></li>
+</ul>
+
+
+
+{% endblock %}

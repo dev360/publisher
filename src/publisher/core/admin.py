@@ -8,7 +8,7 @@ log = logging.getLogger(__name__)  # Get an instance of a logger
 
 
 class FeedAdmin(admin.ModelAdmin):
-    list_display = ('date_created',)
+    list_display = ('title', 'date_created',)
 admin.site.register(Feed, FeedAdmin)
 
 

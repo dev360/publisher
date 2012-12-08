@@ -14,7 +14,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 
 from auth.models import Profile
-from auth.forms import ProfileForm, UserInvitationForm
+from auth.forms import ProfileForm
 
 
 

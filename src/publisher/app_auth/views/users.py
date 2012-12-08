@@ -12,4 +12,4 @@ from django.utils.translation import ugettext_lazy, ugettext as _
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 
-from auth.models import Profile
+from app_auth.models import Profile

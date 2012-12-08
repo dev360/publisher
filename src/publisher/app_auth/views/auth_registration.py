@@ -18,8 +18,8 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 from django.conf import settings
 
-from auth.models import Profile
-from auth.forms import AuthenticationForm, RegistrationForm
+from app_auth.models import Profile
+from app_auth.forms import AuthenticationForm, RegistrationForm
 
 
 @transaction.commit_on_success

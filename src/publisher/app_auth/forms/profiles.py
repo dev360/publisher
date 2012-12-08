@@ -5,7 +5,7 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
 
-from auth.models import User, Profile
+from app_auth.models import User, Profile
 from utils import forms
 
 

@@ -12,5 +12,17 @@ from utils import forms
 class CreateFeedForm(forms.ModelForm):
     """ This form is for adding/editing the profile """
 
+    def __init__(self, *args, **kwargs):
+        super(CreateFeedForm, self).__init__(*args, **kwargs)
+
+        placeholder_fields = ['title', 'description', 'image']
+        for name in placeholder_fields:
+            self.fields[name].widget.attrs = {
+                'placeholder': self.fields[name].label,
+                'class': 'input-large',
+            }
+
+
+
     class Meta:
         model = Feed

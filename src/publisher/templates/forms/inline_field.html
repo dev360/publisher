@@ -1,5 +1,5 @@
 {% load utils %}
-        <span class="control-group{% if field.field.required %} required{% endif %}{% if field.errors %} error{% endif %}">
+        <div class="control-group{% if field.field.required %} required{% endif %}{% if field.errors %} error{% endif %}">
         {% if field|field_type:"checkboxinput" %}
           <label class="checkbox">
             {{ field }}
@@ -10,4 +10,4 @@
         {% endif %}
 
         {% for error in field.errors %}<p class="help-block">{{ error }}</p>{% endfor %}
-        </span>
+        </div>

@@ -16,7 +16,7 @@ class Feed(models.Model):
     )
 
     publisher = models.ForeignKey(User, verbose_name=_('publisher'))
-    title = models.CharField(_('title'), max_length=200)
+    title = models.CharField(_('feed name'), max_length=200)
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)

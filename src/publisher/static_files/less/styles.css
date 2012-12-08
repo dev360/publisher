@@ -486,3 +486,15 @@ hr {
 .chart .chart-type {
   margin-left: 10px;
 }
+.feeds .feed-item {
+  display: inline-block;
+  width: 100%;
+  overflow: auto;
+}
+.feeds .feed-item .image {
+  padding: 20px 10px 0 0;
+  float: left;
+}
+.feeds .feed-item .content {
+  float: left;
+}

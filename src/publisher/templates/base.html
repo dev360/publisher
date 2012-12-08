@@ -43,26 +43,14 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Project name</a>
+          <a class="brand" href="#">Publisher</a>
 
-          {% if request.user.is_authenticated %}
-          <div class="btn-group pull-right">
-            <a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><i class="icon-user"></i>{{ request.user.username }}<span class="caret"></span></a>
-            <ul class="dropdown-menu">
-              <li><a href="{% url profile-index %}">{% trans "Profile" %}</a></li>
-              <li class="divider"></li>
-              <li><a href="{% url auth_logout %}">{% trans "Log out" %}</a></li>
-            </ul>
-          </div>
-          {% else %}
-            <div class="btn-group pull-right">
-              <a href="{% url auth_login %}" class="btn btn-primary">{% trans "Login" %}</a>
-              <a href="{% url register %}" class="btn btn-primary">{% trans "Register" %}</a>
-            </div> 
-          {% endif %}
-          <div class="nav">
+          <div class="nav pull-right">
             <ul class="nav">
-              <li class="active"><a href="#">{% trans "Home" %}</a></li>
+              <li class="active"><a href="#">Channels</a></li>
+              {% if request.user.is_authenticated %}
+              <li><a href="#">Logout</a></li>
+              {% endif %}
             </ul>
           </div><!--/.nav-collapse -->
         </div>

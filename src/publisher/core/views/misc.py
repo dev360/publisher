@@ -18,8 +18,15 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 from django.conf import settings
 
+from auth.forms import AuthenticationForm, RegistrationForm
+
 
 def index(request):
+
+    login_form = AuthenticationForm()
+    registration_form = RegistrationForm()
+
+
     return render_to_response('core/index.html', {}, RequestContext(request))
 
 def terms_of_service(request):

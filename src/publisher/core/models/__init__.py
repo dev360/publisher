@@ -15,6 +15,8 @@ class Feed(models.Model):
     image = models.URLField(_('image'), null=True, blank=True)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
+    def __unicode__(self):
+        return self.title
 
 class FeedReview(models.Model):
     """
@@ -45,11 +47,12 @@ class FeedItem(models.Model):
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=200)
     teaser = models.TextField(_('teaser'), blank=True)
-    description = models.TextField(_('description'))
+    text = models.TextField(_('text'))
     is_sample = models.BooleanField(_('is sample'), default=False)
+    type = models.CharField(_('type'), max_length=50, choices=FEED_ITEMS_CHOICES, default='other', blank=True)
+    file = models.FileField(_('file'), upload_to='attachments', blank=True)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
-    type = models.CharField(_('type'), max_length=50, choices=FEED_ITEMS_CHOICES, default='other')
-    file = models.FileField(_('file'), upload_to='attachments')
+    date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 
 
 class Like(models.Model):

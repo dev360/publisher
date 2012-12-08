@@ -43,13 +43,15 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="#">Publisher</a>
+          <a class="brand" href="/">Publisher</a>
 
           <div class="nav pull-right">
             <ul class="nav">
-              <li class="active"><a href="#">Channels</a></li>
+              <li><a href="#">Channels</a></li>
               {% if request.user.is_authenticated %}
-              <li><a href="#">Logout</a></li>
+              <li><a href="{% url auth_logout %}">Signout</a></li>
+              {% else %}
+              <li><a href="{% url auth_login %}">{% trans "Login" %}</a></li>
               {% endif %}
             </ul>
           </div><!--/.nav-collapse -->

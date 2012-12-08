@@ -15,7 +15,7 @@ class Feed(models.Model):
         (5, _('$5')),
     )
 
-    publisher = models.ForeignKey(User, verbose_name=_('publisher'))
+    publisher = models.ForeignKey(User, verbose_name=_('publisher'), related_name="feeds")
     title = models.CharField(_('title'), max_length=200)
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)

@@ -95,7 +95,7 @@ INSTALLED_APPS = (
     'south',
 
     'api',
-    'auth',
+    'app_auth',
     'core',
     'utils',
 

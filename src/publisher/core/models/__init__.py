@@ -60,7 +60,7 @@ class FeedItem(models.Model):
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=200)
     teaser = models.TextField(_('teaser'), blank=True)
-    text = models.TextField(_('text'))
+    text = models.TextField(_('text'), blank=True)
     is_sample = models.BooleanField(_('is sample'), default=False)
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES, default='other', blank=True)
     file = models.FileField(_('file'), upload_to='attachments', blank=True)

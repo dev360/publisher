@@ -44,11 +44,10 @@ class Profile(GUIDModel):
     Profile object with some basic contact
     information.
     """
-    status = models.CharField(_('status'), max_length=10, editable=False, default='NEW', choices=PROFILE_STATUS_CHOICES)
-    activation_key = models.CharField(_('activation key'), editable=False, default='', max_length=100)
+    status = models.CharField(_('status'), max_length=10, editable=True, default='NEW', choices=PROFILE_STATUS_CHOICES)
+    activation_key = models.CharField(_('activation key'), editable=True, default='', max_length=100)
 
-    user = models.OneToOneField(User, verbose_name=_('user'),
-            related_name='profile', editable=False, unique=True)
+    user = models.OneToOneField(User, verbose_name=_('user'), related_name='profile', editable=True, unique=True)
 
     objects = ProfileManager()
 

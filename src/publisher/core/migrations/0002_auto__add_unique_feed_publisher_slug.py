@@ -8,15 +8,13 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding field 'Feed.price_plan'
-        db.add_column('core_feed', 'price_plan',
-                      self.gf('django.db.models.fields.IntegerField')(default=1),
-                      keep_default=False)
+        # Adding unique constraint on 'Feed', fields ['publisher', 'slug']
+        db.create_unique('core_feed', ['publisher_id', 'slug'])
 
 
     def backwards(self, orm):
-        # Deleting field 'Feed.price_plan'
-        db.delete_column('core_feed', 'price_plan')
+        # Removing unique constraint on 'Feed', fields ['publisher', 'slug']
+        db.delete_unique('core_feed', ['publisher_id', 'slug'])
 
 
     models = {
@@ -57,28 +55,28 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         'core.feed': {
-            'Meta': {'object_name': 'Feed'},
+            'Meta': {'unique_together': "(('publisher', 'slug'),)", 'object_name': 'Feed'},
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'description': ('django.db.models.fields.TextField', [], {}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'price_plan': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
-            'publishers': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'publishers+'", 'symmetrical': 'False', 'to': "orm['auth.User']"}),
-            'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'subscribers+'", 'blank': 'True', 'to': "orm['auth.User']"}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'})
+            'publisher': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '70'})
         },
         'core.feeditem': {
-            'Meta': {'object_name': 'FeedItem'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'authored'", 'to': "orm['auth.User']"}),
+            'Meta': {'unique_together': "(('feed', 'slug'),)", 'object_name': 'FeedItem'},
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'feed_items'", 'to': "orm['core.Feed']"}),
             'file': ('django.db.models.fields.files.FileField', [], {'max_length': '100', 'blank': 'True'}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_sample': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
+            'slug': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
             'teaser': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
-            'text': ('django.db.models.fields.TextField', [], {}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'text': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '70'}),
             'type': ('django.db.models.fields.CharField', [], {'default': "'other'", 'max_length': '50', 'blank': 'True'})
         },
         'core.feedreview': {
@@ -90,6 +88,13 @@ class Migration(SchemaMigration):
             'score': ('django.db.models.fields.IntegerField', [], {'default': '5'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reviews'", 'to': "orm['auth.User']"})
+        },
+        'core.feedsubscriber': {
+            'Meta': {'object_name': 'FeedSubscriber'},
+            'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Feed']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'start_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'core.like': {
             'Meta': {'object_name': 'Like'},

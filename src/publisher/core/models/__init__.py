@@ -1,12 +1,14 @@
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext as _
 from django.db import models
+from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext as _
 
 
 class Feed(models.Model):
     """
     Feed
     """
+
     PRICE_CHOICES = (
         (1, _('$1')),
         (2, _('$2')),
@@ -15,21 +17,30 @@ class Feed(models.Model):
         (5, _('$5')),
     )
 
-    publisher = models.ForeignKey(User, verbose_name=_('publisher'), related_name="feeds")
-    title = models.CharField(_('title'), max_length=200)
+    publisher = models.ForeignKey(User, verbose_name=_('publisher'))
+    title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
+    slug = models.CharField(_('slug'), max_length=200, editable=False)
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
+    class Meta:
+        app_label = 'core'
+        unique_together = ('publisher', 'slug',)
+
     def __unicode__(self):
         return u'%s' % self.title
 
+    def save(self, **kwargs):
+        self.slug = slugify(self.title)
+        super(Feed, self).save(**kwargs)
 
 class FeedSubscriber(models.Model):
     """
     Feed Subscriber
     """
+
     feed = models.ForeignKey(Feed, verbose_name=_('feed'), db_index=True)
     user = models.ForeignKey(User, verbose_name=_('user'), db_index=True)
     start_date = models.DateTimeField(_('start date'), auto_now_add=True)
@@ -50,6 +61,9 @@ class FeedReview(models.Model):
     description = models.TextField(_('description'))
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
+    class Meta:
+        app_label = 'core'
+
     def __unicode__(self):
         return u'User ID %s review of Feed ID %s, with a score of %s' % (self.user.id, self.feed.id, self.score)
 
@@ -69,6 +83,7 @@ class FeedItem(models.Model):
 
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
+    slug = models.CharField(_('slug'), max_length=200)
     teaser = models.TextField(_('teaser'), blank=True)
     text = models.TextField(_('text'), blank=True)
     is_sample = models.BooleanField(_('is sample'), default=False)
@@ -77,12 +92,21 @@ class FeedItem(models.Model):
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 
+    class Meta:
+        app_label = 'core'
+        unique_together = ('feed', 'slug',)
+
     def __unicode__(self):
         return u'%s' % self.title
+
+    def save(self, **kwargs):
+        self.slug = slugify(self.title)
+        super(FeedItem, self).save(**kwargs)
 
 
 class Like(models.Model):
     user = models.ForeignKey(User, related_name="likes")
     feed_item = models.ForeignKey(FeedItem, related_name="likes")
 
-
+    class Meta:
+        app_label = 'core'

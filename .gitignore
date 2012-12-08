@@ -1,0 +1,17 @@
+settingslocal.py
+*.pyc
+._*
+.svn
+.DS_Store
+cfg/publisher
+src/publisher/static_files/images/stations/
+src/publisher/static/images/stations/
+src/publisher/static
+.project
+.settings
+.pydevproject
+*.swp
+*.swo
+*.py~
+*.db
+.ropeproject

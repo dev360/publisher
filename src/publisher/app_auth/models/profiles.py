@@ -132,7 +132,6 @@ class Profile(GUIDModel):
         return self.user.username
 
     class Meta:
-        app_label = 'core'
         verbose_name = _('user profile')
         verbose_name_plural = _('user profiles')
 

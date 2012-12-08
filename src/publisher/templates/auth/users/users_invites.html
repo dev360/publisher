@@ -1,0 +1,79 @@
+{% extends "base_3-9.html" %}
+{% load i18n %}
+
+{% block primary %}
+  <div class="section">
+    <h1>{% trans "Manage Users" %}</h1>
+    <br />
+    <ul class="nav nav-tabs">
+      <li><a href="{% url users-index %}">{% trans "Users" %}</a></li>
+      <li class="active"><a href="{% url users-invites %}">{% trans "Invitations" %}</a></li>
+    </ul>
+
+    {% with invite_form1 as form %}
+    <h3>Inivite Users</h3>
+    <p>You can invite users to join
+    this organization by entering their
+    information below</p>
+    <form id="invite-user" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form" class="well form-inline">{% csrf_token %}{% block form_top %}{% endblock %}
+      {% csrf_token %}
+
+      {% if form.errors %}
+      <div class="alert alert-error">
+      {% if form.non_field_errors %}
+       {% for error in form.non_field_errors %}
+        {{error}}
+       {% endfor%}
+      {% else %}
+       {% blocktrans count form.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below:{% endblocktrans %}
+      {% endif %}
+      </div>{% endif %}
+
+      {% for field in form %}
+        {% include "forms/inline_field.html" %}
+      {% endfor %}
+      <input type="submit" value="Invite" class="btn btn-primary" />
+    </form>
+
+    {% endwith %}
+
+    <hr />
+
+    {% if users %} 
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>{% trans "First Name" %}</th>
+          <th>{% trans "Last Name" %}</th>
+          <th>{% trans "Email" %}</th>
+          <th>{% trans "Status" %}</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        
+         {% for invite in users %}
+        <tr>
+          <td>{{ invite.first_name }}</td>
+          <td>{{ invite.last_name }}</td>
+          <td>{{ invite.email }}</td>
+          <td>{{ invite.get_status_display }}</td>
+        </tr>
+         {% endfor %}
+      </tbody>
+    </table>
+    {% else %}
+      <div class="alert alert-info">
+        {% trans "You do not have any invitations yet" %}
+      </div>
+    {% endif %}
+
+
+
+  </div>
+{% endblock %}
+
+{% block menu %}
+  {% include "core/includes/user_menu.html" %}
+{% endblock %}
+

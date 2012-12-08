@@ -1,0 +1,56 @@
+{% extends "base_3-9.html" %}
+{% load i18n utils %}
+
+{% block primary %}
+  <div class="section profile edit">
+    <h1>Manage Profile</h1>
+    <br />
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="{% url profile-edit %}">{% trans "Profile" %}</a></li>
+    </ul>
+
+    <div id="account-form">
+    </div>
+
+    <div>
+      <form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form" class="form-inline">{% csrf_token %}{% block form_top %}{% endblock %}
+        {% csrf_token %}
+
+      {% if saved %}
+        <div class="alert alert-success">
+          {% trans "Your changes have been saved." %}
+        </div>
+      {% endif %}
+
+      {% if form.errors %}
+        <div class="alert alert-error">
+          {% blocktrans count form.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below:{% endblocktrans %} 
+          {{ form.non_field_errors }}
+        </div>
+      {% else %}
+
+      {% endif %}
+        
+        <fieldset>
+          <div class="form-row names">
+            {{ form|formfields:"first_name,middle_name,last_name" }}
+          </div>
+          <hr />
+          <div class="form-row">
+            {{ form|formfields:"job_title" }}
+          </div>   
+          <div class="form-row">
+            {{ form|formfields:"company" }}
+          </div>
+          <div class="form-actions">
+            <input class=" btn btn-primary" type="submit" value="{% trans "Save" %}" />
+          </div>
+        </fieldset>
+        </form>
+    </div>
+  </div>
+{% endblock %}
+
+{% block menu %}
+  {% include "core/includes/user_menu.html" %}
+{% endblock %}

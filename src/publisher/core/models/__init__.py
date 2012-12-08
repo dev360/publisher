@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
-from django.utils.translation import ugettext as _
 from django.db import models
+from django.template.defaultfilters import slugify
+from django.utils.translation import ugettext as _
 
 
 class Feed(models.Model):
@@ -19,6 +20,7 @@ class Feed(models.Model):
     publishers = models.ManyToManyField(User, related_name="publishers+")
     subscribers = models.ManyToManyField(User, related_name="subscribers+", blank=True)
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
+    slug = models.CharField(_('slug'), max_length=200)
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
@@ -26,6 +28,10 @@ class Feed(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.title
+
+    def save(self, **kwargs):
+        self.slug = slugify(self.title)
+        super(Feed, self).save(**kwargs)
 
 class FeedReview(models.Model):
     """
@@ -59,6 +65,7 @@ class FeedItem(models.Model):
     author = models.ForeignKey(User, related_name="authored")
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
+    slug = models.CharField(_('slug'), max_length=200)
     teaser = models.TextField(_('teaser'), blank=True)
     text = models.TextField(_('text'), blank=True)
     is_sample = models.BooleanField(_('is sample'), default=False)
@@ -67,8 +74,15 @@ class FeedItem(models.Model):
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 
+    class Meta:
+        unique_together = ('feed', 'slug',)
+
     def __unicode__(self):
         return u'%s' % self.title
+
+    def save(self, **kwargs):
+        self.slug = slugify(self.title)
+        super(FeedItem, self).save(**kwargs)
 
 
 class Like(models.Model):

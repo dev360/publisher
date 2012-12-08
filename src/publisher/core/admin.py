@@ -18,6 +18,6 @@ admin.site.register(FeedReview, FeedReviewAdmin)
 
 
 class FeedItemAdmin(admin.ModelAdmin):
-    list_display = ('feed', 'author', 'title',)
+    list_display = ('feed', 'title',)
 admin.site.register(FeedItem, FeedItemAdmin)
 

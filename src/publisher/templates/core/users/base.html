@@ -1,0 +1,13 @@
+{% extends "base_full.html" %}
+
+{% block primary %} 
+  <ul class="nav nav-tabs">
+    <li {% if page == 'feeds' %}class="active"{% endif %}><a href="{% url user_detail request.user.username %}">My Feeds</a></li>
+    <li {% if page == 'share' %}class="active"{% endif %}><a href="/share/">Share Content &amp; Make Money</a></li>
+  </ul>
+
+  {% block content %}
+  {% endblock %}
+
+{% endblock %}
+

@@ -1,15 +1,6 @@
-{% extends "base_full.html" %}
+{% extends "core/users/base.html" %}
 
-{% block primary %} 
-
-<ul class="nav nav-tabs">
-
-
-
-  <li {% if page == 'feeds' %}class="active"{% endif %}><a href="#">My Feeds</a></li>
-  <li {% if page == 'create-content' %}class="active"{% endif %}><a href="#">Share Content &amp; Make Money</a></li>
-</ul>
-
+{% block content %} 
 
   <div class="well">
     Filter by category:
@@ -18,13 +9,19 @@
 
   <div class="feeds">
     <div class="feed-item">
-      <div class="image">
-        <img src="http://placehold.it/75x75" />
+      <div class="wrap">
+        <div class="image">
+          <img src="http://placehold.it/75x75" />
+        </div>
+        <div class="content">
+          <h3>Peepcode</h3>
+          <p class="lead">Feed Post Title</p>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+        </div>
       </div>
-      <div class="content">
-        <h3>Peepcode</h3>
-        <p class="lead">Feed Post Title</p>
-        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+      <div class="actions">
+        <a href="#" class="btn">Share</a>
+        <a href="#" class="btn">Like</a>
       </div>
     </div>
     <hr />

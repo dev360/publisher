@@ -19,7 +19,7 @@ class Feed(models.Model):
 
     publisher = models.ForeignKey(User, verbose_name=_('publisher'))
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
-    slug = models.CharField(_('slug'), max_length=200)
+    slug = models.CharField(_('slug'), max_length=200, editable=False)
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
@@ -27,6 +27,7 @@ class Feed(models.Model):
 
     class Meta:
         app_label = 'core'
+        unique_together = ('publisher', 'slug',)
 
     def __unicode__(self):
         return u'%s' % self.title

@@ -138,4 +138,7 @@ AWS_HEADERS = {
     'Cache-Control': 'max-age=86400',
 }
 
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False
+}
 INTERNAL_IPS = ('127.0.0.1',)

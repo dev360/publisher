@@ -58,6 +58,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 
@@ -97,7 +98,9 @@ INSTALLED_APPS = (
     'auth',
     'core',
     'utils',
+
     'storages',
+    'debug_toolbar',
 )
 
 LOGIN_REDIRECT_URL = '/profile/'
@@ -134,3 +137,5 @@ AWS_HEADERS = {
     'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
     'Cache-Control': 'max-age=86400',
 }
+
+INTERNAL_IPS = ('127.0.0.1',)

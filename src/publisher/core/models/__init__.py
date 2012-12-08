@@ -17,8 +17,7 @@ class Feed(models.Model):
         (5, _('$5')),
     )
 
-    publishers = models.ManyToManyField(User, related_name="publishers+")
-    subscribers = models.ManyToManyField(User, related_name="subscribers+", blank=True)
+    publisher = models.ForeignKey(User, verbose_name=_('publisher'))
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
     slug = models.CharField(_('slug'), max_length=200)
     description = models.TextField(_('description'))
@@ -26,12 +25,28 @@ class Feed(models.Model):
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
+    class Meta:
+        app_label = 'core'
+
     def __unicode__(self):
         return u'%s' % self.title
 
     def save(self, **kwargs):
         self.slug = slugify(self.title)
         super(Feed, self).save(**kwargs)
+
+class FeedSubscriber(models.Model):
+    """
+    Feed Subscriber
+    """
+
+    feed = models.ForeignKey(Feed, verbose_name=_('feed'), db_index=True)
+    user = models.ForeignKey(User, verbose_name=_('user'), db_index=True)
+    start_date = models.DateTimeField(_('start date'), auto_now_add=True)
+
+    class Meta:
+        app_label = 'core'
+
 
 class FeedReview(models.Model):
     """
@@ -44,6 +59,9 @@ class FeedReview(models.Model):
     title = models.CharField(_('title'), max_length=50, blank=True)
     description = models.TextField(_('description'))
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
+
+    class Meta:
+        app_label = 'core'
 
     def __unicode__(self):
         return u'User ID %s review of Feed ID %s, with a score of %s' % (self.user.id, self.feed.id, self.score)
@@ -62,7 +80,6 @@ class FeedItem(models.Model):
         ('other', _('Other')),
     )
 
-    author = models.ForeignKey(User, related_name="authored")
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
     slug = models.CharField(_('slug'), max_length=200)
@@ -75,6 +92,7 @@ class FeedItem(models.Model):
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 
     class Meta:
+        app_label = 'core'
         unique_together = ('feed', 'slug',)
 
     def __unicode__(self):
@@ -89,4 +107,5 @@ class Like(models.Model):
     user = models.ForeignKey(User, related_name="likes")
     feed_item = models.ForeignKey(FeedItem, related_name="likes")
 
-
+    class Meta:
+        app_label = 'core'

@@ -2,38 +2,33 @@
 {% load i18n utils %}
 
 {% block content %}
+  <div class="share">
+    <h3>Marketing Hoopla</h3>
+    <p class="lead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
 
-  <h3>Marketing Hoopla</h3>
-  <p class="lead">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt.</p>
+        <form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form" class="form-inline">{% csrf_token %}{% block form_top %}{% endblock %}
+          {% csrf_token %}
 
-      <form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form" class="form-inline">{% csrf_token %}{% block form_top %}{% endblock %}
-        {% csrf_token %}
-
-      {% if form.errors %}
-        <div class="alert alert-error">
-          {% blocktrans count form.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below:{% endblocktrans %} 
-          {{ form.non_field_errors }}
-        </div>
-      {% else %}
-
-      {% endif %}
-        
-        <fieldset>
-          <div class="form-row names">
-            {{ form|formfields:"first_name,middle_name,last_name" }}
+        {% if form.errors %}
+          <div class="alert alert-error">
+            {% blocktrans count form.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below:{% endblocktrans %} 
+            {{ form.non_field_errors }}
           </div>
-          <hr />
-          <div class="form-row">
-            {{ form|formfields:"job_title" }}
-          </div>   
-          <div class="form-row">
-            {{ form|formfields:"company" }}
-          </div>
-          <div class="form-actions">
-            <input class=" btn btn-primary" type="submit" value="{% trans "Save" %}" />
-          </div>
-        </fieldset>
-      </form>
+        {% else %}
 
+        {% endif %}
+
+          <fieldset>
+            {{ form|formfields:"title" }}
+            {{ form|formfields:"description" }}
+            {{ form|formfields:"image" }}
+            {{ form|formfields:"price_plan" }}
+
+            <div class="actions">
+              <input class=" btn btn-primary" type="submit" value="{% trans "Save" %}" />
+            </div>
+          </fieldset>
+        </form>
+      </div>
 
 {% endblock %}

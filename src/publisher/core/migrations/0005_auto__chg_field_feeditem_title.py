@@ -3,31 +3,16 @@ import datetime
 from south.db import db
 from south.v2 import SchemaMigration
 from django.db import models
-from core.models import Feed, FeedItem
 
 
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
 
-        for feed in Feed.objects.all():
-            feed.title = feed.title[:70]
-            feed.save()
-
-        for item in FeedItem.objects.all():
-            item.title = feed.title[:70]
-            item.save()
-
-        # Changing field 'Feed.title'
-        db.alter_column('core_feed', 'title', self.gf('django.db.models.fields.CharField')(max_length=70))
-
         # Changing field 'FeedItem.title'
         db.alter_column('core_feeditem', 'title', self.gf('django.db.models.fields.CharField')(max_length=70))
 
     def backwards(self, orm):
-
-        # Changing field 'Feed.title'
-        db.alter_column('core_feed', 'title', self.gf('django.db.models.fields.CharField')(max_length=200))
 
         # Changing field 'FeedItem.title'
         db.alter_column('core_feeditem', 'title', self.gf('django.db.models.fields.CharField')(max_length=200))
@@ -76,13 +61,11 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'image': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True', 'blank': 'True'}),
             'price_plan': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
-            'publishers': ('django.db.models.fields.related.ManyToManyField', [], {'related_name': "'publishers+'", 'symmetrical': 'False', 'to': "orm['auth.User']"}),
-            'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'symmetrical': 'False', 'related_name': "'subscribers+'", 'blank': 'True', 'to': "orm['auth.User']"}),
-            'title': ('django.db.models.fields.CharField', [], {'max_length': '70'})
+            'publisher': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"}),
+            'title': ('django.db.models.fields.CharField', [], {'max_length': '200'})
         },
         'core.feeditem': {
             'Meta': {'object_name': 'FeedItem'},
-            'author': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'authored'", 'to': "orm['auth.User']"}),
             'date_created': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
             'date_modified': ('django.db.models.fields.DateTimeField', [], {'auto_now': 'True', 'blank': 'True'}),
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'feed_items'", 'to': "orm['core.Feed']"}),
@@ -103,6 +86,13 @@ class Migration(SchemaMigration):
             'score': ('django.db.models.fields.IntegerField', [], {'default': '5'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '50', 'blank': 'True'}),
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reviews'", 'to': "orm['auth.User']"})
+        },
+        'core.feedsubscriber': {
+            'Meta': {'object_name': 'FeedSubscriber'},
+            'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Feed']"}),
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'start_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
         },
         'core.like': {
             'Meta': {'object_name': 'Like'},

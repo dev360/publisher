@@ -7,7 +7,6 @@ class Feed(models.Model):
     """
     Feed
     """
-
     PRICE_CHOICES = (
         (1, _('$1')),
         (2, _('$2')),
@@ -16,9 +15,8 @@ class Feed(models.Model):
         (5, _('$5')),
     )
 
-    publishers = models.ManyToManyField(User, related_name="publishers+")
-    subscribers = models.ManyToManyField(User, related_name="subscribers+", blank=True)
-    title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
+    publisher = models.ForeignKey(User, verbose_name=_('publisher'))
+    title = models.CharField(_('title'), max_length=200)
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
@@ -26,6 +24,19 @@ class Feed(models.Model):
 
     def __unicode__(self):
         return u'%s' % self.title
+
+
+class FeedSubscriber(models.Model):
+    """
+    Feed Subscriber
+    """
+    feed = models.ForeignKey(Feed, verbose_name=_('feed'), db_index=True)
+    user = models.ForeignKey(User, verbose_name=_('user'), db_index=True)
+    start_date = models.DateTimeField(_('start date'), auto_now_add=True)
+
+    class Meta:
+        app_label = 'core'
+
 
 class FeedReview(models.Model):
     """
@@ -56,7 +67,6 @@ class FeedItem(models.Model):
         ('other', _('Other')),
     )
 
-    author = models.ForeignKey(User, related_name="authored")
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
     teaser = models.TextField(_('teaser'), blank=True)

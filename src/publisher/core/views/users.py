@@ -13,6 +13,7 @@ from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 
+from core.forms import CreateFeedForm
 
 def user_detail(request, username):
     """
@@ -31,7 +32,10 @@ def user_share(request):
     """
     User detail view
     """
+    form = CreateFeedForm()
+
     return render_to_response('core/users/share.html', {
+        'form': form,
         'page': 'share',
     }, RequestContext(request))
 

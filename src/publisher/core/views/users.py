@@ -24,3 +24,12 @@ def user_detail(request, username):
         'page': 'feeds',
     }, RequestContext(request))
 
+
+def user_share(request):
+    """
+    User detail view
+    """
+    return render_to_response('core/users/share.html', {
+        'page': 'share',
+    }, RequestContext(request))
+

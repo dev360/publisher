@@ -1,12 +1,30 @@
-{% extends "base_full.html" %}
+{% extends "core/users/base.html" %}
 
-{% block primary %} 
+{% block content %} 
 
-<ul class="nav nav-tabs">
-  <li {% if page == 'feeds' %}class="active"{% endif %}><a href="#">Feeds</a></li>
-  <li {% if page == 'create-content' %}class="active"{% endif %}><a href="#">Create Content</a></li>
-</ul>
+  <div class="well">
+    Filter by category:
+    
+  </div>
 
-
+  <div class="feeds">
+    <div class="feed-item">
+      <div class="wrap">
+        <div class="image">
+          <img src="http://placehold.it/75x75" />
+        </div>
+        <div class="content">
+          <h3>Peepcode<span class="pull-right">Author name</span></h3>
+          <p class="lead">Feed Post Title</p>
+          <p>Lorem ipsum dolor sit amet, consectetuer adipiscing</p>
+        </div>
+      </div>
+      <div class="actions">
+        <a href="#" class="btn">Share</a>
+        <a href="#" class="btn">Like</a>
+      </div>
+    </div>
+    <hr />
+  </div>
 
 {% endblock %}

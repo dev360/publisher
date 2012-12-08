@@ -21,12 +21,9 @@ from auth.forms import ProfileForm, UserInvitationForm
 @login_required
 def profile_index(request):
 
-    profile = get_object_or_404(Profile, user=request.user)
-
-    return render_to_response('auth/profiles/index.html', {
-        'profile': profile,
-    }, RequestContext(request))
-
+    username = request.user.username
+    url = reverse('user_detail', kwargs={ 'username': username })
+    return HttpResponseRedirect(url)
 
 @login_required
 def profile_view(request, slug):

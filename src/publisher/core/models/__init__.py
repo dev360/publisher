@@ -41,3 +41,8 @@ class FeedItem(models.Model):
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
 
+class Like(models.Model):
+    user = models.ForeignKey(User, related_name="likes")
+    feed_item = models.ForeignKey(FeedItem, related_name="likes")
+
+

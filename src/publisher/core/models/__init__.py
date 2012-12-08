@@ -83,7 +83,7 @@ class FeedItem(models.Model):
 
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
-    slug = models.CharField(_('slug'), max_length=200)
+    slug = models.CharField(_('slug'), max_length=200, editable=False)
     teaser = models.TextField(_('teaser'), blank=True)
     text = models.TextField(_('text'), blank=True)
     is_sample = models.BooleanField(_('is sample'), default=False)

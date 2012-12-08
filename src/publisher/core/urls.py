@@ -15,8 +15,5 @@ urlpatterns = patterns('',
 
     # User views
 	url(r'^(?P<username>([^/])+)/$', views.user_detail, name='user_detail'),
-
-
-
 )
 

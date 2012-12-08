@@ -18,7 +18,7 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 from django.conf import settings
 
-from auth.forms import AuthenticationForm, RegistrationForm
+from app_auth.forms import AuthenticationForm, RegistrationForm
 
 
 def index(request):

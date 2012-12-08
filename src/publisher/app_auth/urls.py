@@ -5,7 +5,7 @@ from django.conf.urls.defaults import *
 from django.utils.http import urlquote
 
 
-from auth import views
+from app_auth import views
 
 urlpatterns = patterns('',
 

@@ -18,7 +18,7 @@ class Feed(models.Model):
 
     publishers = models.ManyToManyField(User, related_name="publishers+")
     subscribers = models.ManyToManyField(User, related_name="subscribers+", blank=True)
-    title = models.CharField(_('title'), max_length=200)
+    title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
     description = models.TextField(_('description'))
     image = models.URLField(_('image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
@@ -58,7 +58,7 @@ class FeedItem(models.Model):
 
     author = models.ForeignKey(User, related_name="authored")
     feed = models.ForeignKey(Feed, related_name="feed_items")
-    title = models.CharField(_('title'), max_length=200)
+    title = models.CharField(_('title'), max_length=70) # NEVER CHANGE: for twitter
     teaser = models.TextField(_('teaser'), blank=True)
     text = models.TextField(_('text'), blank=True)
     is_sample = models.BooleanField(_('is sample'), default=False)

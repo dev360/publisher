@@ -498,3 +498,6 @@ hr {
 .feeds .feed-item .wrap .content {
   float: left;
 }
+.feeds .feed-item .wrap .content h3 span {
+  font-size: 12px;
+}

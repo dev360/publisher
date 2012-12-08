@@ -97,6 +97,7 @@ INSTALLED_APPS = (
     'auth',
     'core',
     'utils',
+    'storages',
 )
 
 LOGIN_REDIRECT_URL = '/profile/'
@@ -121,3 +122,15 @@ TEMPLATE_DEBUG = DEBUG
 USE_CDN = False if ENVIRONMENT == 'dev' else True
 
 MEDIA_URL = '{0}/media/'.format(BASE_URL)
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+
+AWS_ACCESS_KEY_ID = '1VNS318E3TMK6DMHF982'
+AWS_SECRET_ACCESS_KEY = 'kFEpGXI8YGvEDcsuSTsQsb/w1daoP1EiRL9NY350'
+AWS_STORAGE_BUCKET_NAME = 'publisherapp'
+
+# see http://developer.yahoo.com/performance/rules.html#expires
+AWS_HEADERS = {
+    'Expires': 'Thu, 15 Apr 2010 20:00:00 GMT',
+    'Cache-Control': 'max-age=86400',
+}

@@ -32,6 +32,13 @@ class FeedItem(models.Model):
     """
     Feed Item
     """
+    FEED_ITEMS_CHOICES = (
+        ('audio', 'Audio'),
+        ('picture', 'Picture'),
+        ('text', 'Text'),
+        ('video', 'Video'),
+        ('other', 'Other'),
+    )
 
     feed = models.ForeignKey(Feed, related_name="feed_items")
     title = models.CharField(_('title'), max_length=50)
@@ -39,6 +46,8 @@ class FeedItem(models.Model):
     description = models.TextField(_('description'))
     is_sample = models.BooleanField(_('is sample'), default=False)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
+    type = models.CharField(_('type'), max_length=50, choices=FEED_ITEMS_CHOICES, default='other')
+    file = models.FileField(_('file'), upload_to='attachments')
 
 
 class Like(models.Model):

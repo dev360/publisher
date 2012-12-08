@@ -475,6 +475,26 @@ svg .title {
   color: #005580;
   text-decoration: underline;
 }
+body {
+  padding-top: 96px;
+  background: url(../img/body_bg.png) repeat top right;
+}
+hr {
+  border-top: 1px solid #9AB7BE;
+  border-bottom: 1px solid #EBFBFF;
+}
 .chart .chart-type {
   margin-left: 10px;
+}
+.feeds .feed-item .wrap {
+  display: inline-block;
+  width: 100%;
+  overflow: auto;
+}
+.feeds .feed-item .wrap .image {
+  padding: 20px 10px 0 0;
+  float: left;
+}
+.feeds .feed-item .wrap .content {
+  float: left;
 }

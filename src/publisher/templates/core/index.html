@@ -10,37 +10,39 @@
 
   <div class="container">
       {% for feed in feeds %}
-      <div class="slider-card">
-        <header>
-          <div class="publisher-detail">
-            <div class="avatar">
-              <img src="{{ feed.publisher.profile.gravatar_image }}" >
-            </div>
+      <div class="slider-wrapper">
+        <div class="slider-card">
+          <header>
+            <div class="publisher-detail">
+              <div class="avatar">
+                <img src="{{ feed.publisher.profile.gravatar_image }}" >
+              </div>
 
-            <div class="feed-info">
-              <h2>{{ feed.title }}</h2>
-              <span class="author">{{ feed.publisher.get_full_name|default:feed.publisher.username }}</span>
-              <ul class="publisher-stats">
-                <li>Post per month: <span>{{ feed.get_price_plan_display }}</span></li>
-                <li>Subscribers: <span>{{ feed.subscribers_count|intcomma }}</span></li>
+              <div class="feed-info">
+                <h2>{{ feed.title }}</h2>
+                <span class="author">{{ feed.publisher.get_full_name|default:feed.publisher.username }}</span>
+                <ul class="publisher-stats">
+                  <li>Post per month: <span>{{ feed.get_price_plan_display }}</span></li>
+                  <li>Subscribers: <span>{{ feed.subscribers_count|intcomma }}</span></li>
+                </ul>
+              </div>
+            </div>
+          </header>
+
+          <div class="featured-post">
+            <a href="{% url feed_detail feed.publisher.username feed.slug %}" class="button disclosure green">{{ feed.title }}</a>
+          </div>
+
+          <div class="meta-tags">
+            <div class="tags">
+              <ul>
+              {% for tag in feed_item.tags.all %}
+                <li>{{ tag.name }}</li>
+              {% empty %}
+                <li>None..</li>
+              {% endfor %}
               </ul>
             </div>
-          </div>
-        </header>
-
-        <div class="featured-post">
-          <a href="{% url feed_detail feed.publisher.username feed.slug %}" class="button disclosure green">{{ feed.title }}</a>
-        </div>
-
-        <div class="meta-tags">
-          <div class="tags">
-            <ul>
-            {% for tag in feed_item.tags.all %}
-              <li>{{ tag.name }}</li>
-            {% empty %}
-              <li>None..</li>
-            {% endfor %}
-            </ul>
           </div>
         </div>
       </div>

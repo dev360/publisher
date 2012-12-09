@@ -795,13 +795,22 @@ header.carousel-container h1 span {
   font-size: 64px;
   display: inline;
 }
+.slider-wrapper {
+  position: relative;
+  height: 239px;
+  width: 475px;
+  overflow: hidden;
+  margin: 50px auto;
+}
 .slider-card {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   background: white;
-  margin: 50px auto;
   width: 475px;
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 .slider-card header {
   background: #F0F0F1;
@@ -832,6 +841,9 @@ header.carousel-container h1 span {
 }
 .slider-card .meta-tags .tags {
   float: right;
+}
+.carousel-container .container {
+  height: 340px;
 }
 .publisher-detail {
   padding: 15px;

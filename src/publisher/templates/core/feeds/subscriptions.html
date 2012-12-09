@@ -28,7 +28,9 @@
             <div class="avatar">
               <img src="{{ feed.publisher.profile.gravatar_image }}" />
             </div>
-            <span class="pull-right icon icon-{{ feed_item.type }}"></span>
+            <div class="pull-right">
+              <span class=" icon icon-{{ feed.first.type }}"></span>
+            </div>
             <h1>
               {{ feed.title }} 
               <span class="date">{{ feed.first.date_modified|timesince }} ago</span>

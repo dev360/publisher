@@ -4,6 +4,9 @@
 
 {% block primary %}
   <div class="feed-detail">
+    <div class="avatar">
+      <img src="{{ feed.publisher.profile.gravatar_image }}" />
+    </div>
     <h1>{{ feed.title.title }}
       <span>By: {{ feed.publisher.get_full_name.title }}</span>
     </h1>

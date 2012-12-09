@@ -1,8 +1,19 @@
+.slider-wrapper {
+  position: relative;
+  height: 239px;
+  width: 475px;
+  overflow: hidden;
+  margin: 50px auto;
+}
+
 .slider-card {
   .border-radius(3px);
   background: white;
   width: 475px;
-  height: 405px;
+  position: absolute;
+  top: 0;
+  left: 0;
+
   header {
     background: #F0F0F1;
     .box-shadow(inset 0 1px 0 rgba(255,255,255, .615)); // Redeclare so transitions work
@@ -24,6 +35,13 @@
       float: right;
     }
   }
+}
+
+.carousel-container {
+  .container {
+    height: 340px;
+  }
+
 }
 
 

@@ -18,6 +18,7 @@ urlpatterns = patterns('',
     url(r'^create/$', views.feed_create, name='feed_create'),
 
     url(r'^subscriptions/$', views.feed_subscriptions, name='feed_subscriptions'),
+    url(r'^channels/$', views.channels, name='channels'),
 
     url(r'^(?P<username>([^/])+)/$', views.user_detail, name='user_detail'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/$', views.feed_detail, name='feed_detail'),

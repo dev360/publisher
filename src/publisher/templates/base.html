@@ -42,7 +42,7 @@
 
           <div class="nav pull-right">
             <ul class="nav">
-              <li><a href="#">Channels</a></li>
+              <li><a href="{% url channels %}">Channels</a></li>
               <li><a href="#">Become a Publisher</a></li>
               {% if request.user.is_authenticated %}
               <li><a href="{% url auth_logout %}">Signout</a></li>

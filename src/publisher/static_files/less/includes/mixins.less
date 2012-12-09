@@ -8,3 +8,20 @@
     color: white;
   }
 }
+
+.avatar{ /* selector for avatar class*/
+    float: left; /* we press to the left edge, flow around on the right */
+    background: #fff; /* background */
+    width: 69px; 
+    height: 69px; 
+    padding: 3px; /* internal padding ( top, right, bottom, left) */
+    border: 1px solid #BCBCBC; /* border(width, type, color) */
+    border-radius: 50%; /* border-radius is equal to 50 percent of a general width, actually 25 pixels, here and a circle was got(there is also with prefix - moz and - o) */
+}
+.avatar img{ /* selector for a picture which is "inside" the avatar class */
+    display: block; /* a picture is being displayed as a block, by a width it will be equal to the parent(in the div) */
+    width: 100%; /* width 100% */
+    border: 0; /* zero border */
+    margin: 0; /* external margin is lacking */
+    border-radius: 50%; /* read above */
+}

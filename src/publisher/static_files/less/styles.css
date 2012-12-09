@@ -488,6 +488,46 @@ svg .title {
   background-color: #4C6A72;
   color: white;
 }
+.avatar {
+  /* selector for avatar class*/
+
+  float: left;
+  /* we press to the left edge, flow around on the right */
+
+  background: #fff;
+  /* background */
+
+  width: 69px;
+  height: 69px;
+  padding: 3px;
+  /* internal padding ( top, right, bottom, left) */
+
+  border: 1px solid #BCBCBC;
+  /* border(width, type, color) */
+
+  border-radius: 50%;
+  /* border-radius is equal to 50 percent of a general width, actually 25 pixels, here and a circle was got(there is also with prefix - moz and - o) */
+
+}
+.avatar img {
+  /* selector for a picture which is "inside" the avatar class */
+
+  display: block;
+  /* a picture is being displayed as a block, by a width it will be equal to the parent(in the div) */
+
+  width: 100%;
+  /* width 100% */
+
+  border: 0;
+  /* zero border */
+
+  margin: 0;
+  /* external margin is lacking */
+
+  border-radius: 50%;
+  /* read above */
+
+}
 body {
   background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
 }
@@ -498,6 +538,7 @@ section.marketing {
   padding: 50px 0 60px;
 }
 section.marketing div.container h2 {
+  color: #445F66;
   padding: 0 120px 20px;
 }
 h1 {

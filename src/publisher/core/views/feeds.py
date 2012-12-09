@@ -15,6 +15,7 @@ from django.views.generic import View
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 from django.contrib.auth import authenticate
+from django.db.models import Q
 
 from auth.forms import RegistrationForm
 from core.forms import CreateFeedForm, CreateFeedItemForm, PaymentForm
@@ -116,14 +117,16 @@ def feed_detail(request, username, feed_slug):
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
     filter_options = FeedItem.TYPE_CHOICES
 
-    #if request.user.is_anonymous() or not feed.is_subscribed(request.user):
-        #return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
+
+    if request.user.is_anonymous() or not feed.is_subscribed(request.user):
+        return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
 
     form = CreateFeedItemForm()
 
     return render_to_response('core/feeds/detail.html', {
         'profile': user.profile,
         'feed': feed,
+        'feed_items': feed.feed_items.filter(Q(is_sample=True) | Q(feed__subscribers=request.user.id) | Q(feed__publisher=request.user)),
         'form': form,
         'filter_options': filter_options,
         'page': 'feeds',
@@ -147,8 +150,8 @@ class FeedDetailSubscribe(View):
         user = get_object_or_404(User, username=username)
         feed = get_object_or_404(Feed, publisher=user, slug=slug)
 
-        #if request.user.is_authenticated() and feed.is_subscribed(request.user):
-        #    return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
+        if request.user.is_authenticated() and feed.is_subscribed(request.user):
+            return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
 
         return handler(request, user, feed)
 

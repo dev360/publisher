@@ -56,64 +56,66 @@
 
 
     <div class="feed-items">
-      {% for feed_item in feed.feed_items.all %}
-        {% if feed_item.is_sample %}
-          <div class="feed-item">
-            <div class="wrap">
-              <span class="sample pull-right">
-                Sample Post
-              </span>
+      {% for feed_item in feed_items %}
+        <div class="feed-item">
+          <div class="wrap">
+            {% if feed_item.is_sample %}
+            <span class="sample pull-right">
+              Sample Post
+            </span>
+            {% endif %}
 
-              <header class="feed-title">
-                <div class="feed-header-inner">
-                  <span class="icon icon-{{ feed_item.type }}"></span>
-                  <h3><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a></h3>
-                  <span class="date">{{ feed_item.date_modified|timesince }} ago</span>
-                </div>
-              </header>
-
-              <div class="content {{feed_item.type}}">
-                <div class="content-inner">
-                  {% if feed_item.type == 'audio' %}
-                    <audio controls>
-                      <source src="{{ feed_item.file.url }}">
-                    </audio>
-                    <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
-                  {% elif feed_item.type == 'picture' %}
-                    <img src="{{ feed_item.file.url }}" />
-                  {% elif feed_item.type == 'text' %}
-                    <p>{{ feed_item.text|safe }}</p>
-                  {% elif feed_item.type == 'video' %}
-                    <video height="520px" width="346px" controls>
-                      <source src="{{ feed_item.file.url }}">
-                    </video>
-
-                    <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
-                  {% elif feed_item.type == 'other' %}
-                    <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
-                  {% endif %}
-                </div>
+            <header class="feed-title">
+              <div class="feed-header-inner">
+                <span class="icon icon-{{ feed_item.type }}"></span>
+                <h3><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a></h3>
+                <span class="date">{{ feed_item.date_modified|timesince }} ago</span>
               </div>
+            </header>
 
-            <div class="meta">
-                <div class="meta-inner">
-                  {% if feed_item.tags.exists %}
-                  <div class="tags pull-right">
-                    {% for tag in feed_item.tags.all %}
-                      <span><a href="#">{{ tag.name }}</a></span>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
-                  <div class="actions">
-                    <a href="#" class="button small">22 Comments</a>
-                    <a href="#" class="button small blue">Share</a>
-                    <a href="#" class="button small red">Love</a>
-                  </div>
+            <div class="content {{feed_item.type}}">
+              <div class="content-inner">
+              {% if feed_item.file %}
+                {% if feed_item.type == 'audio' %}
+                  <audio controls>
+                    <source src="{{ feed_item.file.url }}">
+                  </audio>
+                  <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+                {% elif feed_item.type == 'picture' %}
+                  <img src="{{ feed_item.file.url }}" />subscriptions
+                {% elif feed_item.type == 'text' %}
+                  <p>{{ feed_item.text|safe }}</p>
+                {% elif feed_item.type == 'video' %}
+                  <video height="520px" width="346px" controls>
+                    <source src="{{ feed_item.file.url }}">
+                  </video>
+
+                  <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+                {% elif feed_item.type == 'other' %}
+                  <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+                {% endif %}
+              {% endif %}
+              </div>
+            </div>
+
+          <div class="meta">
+              <div class="meta-inner">
+                {% if feed_item.tags.exists %}
+                <div class="tags pull-right">
+                  {% for tag in feed_item.tags.all %}
+                    <span><a href="#">{{ tag.name }}</a></span>
+                  {% endfor %}
+                </div>
+                {% endif %}
+                <div class="actions">
+                  <a href="#" class="button small">22 Comments</a>
+                  <a href="#" class="button small blue">Share</a>
+                  <a href="#" class="button small red">Love</a>
                 </div>
               </div>
             </div>
           </div>
-        {% endif %}
+        </div>
       {% endfor %}
     </div>
     </section>

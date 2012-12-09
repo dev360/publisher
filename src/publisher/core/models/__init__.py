@@ -36,6 +36,18 @@ class Feed(models.Model):
         # TODO: Fix it.
         return True
 
+    def posts_per_month(self):
+        return 4
+
+    def subscribers(self):
+        return 1534
+
+    def reviews_count(self):
+        return 500
+
+    def likes_count(self):
+        return 1024
+
     def save(self, **kwargs):
         self.slug = slugify(self.title)
         super(Feed, self).save(**kwargs)

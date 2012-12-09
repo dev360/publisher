@@ -50,7 +50,7 @@
     <section class="feed-item-wrapper">
     {% if request.user.id == feed.publisher.id %}
       <div class="create-feed-item-button">  
-        <a href="{% url feed_item_create feed.publisher.username feed.slug %}" class="btn btn-large">Post in Channel</a>
+        <a href="{% url feed_item_create feed.publisher.username feed.slug %}" class="btn-large button green">Post in Channel</a>
       </div>
     {% endif %}
 

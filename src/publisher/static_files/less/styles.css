@@ -479,6 +479,16 @@ svg .title {
 body {
   background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
 }
+h1 {
+  font-size: 32px;
+  font-weight: 400;
+}
+h1 span {
+  color: #878888;
+  font-size: 14px;
+  display: block;
+  line-height: 10px;
+}
 .navbar-inner {
   padding: 10px;
 }
@@ -492,9 +502,11 @@ body {
 .control-group ul li {
   list-style-type: none;
 }
-.feed-detail h3 span {
+.feed-detail h1 span {
   display: block;
-  font-size: 12px;
+  font-size: 14px;
+  color: #878888;
+  line-height: 10px;
 }
 .feeds .feed-item .wrap {
   display: inline-block;

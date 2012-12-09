@@ -128,7 +128,7 @@ class FeedDetailSubscribe(View):
         if request.is_ajax():
             response = {
                 'error': subscribe_form.errors,
-                'success': reverse('feed_detail', args=[
+                'success_url': reverse('feed_detail', args=[
                     feed.publisher.username,
                     feed.slug
                 ])

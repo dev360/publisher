@@ -27,7 +27,29 @@ header.carousel-container {
    }
   }
 
-  div.container { position:relative; }
+  div.container { position:relative; height: 400px; }
+
+  div.pagination {
+    z-index: 1000;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    float: left;
+    position: absolute;
+    left: 0px;
+    right: 700px;
+    top: 0px;
+    bottom: 0px;
+    background-color: black;
+
+    &.right {
+      float:right;
+      right:0;
+      left: 700px;
+    }
+  }
+
+
 
   div.carousel-container {
     position: absolute;

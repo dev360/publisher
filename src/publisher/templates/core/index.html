@@ -9,6 +9,7 @@
   <h1>New & Noteworthy in <span>Fitness</span></h1>
 
   <div class="container">
+  <div class="pagination left">&lt;</div>
   <div class="carousel-container">
     <div class="carousel counter_{{ feeds.count|add:2 }}">
       <div class="slider-card"></div>
@@ -51,6 +52,7 @@
       <div class="slider-card"></div>
     </div>
   </div>
+  <div class="pagination right">&gt;</div>
   </div>
 
 </header>
@@ -83,6 +85,21 @@
       return x;
     };
 
+    $('.pagination.left').click(function(){
+      el.stop(true, false).animate({
+          scrollLeft: el.scrollLeft() - 475,
+          animatedMark: '+=1.0'
+        }, 250
+      );
+    });
+
+    $('.pagination.right').click(function(){
+      el.stop(true, false).animate({
+          scrollLeft: el.scrollLeft() + 475,
+          animatedMark: '+=1.0'
+        }, 250
+      );
+    });
     el.scroll(function(event) {
       var currentAnimatedMark = animatedMark();
       if (currentAnimatedMark > 0 && (lastAnimatedMark == currentAnimatedMark)) {
@@ -108,7 +125,7 @@
           }, 250
         );
       }, 250));
-    });
+    }).scroll();
   </script>
 {% endblock %}
 

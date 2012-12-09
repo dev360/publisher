@@ -58,6 +58,21 @@ class Profile(GUIDModel):
     def last_name(self):
         return self.user.last_name
 
+    @property
+    def gravatar_image(self):
+        """
+        Returns the gravatar image url
+        """
+        size = 32
+
+        # construct the url
+        base_url = "http://www.gravatar.com/avatar.php?{0}"
+        params = {
+            'gravatar_id': hashlib.md5(self.user.email.lower()).hexdigest(),
+            'size':str(size)
+        }
+        return base_url.format(urllib.urlencode(params))
+
     def save(self, **kwargs):
         if not self.id:
             self.slug = self.user.username

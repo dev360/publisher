@@ -526,6 +526,21 @@ h1 span {
 .control-group ul li {
   list-style-type: none;
 }
+.feed-detail #subscribe-btn {
+  width: 230px;
+}
+.feed-detail .btn-large {
+  background: #00AE6F;
+  border-radius: 0;
+  color: #fff;
+  font-weight: 600;
+}
+.feed-detail .btn-large em {
+  display: block;
+  font-weight: 400;
+  font-size: 15px;
+  font-style: normal;
+}
 .feed-detail .tags {
   padding: 10px 0;
 }
@@ -541,6 +556,7 @@ h1 span {
   width: 100%;
   display: block-inline;
   overflow: hidden;
+  padding: 0 200px;
 }
 .feed-detail dl dt {
   color: #4F585B;

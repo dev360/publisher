@@ -64,7 +64,6 @@
         <input type="text" placeholder="Search for a post" class="input-medium search-query">
       </div>
     </div>
-
     <div class="feed-items">
       {% for feed_item in feed.feed_items.all %}
         {% if feed_item.is_sample %}
@@ -76,20 +75,14 @@
               <span class="icon icon-video"></span>
               <h4>{{ feed_item.title.title }}</h4>
               <span>{{ feed_item.date_modified|timesince }} ago</span>
-        </div>
-        <div class="content">
             </div>
-        </div>
             <div class="content">
-          <a href="#" class="btn">Share</a>
               {% if feed_item.type == 'audio' %}
-        </div>
                 <audio controls>
           <span><a href="#">Fitness</a></span>
                   <source src="{{ feed_item.file.url }}">
           <span><a href="#">Nutrition</a></span>
                 </audio>
-
                 <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
               {% elif feed_item.type == 'picture' %}
                 <img src="{{ feed_item.file.url }}" />

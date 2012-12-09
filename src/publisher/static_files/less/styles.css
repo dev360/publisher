@@ -476,6 +476,19 @@ svg .title {
   color: #005580;
   text-decoration: underline;
 }
+body {
+  background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+}
+h1 span {
+  color: #878888;
+  font-size: 14px;
+  display: block;
+  line-height: 10px;
+}
 .navbar-inner {
   padding: 10px;
 }
@@ -489,9 +502,30 @@ svg .title {
 .control-group ul li {
   list-style-type: none;
 }
-.feed-detail h3 span {
-  display: block;
-  font-size: 12px;
+.feed-detail .tags {
+  padding: 10px 0;
+}
+.feed-detail .tags span {
+  background-color: #94B4B9;
+  font-size: 15px;
+  padding: 6px 10px;
+}
+.feed-detail .tags span a {
+  color: #fff;
+}
+.feed-detail dl {
+  width: 100%;
+  display: block-inline;
+  overflow: hidden;
+}
+.feed-detail dl dt {
+  color: #4F585B;
+  float: left;
+}
+.feed-detail dl dd {
+  color: #809EA3;
+  float: left;
+  margin-right: 10px;
 }
 .feeds .feed-item .wrap {
   display: inline-block;

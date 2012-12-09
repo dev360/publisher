@@ -18,7 +18,7 @@ from core.models import Feed, FeedItem
 
 def feed_list(request, username, feed_slug):
     """
-    User detail view
+    Users feed list
     """
     user = get_object_or_404(User, username=username)
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
@@ -31,7 +31,7 @@ def feed_list(request, username, feed_slug):
 
 def feed_item_detail(request, username, feed_slug, item_slug):
     """
-    User detail view
+    Users feed item detail
     """
     user = get_object_or_404(User, username=username)
     feed_item = get_object_or_404(FeedItem, feed__publisher=user, feed__slug=feed_slug, slug=item_slug)

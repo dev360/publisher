@@ -54,16 +54,8 @@
       </ul>
 
       <p class="lead">{{ feed.description }}</p>
+    </div>
 
-    {% if feed.tags.exists %}
-      <div class="tags">
-        <ul>
-          {% for tag in feed.tags.all %}
-            <li><a href="#">{{ tag.name }}</a></li>
-          {% endfor %}
-        </ul>
-      </div>
-    {% endif %}
     <div class="feed-filter">
       <label>Filter by type:</label> 
       <select>

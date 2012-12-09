@@ -215,13 +215,11 @@ def feed_detail_dashboard(request, username, feed_slug):
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
     my_feeds = Feed.objects.filter(publisher=user, )
     feed_items = FeedItem.objects.filter(feed=feed, is_sample=True)[:3]
-    form = CreateFeedForm()
 
     return render_to_response('core/feeds/dashboard.html', {
         'profile': user.profile,
         'feed': feed,
         'my_feeds': my_feeds,
-        'form': form,
         'feed_items': feed_items,
         'page': 'feeds',
     }, RequestContext(request))

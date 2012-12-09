@@ -1,19 +1,45 @@
-{% extends "core/feeds/base.html" %}
+{% extends "base_full.html" %}
 
-{% block title %}
-  {{ page }}
+{% load humanize %}
+
+{% block primary %}
+  <div class="feed-detail">
+    <div class="feed-detail-inner">
+      <div class="publisher-detail">
+        <div class="avatar">
+          <img src="{{ feed.publisher.profile.gravatar_image }}" />
+        </div>
+
+        <div class="feed-info">
+          <h2>{{ feed.title.title }}</h2>
+          <span class="author">{{ feed.publisher.get_full_name.title }}</span>
+
+          {% if feed.tags.exists %}
+          <div class="tags">
+            <ul>
+              {% for tag in feed.tags.all %}
+                <li><a href="#">{{ tag.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <ul class="publisher-stats">
+        <li>Posts Per Month: <span>{{ feed.posts_per_month|intcomma }}</span></li>
+        <li>Subscribers: <span>{{ feed.subscribers_count|intcomma }}</span></li>
+        <li>Reviews: <span>{{ feed.reviews_count|intcomma }}</span></li>
+        <li>Loves: <span>{{ feed.likes_count|intcomma }}</span></li>
+      </ul>
+
+      <p class="lead">{{ feed.description }}</p>
+    </div>
+    <section>
+    <img src="/static/img/dashboard_placeholder.png">
+    </section>
+  </div>
+
 {% endblock %}
 
-{% block content %} 
-
-<!--<div class="well">Filter by category:</div>-->
-
-<div class="feeds">
-
-  
-
-  <hr />
-</div>
-
-{% endblock %}
 

@@ -481,7 +481,7 @@ body {
 }
 h1 {
   font-size: 32px;
-  font-weight: 400;
+  font-weight: 500;
 }
 h1 span {
   color: #878888;
@@ -502,11 +502,30 @@ h1 span {
 .control-group ul li {
   list-style-type: none;
 }
-.feed-detail h1 span {
-  display: block;
-  font-size: 14px;
-  color: #878888;
-  line-height: 10px;
+.feed-detail .tags {
+  padding: 10px 0;
+}
+.feed-detail .tags span {
+  background-color: #94B4B9;
+  font-size: 15px;
+  padding: 6px 10px;
+}
+.feed-detail .tags span a {
+  color: #fff;
+}
+.feed-detail dl {
+  width: 100%;
+  display: block-inline;
+  overflow: hidden;
+}
+.feed-detail dl dt {
+  color: #4F585B;
+  float: left;
+}
+.feed-detail dl dd {
+  color: #809EA3;
+  float: left;
+  margin-right: 10px;
 }
 .feeds .feed-item .wrap {
   display: inline-block;

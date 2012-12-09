@@ -17,7 +17,7 @@
           {% if feed.tags.exists %}
           <div class="tags">
             <ul>
-              {% for tag in feed.tags %}
+              {% for tag in feed.tags.all %}
                 <li><a href="#">{{ tag.name }}</a></li>
               {% endfor %}
             </ul>

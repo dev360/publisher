@@ -476,6 +476,9 @@ svg .title {
   color: #005580;
   text-decoration: underline;
 }
+body {
+  background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
+}
 .navbar-inner {
   padding: 10px;
 }

@@ -85,6 +85,7 @@ def feed_detail(request, username, feed_slug):
         'page': 'feeds',
     }, RequestContext(request))
 
+
 class FeedDetailSubscribe(View):
     def dispatch(self, request, *args, **kwargs):
         if request.method.lower() in self.http_method_names:

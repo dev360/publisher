@@ -477,6 +477,7 @@ svg .title {
   text-decoration: underline;
 }
 .button {
+  border: none;
   display: inline-block;
   font-size: 20px;
   font-family: "proxima-nova-soft", sans-serif;
@@ -596,10 +597,27 @@ h1 span {
 }
 section {
   background: #fff;
-  padding: 0 20px;
 }
 .modal-backdrop {
   background: #C0CED1;
+}
+.channels h3 {
+  border-bottom: 1px solid #DFDFD9;
+  border-top: 1px solid #DFDFD9;
+  margin: 0;
+  padding: 20px 20px;
+}
+.channels .even {
+  background-color: #E7EBED;
+}
+.hero-unit {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  margin-bottom: 20px;
+  padding: 40px;
+}
+.form-actions {
+  border: none !important;
+  background-color: transparent !important;
 }
 .navbar {
   margin-bottom: 40px;

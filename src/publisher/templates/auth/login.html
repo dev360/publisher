@@ -33,8 +33,8 @@
           {% include "forms/field.html" %}
         {% endfor %}
         <div class="form-actions">
-          <input class=" btn btn-primary" type="submit" value="{% trans "Login" %}" />
-          <a href="{% url password_reset %}" class="btn">{% trans "Password reset" %}</a>
+          <input class="button small" type="submit" value="{% trans "Login" %}" />
+          <a href="{% url password_reset %}" class="button small blue">{% trans "Password reset" %}</a>
         </div>
       </fieldset>
     </form>

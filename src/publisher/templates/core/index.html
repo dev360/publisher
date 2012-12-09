@@ -20,7 +20,7 @@
 
               <div class="feed-info">
                 <h2>{{ feed.title }}</h2>
-                <span class="author">{{ feed.publisher.get_full_name|default:feed.publisher.username }}</span>
+                <span class="author">By: {{ feed.publisher.get_full_name|default:feed.publisher.username }}</span>
                 <ul class="publisher-stats">
                   <li>Post per month: <span>{{ feed.get_price_plan_display }}</span></li>
                   <li>Subscribers: <span>{{ feed.subscribers_count|intcomma }}</span></li>

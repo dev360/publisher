@@ -630,8 +630,85 @@ section {
 .feed-item-create .actions .btn {
   width: 240px;
 }
+.icon {
+  width: 52px;
+  height: 52px;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+.icon.icon-text {
+  background: transparent url('/static/img/icn_text.png') top left no-repeat;
+}
+.icon.icon-video {
+  background: transparent url('/static/img/icn_video.png') top left no-repeat;
+}
+.icon.icon-audio {
+  background: transparent url('/static/img/icn_audio.png') top left no-repeat;
+}
 .subscriptions .feed-filter {
   margin-top: 40px;
+}
+.subscriptions .feed {
+  padding: 10px 0 20px 0;
+}
+.subscriptions .feed .avatar {
+  margin-left: -45px;
+}
+.subscriptions .feed .icon {
+  margin-top: 5px;
+}
+.subscriptions .feed .header {
+  padding-bottom: 10px;
+  border-bottom: 1px solid #efefef;
+}
+.subscriptions .feed .meta {
+  border-top: 1px solid #efefef;
+}
+.subscriptions .feed header.feed-title h3 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1;
+  margin: 0 0 4px 0;
+}
+.subscriptions .feed header.feed-title h3 a {
+  color: #3C3D3F;
+}
+.subscriptions .feed header.feed-title span.date {
+  color: #848484;
+}
+.subscriptions .feed header.feed-title,
+.subscriptions .feed .content-inner {
+  *zoom: 1;
+  border-bottom: 1px solid #DFE0D9;
+}
+.subscriptions .feed header.feed-title:before,
+.subscriptions .feed .content-inner:before,
+.subscriptions .feed header.feed-title:after,
+.subscriptions .feed .content-inner:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.subscriptions .feed header.feed-title:after,
+.subscriptions .feed .content-inner:after {
+  clear: both;
+}
+.subscriptions .feed .feed-header-inner,
+.subscriptions .feed .content-inner,
+.subscriptions .feed .meta-inner {
+  padding: 20px;
+}
+.subscriptions .feed .content.text p {
+  background: #ecefe7 url("/static/img/icon_quotes.png") -10px -10px no-repeat;
+  padding: 20px;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: normal;
+  margin: 0;
+}
+.subscriptions .feed .meta .actions a {
+  margin-right: 10px;
 }
 .feed-detail {
   background-color: rgba(255, 255, 255, 0.25);
@@ -705,16 +782,6 @@ section {
 }
 .feed-detail .publisher-detail:after {
   clear: both;
-}
-.feed-detail .feed-items .feed-item .icon {
-  width: 52px;
-  height: 52px;
-  display: inline-block;
-  float: left;
-  margin-right: 10px;
-}
-.feed-detail .feed-items .feed-item .icon.icon-text {
-  background: transparent url('/static/img/icn_text.png') top left no-repeat;
 }
 .feed-detail section.feed-item-wrapper {
   padding: 0;

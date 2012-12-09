@@ -96,8 +96,14 @@ class FeedDetailSubscribe(View):
         self.args = args
         self.kwargs = kwargs
 
-        user = get_object_or_404(User, username=kwargs.get('username'))
-        feed = get_object_or_404(Feed, publisher=user, slug=kwargs.get('feed_slug'))
+        username = kwargs.get('username')
+        slug = kwargs.get('feed_slug')
+
+        user = get_object_or_404(User, username=username)
+        feed = get_object_or_404(Feed, publisher=user, slug=slug)
+
+        if request.user.is_authenticated() and feed.is_subscribed(request.user):
+            return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
 
         return handler(request, user, feed)
 

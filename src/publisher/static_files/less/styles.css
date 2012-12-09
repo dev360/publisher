@@ -570,11 +570,16 @@ h1 span {
 .feed-detail #subscribe-btn {
   width: 230px;
 }
+.feed-detail .avatar {
+  margin-right: 20px;
+}
 .feed-detail .btn-large {
   background: #00AE6F;
   border-radius: 0;
   color: #fff;
-  font-weight: 600;
+  font-weight: 400;
+  font-family: proxima-nova-soft, sans-serif;
+  font-size: 24px;
 }
 .feed-detail .btn-large em {
   display: block;

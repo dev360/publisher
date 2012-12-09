@@ -1,6 +1,7 @@
 #coding=utf-8
 import hashlib
 import random
+import urllib
 import datetime, os, linecache
 from os.path import join as pjoin
 

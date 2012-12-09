@@ -44,8 +44,7 @@ class Feed(models.Model):
         return u'%s' % self.title
 
     def is_subscribed(self, user):
-        #return user.subscriptions.filter(feed=self).exists()
-        return True
+        return user.subscriptions.filter(feed=self).exists()
 
     def posts_per_month(self):
         query = """

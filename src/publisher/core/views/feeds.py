@@ -197,10 +197,7 @@ def feed_item_detail(request, username, feed_slug, item_slug):
     user = get_object_or_404(User, username=username)
     feed_item = get_object_or_404(FeedItem, feed__publisher=user, feed__slug=feed_slug, slug=item_slug)
 
-    return render_to_response('core/feeds/detail.html', {
+    return render_to_response('core/feeds/item_detail.html', {
         'profile': user.profile,
         'item': feed_item,
     }, RequestContext(request))
-
-
-

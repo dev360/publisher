@@ -23,6 +23,9 @@ from auth.forms import AuthenticationForm, RegistrationForm
 
 def index(request):
 
+    if request.user.is_authenticated():
+        return HttpResponseRedirect(reverse('feed_subscriptions'))
+
     login_form = AuthenticationForm()
     registration_form = RegistrationForm()
 

@@ -575,3 +575,8 @@ header.carousel-container h1 {
   padding-top: 20px;
   text-align: center;
 }
+header.carousel-container h1 span {
+  color: #878888;
+  font-size: 64px;
+  display: inline;
+}

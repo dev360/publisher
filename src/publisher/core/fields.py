@@ -50,7 +50,7 @@ class ExpiryDateField(forms.MultiValueField):
     default_error_messages = {
         'invalid_month': _(u'Please enter a valid month.'),
         'invalid_year': _(u'Please enter a valid year.'),
-        'date_passed': _(u'This expiry date has passed.'),
+        'date_passed': _(u'This expiration date has passed.'),
     }
 
     def __init__(self, *args, **kwargs):

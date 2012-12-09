@@ -147,7 +147,7 @@ body {
   font-family: "Droid Sans", Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 20px;
-  color: #333333;
+  color: #3f4647;
   background-color: #edeee7;
 }
 a {
@@ -703,7 +703,7 @@ pre {
   padding: 0 3px 2px;
   font-family: Monaco, Menlo, Consolas, "Courier New", monospace;
   font-size: 14px;
-  color: #333333;
+  color: #3f4647;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -759,7 +759,7 @@ legend {
   margin-bottom: 20px;
   font-size: 24px;
   line-height: 40px;
-  color: #333333;
+  color: #3f4647;
   border: 0;
   border-bottom: 1px solid #e5e5e5;
 }
@@ -1260,7 +1260,7 @@ select:focus:required:invalid:focus {
 }
 .help-block,
 .help-inline {
-  color: #595959;
+  color: #636e70;
 }
 .help-block {
   display: block;
@@ -2315,7 +2315,7 @@ table [class*=span],
   clear: both;
   font-weight: normal;
   line-height: 20px;
-  color: #333333;
+  color: #3f4647;
   white-space: nowrap;
 }
 .dropdown-menu li > a:hover,
@@ -2509,7 +2509,7 @@ button.close {
   text-align: center;
   vertical-align: middle;
   cursor: pointer;
-  color: #333333;
+  color: #3f4647;
   text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75);
   background-color: #f5f5f5;
   background-image: -moz-linear-gradient(top, #ffffff, #e6e6e6);
@@ -2541,7 +2541,7 @@ button.close {
 .btn.active,
 .btn.disabled,
 .btn[disabled] {
-  color: #333333;
+  color: #3f4647;
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
 }
@@ -2553,7 +2553,7 @@ button.close {
   *margin-left: 0;
 }
 .btn:hover {
-  color: #333333;
+  color: #3f4647;
   text-decoration: none;
   background-color: #e6e6e6;
   *background-color: #d9d9d9;
@@ -2878,7 +2878,7 @@ input[type="submit"].btn.btn-mini {
   background-color: transparent;
 }
 .btn-link[disabled]:hover {
-  color: #333333;
+  color: #3f4647;
   text-decoration: none;
 }
 .btn-group {
@@ -3532,7 +3532,7 @@ input[type="submit"].btn.btn-mini {
   color: #777777;
 }
 .navbar-link:hover {
-  color: #333333;
+  color: #3f4647;
 }
 .navbar .divider-vertical {
   height: 40px;
@@ -3687,7 +3687,7 @@ input[type="submit"].btn.btn-mini {
 .navbar .nav > li > a:focus,
 .navbar .nav > li > a:hover {
   background-color: transparent;
-  color: #333333;
+  color: #3f4647;
   text-decoration: none;
 }
 .navbar .nav > .active > a,
@@ -3913,7 +3913,7 @@ input[type="submit"].btn.btn-mini {
 .navbar-inverse .navbar-search .search-query:focus,
 .navbar-inverse .navbar-search .search-query.focused {
   padding: 5px 15px;
-  color: #333333;
+  color: #3f4647;
   text-shadow: 0 1px 0 #ffffff;
   background-color: #ffffff;
   border: 0;
@@ -4510,11 +4510,11 @@ a.badge:hover {
 }
 .label-inverse,
 .badge-inverse {
-  background-color: #333333;
+  background-color: #3f4647;
 }
 .label-inverse[href],
 .badge-inverse[href] {
-  background-color: #1a1a1a;
+  background-color: #272b2c;
 }
 .btn .label,
 .btn .badge {
@@ -4827,7 +4827,7 @@ a.badge:hover {
   right: 0;
   bottom: 0;
   padding: 15px;
-  background: #333333;
+  background: #3f4647;
   background: rgba(0, 0, 0, 0.75);
 }
 .carousel-caption h4,

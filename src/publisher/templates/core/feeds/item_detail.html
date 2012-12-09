@@ -29,24 +29,25 @@
             <span>{{ item.date_modified|timesince }} ago</span>
           </div>
           <div class="content">
-            {% if item.type == 'audio' %}
-              <audio controls>
-                <source src="{{ item.file.url }}">
-              </audio>
+            {% if feed_item.file %}
+              {% if feed_item.type == 'audio' %}
+                <audio controls>
+                  <source src="{{ feed_item.file.url }}">
+                </audio>
+                <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+              {% elif feed_item.type == 'picture' %}
+                <img src="{{ feed_item.file.url }}" />subscriptions
+              {% elif feed_item.type == 'text' %}
+                <p>{{ feed_item.text|safe }}</p>
+              {% elif feed_item.type == 'video' %}
+                <video height="520px" width="346px" controls>
+                  <source src="{{ feed_item.file.url }}">
+                </video>
 
-              <a href="{{ item.file.url }}" target="_blank">Download</a>
-            {% elif item.type == 'picture' %}
-              <img src="{{ item.file.url }}" />
-            {% elif item.type == 'text' %}
-              {{ item.text|safe }}
-            {% elif item.type == 'video' %}
-              <video height="520px" width="346px" controls>
-                <source src="{{ item.file.url }}">
-              </video>
-
-              <a href="{{ item.file.url }}" target="_blank">Download</a>
-            {% elif item.type == 'other' %}
-              <a href="{{ item.file.url }}" target="_blank">Download</a>
+                <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+              {% elif feed_item.type == 'other' %}
+                <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+              {% endif %}
             {% endif %}
           </div>
           <div class="actions">

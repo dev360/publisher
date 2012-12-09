@@ -1,1 +1,1 @@
-from feeds import CreateFeedForm
+from feeds import CreateFeedForm, PaymentForm

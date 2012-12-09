@@ -29,6 +29,7 @@ class PaymentForm(forms.Form):
                 'class': 'input-large',
             }
 
+
 class CreateFeedForm(forms.Form):
     """
     This form is for adding/editing the profile
@@ -49,25 +50,6 @@ class CreateFeedForm(forms.Form):
                 'placeholder': self.fields[name].label,
                 'class': 'input-large',
             }
-
-
-    def save(self, *args, **kwargs):
-        feed = None
-
-        if self.is_valid():
-
-            data = dict(
-                title = self.cleaned_data['title'],
-                description = self.cleaned_data['description'],
-                image = self.cleaned_data['image'],
-                price_plan = self.cleaned_data['price_plan'],
-                publisher = kwargs.get('user'),
-            )
-
-            feed = Feed(**data)
-            feed.save()
-
-        return feed
 
 
 class CreateFeedItemForm(forms.ModelForm):

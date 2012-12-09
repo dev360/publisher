@@ -67,7 +67,10 @@ def feed_item_create(request, username, feed_slug):
         form = CreateFeedItemForm(request.POST)
 
         if form.is_valid():
-            feed = form.save(user=user)
+            feed_item = form.save(commit=False)
+            feed_item.feed = feed
+            feed_item.save()
+
             url = reverse('feed_detail', args=[
                 feed.publisher.username,
                 feed.slug

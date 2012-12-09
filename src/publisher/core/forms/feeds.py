@@ -24,9 +24,9 @@ class CreateFeedForm(forms.Form):
     """
     This form is for adding/editing the profile
     """
-    title = forms.CharField(label=_('Feed name'), max_length=70)
-    description = forms.CharField(label=_('Feed description'))
-    image = forms.URLField(label=_('Feed image'), required=False)
+    title = forms.CharField(label=_('Channel name'), max_length=70)
+    description = forms.CharField(label=_('Channel description'))
+    image = forms.URLField(label=_('Channel image'), required=False)
     price_plan = forms.ChoiceField(label=_('Price'), widget=widgets.RadioSelect)
 
     def __init__(self, *args, **kwargs):

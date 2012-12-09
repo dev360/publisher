@@ -69,3 +69,14 @@ class CreateFeedForm(forms.Form):
 
         return feed
 
+
+class CreateFeedItemForm(forms.Form):
+    """
+    This form is for adding feed items
+    """
+    title = forms.CharField(label=_('Channel name'), max_length=70)
+    description = forms.CharField(label=_('Channel description'))
+    image = forms.URLField(label=_('Channel image'), required=False)
+    price_plan = forms.ChoiceField(label=_('Price'), widget=widgets.RadioSelect)
+
+

@@ -5,7 +5,7 @@
 {% block primary %}
   <div class="feed-detail">
     <div class="feed-detail-inner">
-      <a id="subscribe-btn" href="#subscribe" role="button" class="button green pull-right" data-toggle="modal">Subscribe! <span>$2/Month</span></a>
+      <a id="subscribe-btn" href="#subscribe" role="button" class="button green pull-right" data-toggle="modal">Subscribe! <span>{{ feed.get_price_plan_display }}/Month</span></a>
       <div id="subscribe" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
         <form id="subscribe_form" method="post">
           {% csrf_token %}

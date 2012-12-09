@@ -64,7 +64,7 @@ class Profile(GUIDModel):
         """
         Returns the gravatar image url
         """
-        size = 32
+        size = 69
 
         # construct the url
         base_url = "http://www.gravatar.com/avatar.php?{0}"

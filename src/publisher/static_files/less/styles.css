@@ -501,9 +501,26 @@ svg .title {
   margin-right: 20px;
   padding-right: 50px;
 }
+.button.blue {
+  background-color: #45B2CF;
+}
+.button.blue:hover {
+  background-color: #29869f;
+}
+.button.red {
+  background-color: #FF1528;
+}
+.button.red:hover {
+  background-color: #c70010;
+}
+.button.small {
+  font-size: 15px;
+  padding: 8px 12px !important;
+}
 .button:hover {
   color: white;
   text-decoration: none;
+  background-color: #2d3f44;
 }
 .button:active {
   position: relative;
@@ -607,6 +624,7 @@ section {
 .feed-detail {
   background-color: rgba(255, 255, 255, 0.25);
   margin-top: -40px;
+  margin-bottom: 70px;
 }
 .feed-detail .feed-detail-inner {
   padding: 30px 20px;
@@ -713,7 +731,8 @@ section {
   clear: both;
 }
 .feed-detail section.feed-item-wrapper .feed-header-inner,
-.feed-detail section.feed-item-wrapper .content-inner {
+.feed-detail section.feed-item-wrapper .content-inner,
+.feed-detail section.feed-item-wrapper .meta-inner {
   padding: 20px;
 }
 .feed-detail section.feed-item-wrapper .content.text p {
@@ -723,6 +742,9 @@ section {
   line-height: 28px;
   font-weight: normal;
   margin: 0;
+}
+.feed-detail section.feed-item-wrapper .meta .actions a {
+  margin-right: 10px;
 }
 .feed-detail .tags ul {
   list-style-type: none;

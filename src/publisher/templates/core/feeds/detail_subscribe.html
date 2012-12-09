@@ -96,17 +96,21 @@
                 </div>
               </div>
 
-              {% if feed_item.tags.exists %}
-              <div class="tags pull-right">
-                {% for tag in feed_item.tags.all %}
-                  <span><a href="#">{{ tag.name }}</a></span>
-                {% endfor %}
-              </div>
-              {% endif %}
-              <div class="actions">
-                <a href="#" class="btn">22 Comments</a>
-                <a href="#" class="btn">Share</a>
-                <a href="#" class="btn">Love</a>
+              <div class="meta">
+                <div class="meta-inner">
+                  {% if feed_item.tags.exists %}
+                  <div class="tags pull-right">
+                    {% for tag in feed_item.tags.all %}
+                      <span><a href="#">{{ tag.name }}</a></span>
+                    {% endfor %}
+                  </div>
+                  {% endif %}
+                  <div class="actions">
+                    <a href="#" class="button small">22 Comments</a>
+                    <a href="#" class="button small blue">Share</a>
+                    <a href="#" class="button small red">Love</a>
+                  </div>
+                </div>
               </div>
             </div>
           {% endif %}

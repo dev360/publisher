@@ -21,11 +21,12 @@ def user_detail(request, username):
     """
     user = get_object_or_404(User, username=username)
     feeds = user.feeds.all()
+    channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
 
     return render_to_response('core/users/detail.html', {
         'profile': user.profile,
         'feeds': feeds,
-        'page': 'feeds',
+        'page': channel_name,
     }, RequestContext(request))
 
 

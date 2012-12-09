@@ -34,11 +34,14 @@
       <span>By: {{ feed.publisher.get_full_name.title }}</span>
 
     </h1>
+
+    {% if feed.tags.exists %}
     <div class="tags">
-      <span><a href="#">Fitness</a></span>
-      <span><a href="#">Health</a></span>
-      <span><a href="#">Nutrition</a></span>
+      {% for tag in feed.tags %}
+        <span><a href="#">{{ tag.name }}</a></span>
+      {% endfor %}
     </div>
+    {% endif %}
 
     <dl>
       <dt>Posts Per Month:</dt>
@@ -103,11 +106,13 @@
               <a href="#" class="btn">Share</a>
               <a href="#" class="btn">Love</a>
             </div>
+            {% if feed_item.tags.exists %}
             <div class="tags">
-              <span><a href="#">Fitness</a></span>
-              <span><a href="#">Health</a></span>
-              <span><a href="#">Nutrition</a></span>
+              {% for tag in feed_item.tags %}
+                <span><a href="#">{{ tag.name }}</a></span>
+              {% endfor %}
             </div>
+            {% endif %}
           </div>
         {% endif %}
       {% endfor %}

@@ -554,36 +554,6 @@ svg .title {
   /* read above */
 
 }
-body {
-  background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
-}
-section.marketing {
-  background-color: white;
-  border-bottom: 1px solid #DFDFD9;
-  text-align: center;
-  padding: 50px 0 60px;
-}
-section.marketing div.container h2 {
-  color: #445F66;
-  padding: 0 120px 20px;
-}
-h1 {
-  font-size: 32px;
-  font-weight: 500;
-}
-h1 span {
-  color: #878888;
-  font-size: 14px;
-  display: block;
-  line-height: 10px;
-}
-section {
-  background: #fff;
-  padding: 0 20px;
-}
-.modal-backdrop {
-  background: #C0CED1;
-}
 .navbar {
   margin-bottom: 40px;
 }
@@ -773,6 +743,9 @@ header.carousel-container h1 span {
   font-size: 64px;
   display: inline;
 }
+header.carousel-container div.container {
+  position: relative;
+}
 header.carousel-container div.carousel-container {
   position: absolute;
   left: 0px;
@@ -791,6 +764,7 @@ header.carousel-container div.carousel-container .carousel .slider-card {
   border-radius: 3px;
   background: white;
   width: 475px;
+  height: 405px;
 }
 .slider-card header {
   background: #F0F0F1;

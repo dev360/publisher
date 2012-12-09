@@ -56,7 +56,7 @@ class Feed(models.Model):
         return results[0].monthly_count if len(results) > 0 else 0
 
     def subscribers_count(self):
-        return self.subscribers.count()
+        return self.feedsubscriber_set.count()
 
     def reviews_count(self):
         return self.reviews.count()

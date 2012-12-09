@@ -630,8 +630,30 @@ section {
 .feed-item-create .actions .btn {
   width: 240px;
 }
+.icon {
+  width: 52px;
+  height: 52px;
+  display: inline-block;
+  float: left;
+  margin-right: 10px;
+}
+.icon.icon-text {
+  background: transparent url('/static/img/icn_text.png') top left no-repeat;
+}
+.icon.icon-video {
+  background: transparent url('/static/img/icn_video.png') top left no-repeat;
+}
+.icon.icon-audio {
+  background: transparent url('/static/img/icn_audio.png') top left no-repeat;
+}
 .subscriptions .feed-filter {
   margin-top: 40px;
+}
+.subscriptions .feed {
+  padding: 10px 0 20px 0;
+}
+.subscriptions .feed .avatar {
+  margin-left: -45px;
 }
 .feed-detail {
   background-color: rgba(255, 255, 255, 0.25);
@@ -705,16 +727,6 @@ section {
 }
 .feed-detail .publisher-detail:after {
   clear: both;
-}
-.feed-detail .feed-items .feed-item .icon {
-  width: 52px;
-  height: 52px;
-  display: inline-block;
-  float: left;
-  margin-right: 10px;
-}
-.feed-detail .feed-items .feed-item .icon.icon-text {
-  background: transparent url('/static/img/icn_text.png') top left no-repeat;
 }
 .feed-detail section.feed-item-wrapper {
   padding: 0;

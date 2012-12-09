@@ -28,7 +28,11 @@
             <div class="avatar">
               <img src="{{ feed.publisher.profile.gravatar_image }}" />
             </div>
-          <h1>{{ feed.title }}</h1>
+            <span class="pull-right icon icon-{{ feed_item.type }}"></span>
+            <h1>
+              {{ feed.title }} 
+              <span class="date">{{ feed.first.date_modified|timesince }} ago</span>
+          </h1>
         </div>
 
         {% endif %}
@@ -41,9 +45,9 @@
 
               <header class="feed-title">
                 <div class="feed-header-inner">
-                  <span class="icon icon-{{ feed_item.type }}"></span>
+                  
                   <h3><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a></h3>
-                  <span class="date">{{ feed_item.date_modified|timesince }} ago</span>
+                  
                 </div>
               </header>
 

@@ -53,7 +53,8 @@ class Feed(models.Model):
             where
             date_created >= (CURRENT_DATE - INTERVAL '1 months')
         """
-        return self.feed_items.extra(select={'monthly_count': query})[0].monthly_count
+        results = self.feed_items.extra(select={'monthly_count': query})
+        return results[0].monthly_count if len(results) > 0 else 0
 
     def subscribers_count(self):
         return self.subscribers.count()

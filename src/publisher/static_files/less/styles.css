@@ -592,6 +592,29 @@ h1 span {
   float: left;
   margin-right: 10px;
 }
+.feed-detail p.lead {
+  color: #444A4A;
+  margin: 10px 30px;
+}
+.feed-detail .feed-filter {
+  background: #383D3E;
+  padding: 15px;
+  color: #fff;
+}
+.feed-detail .feed-filter label {
+  line-height: 41px;
+  float: left;
+  margin-right: 10px;
+}
+.feed-detail .feed-filter select {
+  margin-top: 7px;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+.feed-detail .feed-filter input {
+  margin-top: 7px;
+  vertical-align: middle;
+}
 .feeds .feed-item .wrap {
   display: inline-block;
   width: 100%;

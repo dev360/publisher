@@ -127,7 +127,7 @@ class FeedItem(models.Model):
     is_sample = models.BooleanField(_('is sample'), default=False)
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES, default='other', blank=True)
     file = models.FileField(_('file'), upload_to='attachments', blank=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 

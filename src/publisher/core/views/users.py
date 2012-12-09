@@ -15,12 +15,26 @@ from django.template import RequestContext
 
 from core.forms import CreateFeedForm
 
-def user_detail(request, username):
+
+@login_required
+def dashboard(request):
     """
     User detail view
     """
-    user = get_object_or_404(User, username=username)
+    user = get_object_or_404(User, username=request.user.username)
     feeds = user.feeds.all()
+    channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
+
+    return render_to_response('core/users/dashboard.html', {
+        'profile': user.profile,
+        'feeds': feeds,
+        'page': channel_name,
+    }, RequestContext(request))
+
+
+def user_detail(request, username):
+    user = get_object_or_404(User, username=username)
+    feeds = user.feeds.filter(publisher__username=username)
     channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
 
     return render_to_response('core/users/detail.html', {

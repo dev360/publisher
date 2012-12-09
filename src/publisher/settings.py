@@ -104,7 +104,7 @@ INSTALLED_APPS = (
     'debug_toolbar',
 )
 
-LOGIN_REDIRECT_URL = '/profile/'
+LOGIN_REDIRECT_URL = '/dashboard/'
 ACCOUNT_ACTIVATION_DAYS = 30
 
 LANGUAGES = (

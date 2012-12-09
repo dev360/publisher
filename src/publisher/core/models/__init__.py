@@ -32,6 +32,7 @@ class Feed(models.Model):
     )
 
     publisher = models.ForeignKey(User, verbose_name=_('publisher'), related_name="feeds")
+    subscribers = models.ManyToManyField(User, through='FeedSubscriber')
     title = models.CharField(_('channel name'), max_length=70) # NEVER CHANGE: for twitter
     slug = models.CharField(_('slug'), max_length=200, editable=False)
     description = models.TextField(_('channel description'))
@@ -126,7 +127,7 @@ class FeedItem(models.Model):
     is_sample = models.BooleanField(_('is sample'), default=False)
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES, default='other', blank=True)
     file = models.FileField(_('file'), upload_to='attachments', blank=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 

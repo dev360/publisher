@@ -26,16 +26,23 @@ class Feed(models.Model):
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
-    class Meta:
-        app_label = 'core'
-        unique_together = ('publisher', 'slug',)
-
     def __unicode__(self):
         return u'%s' % self.title
+
+    def is_subscribed(self, user):
+        """
+        Returns whether the user is subscribed
+        """
+        # TODO: Fix it.
+        return True
 
     def save(self, **kwargs):
         self.slug = slugify(self.title)
         super(Feed, self).save(**kwargs)
+
+    class Meta:
+        app_label = 'core'
+        unique_together = ('publisher', 'slug',)
 
 class FeedSubscriber(models.Model):
     """

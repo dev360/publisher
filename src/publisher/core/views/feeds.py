@@ -77,8 +77,8 @@ def feed_detail(request, username, feed_slug):
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
     filter_options = FeedItem.TYPE_CHOICES
 
-    if request.user.is_anonymous() or not feed.is_subscribed(request.user):
-        return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
+    #if request.user.is_anonymous() or not feed.is_subscribed(request.user):
+        #return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
 
     return render_to_response('core/feeds/detail.html', {
         'profile': user.profile,
@@ -105,8 +105,8 @@ class FeedDetailSubscribe(View):
         user = get_object_or_404(User, username=username)
         feed = get_object_or_404(Feed, publisher=user, slug=slug)
 
-        if request.user.is_authenticated() and feed.is_subscribed(request.user):
-            return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
+        #if request.user.is_authenticated() and feed.is_subscribed(request.user):
+        #    return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
 
         return handler(request, user, feed)
 

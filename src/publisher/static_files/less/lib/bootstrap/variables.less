@@ -5,6 +5,7 @@
 
 // Global values
 // --------------------------------------------------
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 
 
 // Grays
@@ -16,6 +17,7 @@
 @grayLight:             #999;
 @grayLighter:           #eee;
 @white:                 #fff;
+@cream:                 #EDEEE7;
 
 
 // Accent colors
@@ -32,7 +34,7 @@
 
 // Scaffolding
 // -------------------------
-@bodyBackground:        @white;
+@bodyBackground:        @cream;
 @textColor:             @grayDark;
 
 
@@ -44,11 +46,11 @@
 
 // Typography
 // -------------------------
-@sansFontFamily:        "Helvetica Neue", Helvetica, Arial, sans-serif;
+@sansFontFamily:        "Droid Sans", Helvetica, Arial, sans-serif;
 @serifFontFamily:       Georgia, "Times New Roman", Times, serif;
 @monoFontFamily:        Monaco, Menlo, Consolas, "Courier New", monospace;
 
-@baseFontSize:          14px;
+@baseFontSize:          16px;
 @baseFontFamily:        @sansFontFamily;
 @baseLineHeight:        20px;
 @altFontFamily:         @serifFontFamily;
@@ -159,9 +161,9 @@
 @navbarCollapseWidth:             979px;
 
 @navbarHeight:                    40px;
-@navbarBackgroundHighlight:       #ffffff;
-@navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
-@navbarBorder:                    darken(@navbarBackground, 12%);
+@navbarBackgroundHighlight:       rgba(21,22,23, 0.7);
+@navbarBackground:                rgba(21,22,23, 0.7);
+@navbarBorder:                    rgba(21,22,23, 0.7);
 
 @navbarText:                      #777;
 @navbarLinkColor:                 #777;

@@ -36,17 +36,18 @@
   <body>
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container-fluid">
+        <div class="container">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/">Publisher</a>
+          <a class="brand" href="/"><img src="/static/img/logo.png" /></a>
 
           <div class="nav pull-right">
             <ul class="nav">
               <li><a href="#">Channels</a></li>
+              <li><a href="#">Become a Publisher</a></li>
               {% if request.user.is_authenticated %}
               <li><a href="{% url auth_logout %}">Signout</a></li>
               {% else %}
@@ -58,7 +59,7 @@
       </div>
     </div>
 
-    <div class="container-fluid">
+    <div class="container">
       {% block container %}
       {% endblock %}
       <hr>

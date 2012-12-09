@@ -604,12 +604,28 @@ section {
 #subscribe_form #id_name_on_card {
   width: 409px;
 }
+.feed-item-create {
+  padding: 40px 100px;
+}
+.feed-item-create .actions {
+  text-align: center;
+}
+.feed-item-create .actions .btn {
+  width: 240px;
+}
 .feed-detail {
   background-color: rgba(255, 255, 255, 0.25);
   margin-top: -40px;
 }
 .feed-detail .feed-detail-inner {
   padding: 30px 20px;
+}
+.feed-detail .create-feed-item-button {
+  text-align: center;
+  padding: 20px 0;
+}
+.feed-detail .create-feed-item-button .btn {
+  width: 240px;
 }
 .feed-detail .button {
   padding: 10px 40px;

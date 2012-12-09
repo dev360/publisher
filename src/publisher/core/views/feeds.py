@@ -27,7 +27,7 @@ def feed_create(request):
     Creates a feed
     """
     user = get_object_or_404(User, id=request.user.id)
-    my_feeds = Feed.objects.filter(publisher=user, )
+    my_feeds = Feed.objects.filter(publisher=user)
 
     form = CreateFeedForm()
 

@@ -476,8 +476,32 @@ svg .title {
   color: #005580;
   text-decoration: underline;
 }
+.button {
+  display: inline-block;
+  font-size: 22px;
+  padding: 20px 30px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+.button.dark_blue {
+  background-color: #4C6A72;
+  color: white;
+}
 body {
   background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
+}
+section.marketing {
+  background-color: white;
+  border-bottom: 1px solid #DFDFD9;
+  text-align: center;
+  padding: 50px 0 60px;
+}
+section.marketing div.container h2 {
+  padding: 0 120px 20px;
+}
+.navbar {
+  margin-bottom: 40px;
 }
 .navbar-inner {
   padding: 10px;
@@ -510,4 +534,13 @@ body {
 }
 .feeds .feed-item .wrap .content h3 span {
   font-size: 12px;
+}
+header.carousel-container {
+  height: 405px;
+}
+header.carousel-container h1 {
+  font-weight: normal;
+  font-size: 64px;
+  padding-top: 20px;
+  text-align: center;
 }

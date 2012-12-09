@@ -6,6 +6,10 @@
   <div class="feed-detail">
     <div class="feed-detail-inner">
       <div class="publisher-detail">
+        <div class="pull-right">
+          <a href="{% url feed_item_create feed.publisher.username feed.slug %}" class="button red small"><i class="icon-pencil icon-white"></i></a>
+          <a href="{% url feed_detail_dashboard feed.publisher.username feed.slug %}" class="button red small"><i class="icon-th icon-white"></i></a>
+        </div>
         <div class="avatar">
           <img src="{{ feed.publisher.profile.gravatar_image }}" />
         </div>

@@ -5,7 +5,7 @@ from django.forms import widgets
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-from core.models import Feed, FeedItem, FeedSubscriber
+from core.models import Feed, FeedItem, Category, FeedSubscriber
 from core.fields import CreditCardField, ExpiryDateField, VerificationValueField
 from utils import forms
 
@@ -37,12 +37,16 @@ class CreateFeedForm(forms.Form):
     title = forms.CharField(label=_('Channel name'), max_length=70)
     description = forms.CharField(label=_('Channel description'))
     image = forms.URLField(label=_('Channel image'), required=False)
+    category = forms.ChoiceField(label=_('Price'), choices=[])
     price_plan = forms.ChoiceField(label=_('Price'), widget=widgets.RadioSelect)
 
     def __init__(self, *args, **kwargs):
         super(CreateFeedForm, self).__init__(*args, **kwargs)
 
+        
+
         self.fields['price_plan'].choices = Feed.PRICE_CHOICES
+        self.fields['category'].choices = [(x.id, x.name) for x in Category.objects.all()]
 
         placeholder_fields = ['title', 'description', 'image']
         for name in placeholder_fields:
@@ -50,6 +54,24 @@ class CreateFeedForm(forms.Form):
                 'placeholder': self.fields[name].label,
                 'class': 'input-large',
             }
+
+    def save(self, *args, **kwargs):
+        feed = None
+
+        if self.is_valid():
+
+            data = dict(
+                title = self.cleaned_data['title'],
+                description = self.cleaned_data['description'],
+                image = self.cleaned_data['image'],
+                price_plan = self.cleaned_data['price_plan'],
+                publisher = kwargs.get('user'),
+            )
+
+            feed = Feed(**data)
+            feed.save()
+
+        return feed
 
 
 class CreateFeedItemForm(forms.ModelForm):

@@ -695,6 +695,10 @@ section {
   display: block;
   line-height: 14px;
 }
+.feed-detail .feeds .feed-item .sample {
+  padding: 10px 4px;
+  background: #3C3D3F;
+}
 .feed-detail .feeds .feed-item .wrap {
   display: inline-block;
   width: 100%;

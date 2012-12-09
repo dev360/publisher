@@ -30,6 +30,8 @@ class SessionMixin(object):
 
 class RegistrationForm(forms.FormMixin, RegistrationFormUniqueEmail):
 
+    first_name = forms.CharField(label='First name', max_length=30)
+    last_name = forms.CharField(label='Last name', max_length=30)
     accepted_terms = forms.BooleanField(label=mark_safe(u'I accept the '
             u'<a href="/terms/">terms and conditions</a>'), required=True)
 
@@ -72,12 +74,16 @@ class RegistrationForm(forms.FormMixin, RegistrationFormUniqueEmail):
 
         send_email = kwargs.get('send_email', True)
 
+        first_name = self.cleaned_data['first_name']
+        last_name = self.cleaned_data['last_name']
         username = self.cleaned_data['username']
         email = self.cleaned_data['email']
         password = self.cleaned_data['password1']
 
         user = User.objects.create_user(username, email, password)
         user.is_active = False
+        user.first_name = first_name
+        user.last_name = last_name
         user.save()
         profile, created = Profile.objects.get_or_create(user=user)
 
@@ -90,7 +96,7 @@ class RegistrationForm(forms.FormMixin, RegistrationFormUniqueEmail):
 
 
     class Meta:
-        fields = ['email', 'password1', 'password2', 'accepted_terms']
+        fields = ['first_name', 'last_name', 'email', 'password1', 'password2', 'accepted_terms']
 
 
 class AuthenticationForm(forms.Form):

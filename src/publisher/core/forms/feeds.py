@@ -5,7 +5,7 @@ from django.forms import widgets
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-from core.models import Feed, FeedSubscriber
+from core.models import Feed, FeedItem, FeedSubscriber
 from core.fields import CreditCardField, ExpiryDateField, VerificationValueField
 from utils import forms
 
@@ -68,4 +68,22 @@ class CreateFeedForm(forms.Form):
             feed.save()
 
         return feed
+
+
+class CreateFeedItemForm(forms.ModelForm):
+    """
+    This form is for adding feed items
+    """
+    def __init__(self, *args, **kwargs):
+        super(CreateFeedItemForm, self).__init__(*args, **kwargs)
+
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs = {
+                'placeholder': self.fields[name].label,
+                'class': 'input-large input-block-level',
+            }
+
+
+    class Meta:
+        model = FeedItem
 

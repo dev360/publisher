@@ -17,7 +17,7 @@ from django.template import RequestContext
 from django.contrib.auth import authenticate
 
 from auth.forms import RegistrationForm
-from core.forms import CreateFeedForm, PaymentForm
+from core.forms import CreateFeedForm, CreateFeedItemForm, PaymentForm
 from core.models import Feed, FeedItem, FeedSubscriber
 
 
@@ -43,6 +43,39 @@ def feed_create(request):
             return HttpResponseRedirect(url)
 
     return render_to_response('core/feeds/create.html', {
+        'form': form,
+        'my_feeds': my_feeds,
+        'page_name': 'feed_create',
+    }, RequestContext(request))
+
+
+@login_required
+def feed_item_create(request, username, feed_slug):
+    """
+    Creates a feed
+    """
+    user = get_object_or_404(User, username=username)
+    if user.id != request.user.id:
+        raise Exception('')
+
+    feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
+    my_feeds = Feed.objects.filter(publisher=user)
+
+    form = CreateFeedItemForm()
+
+    if request.method == 'POST':
+        form = CreateFeedItemForm(request.POST)
+
+        if form.is_valid():
+            feed = form.save(user=user)
+            url = reverse('feed_detail', args=[
+                feed.publisher.username,
+                feed.slug
+            ])
+            return HttpResponseRedirect(url)
+
+    return render_to_response('core/feeds/create_item.html', {
+        'feed': feed,
         'form': form,
         'my_feeds': my_feeds,
         'page_name': 'feed_create',
@@ -77,12 +110,15 @@ def feed_detail(request, username, feed_slug):
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
     filter_options = FeedItem.TYPE_CHOICES
 
-    if request.user.is_anonymous() or not feed.is_subscribed(request.user):
-        return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
+    #if request.user.is_anonymous() or not feed.is_subscribed(request.user):
+        #return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
+
+    form = CreateFeedItemForm()
 
     return render_to_response('core/feeds/detail.html', {
         'profile': user.profile,
         'feed': feed,
+        'form': form,
         'filter_options': filter_options,
         'page': 'feeds',
     }, RequestContext(request))
@@ -105,8 +141,8 @@ class FeedDetailSubscribe(View):
         user = get_object_or_404(User, username=username)
         feed = get_object_or_404(Feed, publisher=user, slug=slug)
 
-        if request.user.is_authenticated() and feed.is_subscribed(request.user):
-            return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
+        #if request.user.is_authenticated() and feed.is_subscribed(request.user):
+        #    return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
 
         return handler(request, user, feed)
 

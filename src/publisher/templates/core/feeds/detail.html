@@ -4,89 +4,110 @@
 
 {% block primary %}
   <div class="feed-detail">
-    <div class="avatar">
-      <img src="{{ feed.publisher.profile.gravatar_image }}" />
+    <div class="feed-detail-inner">
+      <div class="publisher-detail">
+        <div class="avatar">
+          <img src="{{ feed.publisher.profile.gravatar_image }}" />
+        </div>
+
+        <div class="feed-info">
+          <h2>{{ feed.title.title }}</h2>
+          <span class="author">{{ feed.publisher.get_full_name.title }}</span>
+
+          {% if feed.tags.exists %}
+          <div class="tags">
+            <ul>
+              {% for tag in feed.tags.all %}
+                <li><a href="#">{{ tag.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+
+      <ul class="publisher-stats">
+        <li>Posts Per Month: <span>{{ feed.posts_per_month|intcomma }}</span></li>
+        <li>Subscribers: <span>{{ feed.subscribers_count|intcomma }}</span></li>
+        <li>Reviews: <span>{{ feed.reviews_count|intcomma }}</span></li>
+        <li>Loves: <span>{{ feed.likes_count|intcomma }}</span></li>
+      </ul>
+
+      <p class="lead">{{ feed.description }}</p>
     </div>
-    <h1>{{ feed.title.title }}
-      <span>By: {{ feed.publisher.get_full_name.title }}</span>
-    </h1>
-
-    {% if feed.tags.exists %}
-    <div class="tags">
-      {% for tag in feed.tags.all %}
-        <span><a href="#">{{ tag.name }}</a></span>
-      {% endfor %}
-    </div>
-    {% endif %}
-
-    <dl>
-      <dt>Posts Per Month:</dt>
-      <dd>{{ feed.posts_per_month|intcomma }}</dd>
-      <dt>Subscribers:</dt>
-      <dd>{{ feed.subscribers_count|intcomma }}</dd>
-      <dt>Reviews:</dt>
-      <dd>{{ feed.reviews_count|intcomma }}</dd>
-      <dt>Loves:</dt>
-      <dd>{{ feed.likes_count|intcomma }}</dd>
-    </dl>
-
-    <p class="lead">{{ feed.description }}</p>
 
     <div class="feed-filter">
-      Filter by type: 
+      <label>Filter by type:</label> 
       <select>
         {% for filter_option in filter_options %}
           <option value="{{ filter_option.0 }}">{{ filter_option.1 }}</option>
         {% endfor %}
       </select>
-      <input type="text" placeholder="Search for a post" class="input-medium search-query">
+      <div class="pull-right">
+        <input type="text" placeholder="Search for a post" class="input-medium search-query">
+      </div>
     </div>
+    <section>
+    {% if request.user.id == feed.publisher.id %}
+      <div class="create-feed-item-button">  
+        <a href="{% url feed_item_create feed.publisher.username feed.slug %}" class="btn btn-large">Post in Channel</a>
+      </div>
+    {% endif %}
 
     <div class="feed-items">
       {% for feed_item in feed.feed_items.all %}
-        <div class="feed-item">
-          <div class="header">
-            <span class="icon icon-video"></span>
-            <h4><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a></h4>
-            <span>{{ feed_item.date_modified|timesince }} ago</span>
-          </div>
-          <div class="content">
-            {% if feed_item.type == 'audio' %}
-              <audio controls>
-                <source src="{{ feed_item.file.url }}">
-              </audio>
+        {% if feed_item.is_sample %}
+          <div class="feed-item">
+            <div class="wrap">
+              <span class="sample pull-right">
+                Sample Post
+              </span>
+              <div class="header">
 
-              <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
-            {% elif feed_item.type == 'picture' %}
-              <img src="{{ feed_item.file.url }}" />
-            {% elif feed_item.type == 'text' %}
-              {{ feed_item.text|safe }}
-            {% elif feed_item.type == 'video' %}
-              <video height="520px" width="346px" controls>
-                <source src="{{ feed_item.file.url }}">
-              </video>
+                <span class="icon icon-{{ feed_item.type }}"></span>
+                <h3><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a>
+                  <span>{{ feed_item.date_modified|timesince }} ago</span>
+                </h3>
+              </div>
+              <div class="content">
+                {% if feed_item.type == 'audio' %}
+                  <audio controls>
+                    <source src="{{ feed_item.file.url }}">
+                  </audio>
+                  <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+                {% elif feed_item.type == 'picture' %}
+                  <img src="{{ feed_item.file.url }}" />
+                {% elif feed_item.type == 'text' %}
+                  {{ feed_item.text|safe }}
+                {% elif feed_item.type == 'video' %}
+                  <video height="520px" width="346px" controls>
+                    <source src="{{ feed_item.file.url }}">
+                  </video>
 
-              <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
-            {% elif feed_item.type == 'other' %}
-              <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
-            {% endif %}
-          </div>
-          <div class="actions">
-            <a href="#" class="btn">22 Comments</a>
-            <a href="#" class="btn">Share</a>
-            <a href="#" class="btn">Love</a>
-          </div>
+                  <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+                {% elif feed_item.type == 'other' %}
+                  <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+                {% endif %}
+              </div>
 
-        {% if feed_item.tags.exists %}
-        <div class="tags">
-          {% for tag in feed_item.tags.all %}
-            <span><a href="#">{{ tag.name }}</a></span>
-          {% endfor %}
-        </div>
+              {% if feed_item.tags.exists %}
+              <div class="tags pull-right">
+                {% for tag in feed_item.tags.all %}
+                  <span><a href="#">{{ tag.name }}</a></span>
+                {% endfor %}
+              </div>
+              {% endif %}
+              <div class="actions">
+                <a href="#" class="btn">22 Comments</a>
+                <a href="#" class="btn">Share</a>
+                <a href="#" class="btn">Love</a>
+              </div>
+            </div>
+          </div>
         {% endif %}
       {% endfor %}
     </div>
-
+    </section>
   </div>
-  
+
 {% endblock %}

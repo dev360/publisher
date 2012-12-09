@@ -621,6 +621,11 @@ section {
 #subscribe_form #id_name_on_card {
   width: 409px;
 }
+.sample {
+  background: #3B3D3E;
+  color: #fff;
+  padding: 6px 10px;
+}
 .feed-item-create {
   padding: 40px 100px;
 }

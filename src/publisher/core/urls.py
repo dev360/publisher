@@ -14,13 +14,14 @@ urlpatterns = patterns('',
     url(r'^privacy/$', views.privacy_policy, name='privacy-policy'),
 
     # User views
-    url(r'^share/$', views.user_share, name='user_share'),
+    url(r'^create/$', views.feed_create, name='feed_create'),
 
-    url(r'^dashboard/$', views.dashboard, name='dashboard'),
+    url(r'^subscriptions/$', views.feed_subscriptions, name='feed_subscriptions'),
 
     url(r'^(?P<username>([^/])+)/$', views.user_detail, name='user_detail'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/$', views.feed_detail, name='feed_detail'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/subscribe/$', views.feed_detail_subscribe, name='feed_detail_subscribe'),
+    url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/dashboard/$', views.feed_detail_dashboard, name='feed_detail_dashboard'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/(?P<item_slug>([^/])+)/$', views.feed_item_detail, name='feeditem_detail'),
 
 )

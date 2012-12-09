@@ -42,6 +42,13 @@ class RegistrationForm(forms.FormMixin, RegistrationFormUniqueEmail):
         self.fields['password1'].label = _('Password')
         self.fields['password2'].label = _('Password (again)')
 
+        # adds placeholder data for all fields
+        for field_name in self.fields:
+            field = self.fields.get(field_name)
+            if field:
+                if type(field.widget) in (forms.TextInput, forms.PasswordInput, forms.DateInput):
+                    field.widget = forms.TextInput(attrs={'placeholder': field.label})
+
 
     def clean_username(self):
         data = self.cleaned_data['username']

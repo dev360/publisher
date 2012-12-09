@@ -3,7 +3,26 @@
 {% block primary %}
   <div class="feed-detail">
 
-    <a href="#" class="btn btn-primary btn-large">Subscribe <em>$2/Month</em></a>
+    <a href="#subscribe" role="button" class="btn btn-primary btn-large" data-toggle="modal">Subscribe <em>$2/Month</em></a>
+
+    <div id="subscribe" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+      <form method="post">
+        {% csrf_token %}
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+          <h3 id="myModalLabel">Subscribe</h3>
+        </div>
+        <div class="modal-body">
+          {{ register_form.as_ul }}
+          {% if register_form %}<hr>{% endif %}
+          {{ subscribe_form.as_ul }}
+        </div>
+        <div class="modal-footer">
+          <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+          <button class="btn btn-primary" type="submit">Sign Me UP!</button>
+        </div>
+      </form>
+    </div>
 
     <h3>Crossfit extreme
       <span>By: Danny Lopez-Calleja </span>
@@ -16,7 +35,7 @@
 
     <dl>
       <dt>Posts Per Month:</dt>
-      <dd>22 </dd>
+      <dd>2 </dd>
       <dt>Subscribers:</dt>
       <dd>2,340 </dd>
       <dt>Reviews:</dt>

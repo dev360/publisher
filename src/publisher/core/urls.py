@@ -20,7 +20,7 @@ urlpatterns = patterns('',
 
     url(r'^(?P<username>([^/])+)/$', views.user_detail, name='user_detail'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/$', views.feed_detail, name='feed_detail'),
-    url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/subscribe/$', views.feed_detail_subscribe, name='feed_detail_subscribe'),
+    url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/subscribe/$', views.FeedDetailSubscribe.as_view(), name='feed_detail_subscribe'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/dashboard/$', views.feed_detail_dashboard, name='feed_detail_dashboard'),
     url(r'^(?P<username>([^/])+)/(?P<feed_slug>([^/])+)/(?P<item_slug>([^/])+)/$', views.feed_item_detail, name='feeditem_detail'),
 

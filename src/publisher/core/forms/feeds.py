@@ -5,9 +5,19 @@ from django.forms import widgets
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-
 from core.models import Feed
+from core.fields import CreditCardField, ExpiryDateField, VerificationValueField
 from utils import forms
+
+
+class PaymentForm(forms.Form):
+    """
+    Credit Card form
+    """
+    name_on_card = forms.CharField(label=_('name on card'), max_length=50, required=True)
+    card_number = CreditCardField(label=_('card number'), required=True)
+    expiry_date = ExpiryDateField(required=True)
+    card_code = VerificationValueField(label=_('card code'), required=True)
 
 
 class CreateFeedForm(forms.Form):

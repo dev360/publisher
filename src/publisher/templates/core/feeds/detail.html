@@ -56,7 +56,13 @@
             {% elif feed_item.type == 'text' %}
               {{ feed_item.text|safe }}
             {% elif feed_item.type == 'video' %}
+              <video height="520px" width="346px" controls>
+                <source src="{{ feed_item.file.url }}">
+              </video>
+
+              <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
             {% elif feed_item.type == 'other' %}
+              <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
             {% endif %}
           </div>
           <div class="actions">

@@ -28,19 +28,7 @@ def dashboard(request):
     return render_to_response('core/users/dashboard.html', {
         'profile': user.profile,
         'feeds': feeds,
-        'page': channel_name,
-    }, RequestContext(request))
-
-
-def user_detail(request, username):
-    user = get_object_or_404(User, username=username)
-    feeds = user.feeds.filter(publisher__username=username)
-    channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
-
-    return render_to_response('core/users/detail.html', {
-        'profile': user.profile,
-        'feeds': feeds,
-        'page': channel_name,
+        'page_name': 'feeds',
     }, RequestContext(request))
 
 
@@ -65,6 +53,18 @@ def user_share(request):
 
     return render_to_response('core/users/share.html', {
         'form': form,
-        'page': 'share',
+        'page_name': 'share',
+    }, RequestContext(request))
+
+
+def user_detail(request, username):
+    user = get_object_or_404(User, username=username)
+    feeds = user.feeds.filter(publisher__username=username)
+    channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
+
+    return render_to_response('core/users/detail.html', {
+        'profile': user.profile,
+        'feeds': feeds,
+        'page': channel_name,
     }, RequestContext(request))
 

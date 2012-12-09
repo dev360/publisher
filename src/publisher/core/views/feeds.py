@@ -14,19 +14,31 @@ from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 
 from core.forms import CreateFeedForm
-from core.models import Feed
+from core.models import Feed, FeedItem
 
-def feed_detail(request, username, slug):
+def feed_list(request, username, feed_slug):
     """
-    User detail view
+    Users feed list
     """
     user = get_object_or_404(User, username=username)
-    feed = Feed.objects.get(publisher=user, slug=slug)
+    feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
 
-    return render_to_response('core/feeds/detail.html', {
+    return render_to_response('core/feeds/list.html', {
         'profile': user.profile,
         'feed': feed,
         'page': 'feeds',
+    }, RequestContext(request))
+
+def feed_item_detail(request, username, feed_slug, item_slug):
+    """
+    Users feed item detail
+    """
+    user = get_object_or_404(User, username=username)
+    feed_item = get_object_or_404(FeedItem, feed__publisher=user, feed__slug=feed_slug, slug=item_slug)
+
+    return render_to_response('core/feeds/detail.html', {
+        'profile': user.profile,
+        'item': feed_item,
     }, RequestContext(request))
 
 

@@ -619,6 +619,9 @@ section {
   border: none !important;
   background-color: transparent !important;
 }
+.dashboard_image {
+  padding: 20px 20px 40px;
+}
 .navbar {
   margin-bottom: 40px;
 }

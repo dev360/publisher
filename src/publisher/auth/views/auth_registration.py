@@ -41,7 +41,7 @@ def register(request):
 
 
 def register_success(request):
-    return render_to_response('auth/register_success.html', { }, RequestContext(request))
+    return HttpResponseRedirect(reverse("feed_subscriptions") + "?success=1")
 
 
 def activate(request, activation_key):

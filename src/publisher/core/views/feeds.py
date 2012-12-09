@@ -96,6 +96,7 @@ def feed_subscriptions(request):
     channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
     form = CreateFeedForm()
 
+    success=request.GET.get("success")
 
     return render_to_response('core/feeds/subscriptions.html', {
         'profile': user.profile,
@@ -103,6 +104,7 @@ def feed_subscriptions(request):
         'my_feeds': my_feeds,
         'form': form,
         'page_name': 'feed_subscriptions',
+        'success': success
     }, RequestContext(request))
 
 

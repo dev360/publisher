@@ -30,7 +30,7 @@
           </header>
 
           <div class="featured-post">
-            <a href="{% url feed_detail feed.publisher.username feed.slug %}" class="button disclosure green">{{ feed.title }}</a>
+            <a href="{% url feed_detail_subscribe feed.publisher.username feed.slug %}" class="button disclosure green">Subscribe</a>
           </div>
 
           <div class="meta-tags">
@@ -51,8 +51,8 @@
 <section class="marketing">
   <div class="container">
     <h2>Exclusive content from experts, artists, musicians, chefs, craftsmen, etc...</h2>
-    <a href="#" class="button">
-      How does it work?
+    <a href="{% url register %}" class="button blue">
+      Register Today
     </a>
   </div>
 </section>
@@ -83,17 +83,5 @@
 
 {% block primary %}
 
-  <ul class="nav nav-tabs">
-    <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-    <li><a href="#registration" data-toggle="tab">Registration</a></li>
-  </ul>
-  <div class="tab-content">
-    <div class="tab-pane active" id="login">
-      {{ login_form.as_ul }}
-    </div>
-    <div class="tab-pane" id="registration">
-      {{ registration_form.as_ul }}
-    </div>
-  </div>
 
 {% endblock %}

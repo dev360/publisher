@@ -5,6 +5,12 @@
 {% endblock %}
 
 {% block content %} 
+  {% if success %}
+  <div class="alert alert-success">
+    Welcome!
+  </div>
+  <br />
+  {% endif %}
   <div class="feed-detail subscriptions">
     <div class="feed-filter">
       <label>Filter by type:</label> 
@@ -17,11 +23,12 @@
         <input type="text" placeholder="Search for a post" class="input-medium search-query">
       </div>
     </div>
-    <br /><br />
 
 
     <section>
     <div class="feeds">
+      {% if feeds %}
+        
       {% for feed in feeds %}
         {% if feed.first %}
           <div class="feed">
@@ -123,6 +130,9 @@
           </div>
         {% endif %}
       {% endfor %}
+      {% else %}
+        <img src="/static/img/blank_subscriptions.png" style="padding: 40px; text-align: center;">
+      {% endif %}
     </div>
 
 

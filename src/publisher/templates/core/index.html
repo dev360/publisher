@@ -1,6 +1,6 @@
 {% extends "base_full.html" %}
 
-{% block container_css %}index{% endblock %}
+{% block container_css %} index{% endblock %}
 {% load humanize %}
 
 {% block container_full %}
@@ -9,10 +9,8 @@
   <h1>New & Noteworthy in <span>Fitness</span></h1>
 
   <div class="container">
-  <div class="pagination left">&lt;</div>
   <div class="carousel-container">
-    <div class="carousel counter_{{ feeds.count|add:2 }}">
-      <div class="slider-card"></div>
+    <div class="carousel">
       {% for feed in feeds %}
       <div class="slider-card">
         <header>
@@ -49,10 +47,8 @@
         </div>
       </div>
       {% endfor %}
-      <div class="slider-card"></div>
     </div>
   </div>
-  <div class="pagination right">&gt;</div>
   </div>
 
 </header>
@@ -68,64 +64,24 @@
 
 {% block extra_scripts %}
   <script type="text/javascript">
-    var lastAnimatedMark = 0.0;
-    var el = $('.slider-card').parent().parent();
+    var count = 0;
+    var el = $('.slider-card').parent().children().hide();
+    var old = el.last();
 
-    function stopBodyAnimation() {
-      lastAnimatedMark=0;
-      el.stop(true, false);
+    function changeNews() {
+      old.fadeOut(100);
+      old = $(el[count++]).fadeIn(250);
+
+      setTimeout(function() {
+        changeNews();
+      }, 3000);
+
+      if (count == el.length) {
+        count = 0;
+      }
     }
 
-    function animatedMark() {
-      var x = el.prop('animatedMark');
-      if (x == undefined){
-        x = 0.0;
-        el.prop('animatedMark', x);
-      }
-      return x;
-    };
-
-    $('.pagination.left').click(function(){
-      el.stop(true, false).animate({
-          scrollLeft: el.scrollLeft() - 475,
-          animatedMark: '+=1.0'
-        }, 250
-      );
-    });
-
-    $('.pagination.right').click(function(){
-      el.stop(true, false).animate({
-          scrollLeft: el.scrollLeft() + 475,
-          animatedMark: '+=1.0'
-        }, 250
-      );
-    });
-    el.scroll(function(event) {
-      var currentAnimatedMark = animatedMark();
-      if (currentAnimatedMark > 0 && (lastAnimatedMark == currentAnimatedMark)) {
-      stopBodyAnimation();
-      return;
-      }
-      lastAnimatedMark=currentAnimatedMark;
-
-      // console.log('event', event);
-      clearTimeout($.data(this, 'timer_do'));
-      //clearTimeout($.data(this, 'timer_clear'));
-      //$.data(this, 'timer_clear', setTimeout(function() { el.stop(true, false) }, 50));
-      $.data(this, 'timer_do', setTimeout(function() {
-        var width = el.width();
-        var len = $('.slider-card').parent().children().length - 2;
-        var position = Math.ceil(el.scrollLeft() / 475);
-        if (position == 0) position = 1;
-        if (position >= len) position = len;
-        var scroll = position * 475 - ((width-475)/2);
-        el.stop(true, false).animate({
-            scrollLeft: scroll,
-            animatedMark: '+=1.0'
-          }, 250
-        );
-      }, 250));
-    }).scroll();
+    changeNews();
   </script>
 {% endblock %}
 

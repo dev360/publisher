@@ -17,6 +17,7 @@ urlpatterns = patterns('',
 	url(r'^share/$', views.user_share, name='user_share'),
 
 	url(r'^(?P<username>([^/])+)/$', views.user_detail, name='user_detail'),
+	url(r'^(?P<username>([^/])+)/(?P<slug>([^/])+)/$', views.feed_detail, name='feed_detail'),
 
 )
 

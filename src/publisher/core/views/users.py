@@ -42,7 +42,11 @@ def user_share(request):
 
         if form.is_valid():
             feed = form.save(user=user)
-            raise Exception(feed)
+            url = reverse('feed_detail', kwargs={
+                'username': feed.publisher.username,
+                'slug': feed.slug
+            })
+            return HttpResponseRedirect(url)
 
     return render_to_response('core/users/share.html', {
         'form': form,

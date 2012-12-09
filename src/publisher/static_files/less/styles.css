@@ -642,11 +642,15 @@ section {
 }
 .feed-detail ul.publisher-stats {
   display: block;
-  margin: 25px 0 30px;
+  margin: 40px 0 30px;
   text-align: center;
 }
 .feed-detail ul.publisher-stats span {
   font-weight: 800;
+}
+.feed-detail .feed-info .author {
+  display: block;
+  margin-bottom: 7px;
 }
 .feed-detail p.lead {
   text-align: center;

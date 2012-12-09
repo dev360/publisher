@@ -67,6 +67,7 @@
         <input type="text" placeholder="Search for a post" class="input-medium search-query">
       </div>
     </div>
+    <section>
     <div class="feed-items">
       {% for feed_item in feed.feed_items.all %}
         {% if feed_item.is_sample %}
@@ -75,9 +76,11 @@
               Sample Post
             </span>
             <div class="header">
-              <span class="icon icon-video"></span>
-              <h4>{{ feed_item.title.title }}</h4>
-              <span>{{ feed_item.date_modified|timesince }} ago</span>
+
+              <span class="icon icon-{{ feed_item.type }}"></span>
+              <h3>{{ feed_item.title.title }}
+                <span>{{ feed_item.date_modified|timesince }} ago</span>
+              </h3>
             </div>
             <div class="content">
               {% if feed_item.type == 'audio' %}
@@ -99,22 +102,24 @@
                 <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
               {% endif %}
             </div>
-            <div class="actions">
-              <a href="#" class="btn">22 Comments</a>
-              <a href="#" class="btn">Share</a>
-              <a href="#" class="btn">Love</a>
-            </div>
+
             {% if feed_item.tags.exists %}
-            <div class="tags">
+            <div class="tags pull-right">
               {% for tag in feed_item.tags.all %}
                 <span><a href="#">{{ tag.name }}</a></span>
               {% endfor %}
             </div>
             {% endif %}
+            <div class="actions">
+              <a href="#" class="btn">22 Comments</a>
+              <a href="#" class="btn">Share</a>
+              <a href="#" class="btn">Love</a>
+            </div>
           </div>
         {% endif %}
       {% endfor %}
     </div>
+    </section>
   </div>
 
 {% endblock %}

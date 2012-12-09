@@ -58,11 +58,13 @@ def feed_subscriptions(request):
     my_feeds = Feed.objects.filter(publisher=user, )
     feeds = [x.feed for x in FeedSubscriber.objects.filter(user=user).select_related('feed')]
     channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
+    form = CreateFeedForm()
 
     return render_to_response('core/feeds/subscriptions.html', {
         'profile': user.profile,
         'feeds': feeds,
         'my_feeds': my_feeds,
+        'form': form,
         'page_name': 'feed_subscriptions',
     }, RequestContext(request))
 
@@ -84,6 +86,7 @@ def feed_detail(request, username, feed_slug):
         'filter_options': filter_options,
         'page': 'feeds',
     }, RequestContext(request))
+
 
 class FeedDetailSubscribe(View):
     def dispatch(self, request, *args, **kwargs):
@@ -176,11 +179,13 @@ def feed_detail_dashboard(request, username, feed_slug):
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
     my_feeds = Feed.objects.filter(publisher=user, )
     feed_items = FeedItem.objects.filter(feed=feed, is_sample=True)[:3]
+    form = CreateFeedForm()
 
     return render_to_response('core/feeds/dashboard.html', {
         'profile': user.profile,
         'feed': feed,
         'my_feeds': my_feeds,
+        'form': form,
         'feed_items': feed_items,
         'page': 'feeds',
     }, RequestContext(request))

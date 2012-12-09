@@ -1,0 +1,40 @@
+{% extends "core/feeds/base.html" %}
+
+{% block title %}
+  {{ page }}
+{% endblock %}
+
+{% block content %} 
+
+<!--<div class="well">Filter by category:</div>-->
+
+<div class="feeds">
+
+  {% if feeds %}
+    {% for feed in feeds %}
+      <div class="feed-item">
+        <div class="wrap">
+          <div class="image">
+            <img src="{{ feed.image }}" height="75px" width="75px" />
+          </div>
+          <div class="content">
+            <h3>{{ feed.title.title }}<span class="pull-right"><a href="">{{ feed.publisher.username.title }}</a></span></h3>
+              <p class="lead">{{ feed.description }}</p>
+          </div>
+        </div>
+        <div class="actions">
+          <a href="#" class="btn btn-small">Share</a>
+          <a href="#" class="btn btn-small">Like</a>
+        </div>
+      </div>
+    {% endfor %}
+  {% else %}
+    <div>
+      <p>You have not subscribed to any feeds yet.</p>
+    </div>
+
+  {% endif %}
+  <hr />
+</div>
+
+{% endblock %}

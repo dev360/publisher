@@ -4,6 +4,20 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 
 
+class Tag(models.Model):
+    """
+    Feed
+    """
+
+    name = models.CharField(_('name'), max_length=50, unique=True)
+
+    class Meta:
+        app_label = 'core'
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+
 class Feed(models.Model):
     """
     Feed
@@ -26,16 +40,35 @@ class Feed(models.Model):
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
-    class Meta:
-        app_label = 'core'
-        unique_together = ('publisher', 'slug',)
-
     def __unicode__(self):
         return u'%s' % self.title
 
-    def save(self, **kwargs):
+    def is_subscribed(self, user):
+        """
+        Returns whether the user is subscribed
+        """
+        # TODO: Fix it.
+        return True
+
+    def posts_per_month(self):
+        return 4
+
+    def subscribers(self):
+        return 1534
+
+    def reviews_count(self):
+        return 500
+
+    def likes_count(self):
+        return 1024
+
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Feed, self).save(**kwargs)
+        super(Feed, self).save(*args, **kwargs)
+
+    class Meta:
+        app_label = 'core'
+        unique_together = ('publisher', 'slug',)
 
 class FeedSubscriber(models.Model):
     """
@@ -90,6 +123,7 @@ class FeedItem(models.Model):
     is_sample = models.BooleanField(_('is sample'), default=False)
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES, default='other', blank=True)
     file = models.FileField(_('file'), upload_to='attachments', blank=True)
+    tags = models.ManyToManyField(Tag)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 

@@ -1,0 +1,29 @@
+{% extends "base_full.html" %}
+
+{% block primary %} 
+  <div class="user">
+    <ul class="nav nav-tabs">
+      <li {% if page_name == 'feed_subscriptions' %}class="active"{% endif %}><a href="{% url feed_subscriptions %}">My Subscriptions</a></li>
+      {% if my_feeds %}
+      <li class="dropdown {% if page_name == 'feed_dashboard' %}active{% endif %}">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Channels <b class="caret"></b></a>
+        <ul class="dropdown-menu">
+          {% for feed in my_feeds %}
+            <li><a href="{% url feed_detail_dashboard feed.publisher.username feed.slug %}">{{ feed.title }}</a></li>
+          {% endfor %}
+          <li class="divider"></li>
+          <li><a href="{% url feed_create %}">Create</a></li>
+        </ul>
+      </li>
+      {% else %}
+      <li {% if page_name == 'feed_create' %}class="active"{% endif %}><a href="{% url feed_create %}">Create Channel</a></li>
+      {% endif %}
+    </ul>
+    <div class=" tab-pane active">
+    {% block content %}
+    {% endblock %}
+    </div>
+  </div>
+
+{% endblock %}
+

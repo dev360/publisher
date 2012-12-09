@@ -1,4 +1,3 @@
-@import url(http://fonts.googleapis.com/css?family=Droid+Sans);
 .clearfix {
   *zoom: 1;
 }
@@ -476,18 +475,11 @@ svg .title {
   color: #005580;
   text-decoration: underline;
 }
-.navbar-inner {
-  padding: 10px;
-}
-.navbar-inner .nav {
-  padding-top: 3px;
-}
-.navbar-inner .nav a {
-  color: white !important;
-  text-shadow: none !important;
-}
 .control-group ul li {
   list-style-type: none;
+}
+.chart .chart-type {
+  margin-left: 10px;
 }
 .feed-detail h3 span {
   display: block;

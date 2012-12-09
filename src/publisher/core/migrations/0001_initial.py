@@ -17,6 +17,13 @@ class Migration(SchemaMigration):
         ))
         db.send_create_signal('core', ['Profile'])
 
+        # Adding model 'Tag'
+        db.create_table('core_tag', (
+            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
+            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=50)),
+        ))
+        db.send_create_signal('core', ['Tag'])
+
         # Adding model 'Feed'
         db.create_table('core_feed', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -37,7 +44,7 @@ class Migration(SchemaMigration):
         db.create_table('core_feedsubscriber', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('feed', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['core.Feed'])),
-            ('user', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['auth.User'])),
+            ('user', self.gf('django.db.models.fields.related.ForeignKey')(related_name='subscriptions', to=orm['auth.User'])),
             ('start_date', self.gf('django.db.models.fields.DateTimeField')(auto_now_add=True, blank=True)),
         ))
         db.send_create_signal('core', ['FeedSubscriber'])
@@ -73,6 +80,14 @@ class Migration(SchemaMigration):
         # Adding unique constraint on 'FeedItem', fields ['feed', 'slug']
         db.create_unique('core_feeditem', ['feed_id', 'slug'])
 
+        # Adding M2M table for field tags on 'FeedItem'
+        db.create_table('core_feeditem_tags', (
+            ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
+            ('feeditem', models.ForeignKey(orm['core.feeditem'], null=False)),
+            ('tag', models.ForeignKey(orm['core.tag'], null=False))
+        ))
+        db.create_unique('core_feeditem_tags', ['feeditem_id', 'tag_id'])
+
         # Adding model 'Like'
         db.create_table('core_like', (
             ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
@@ -92,6 +107,9 @@ class Migration(SchemaMigration):
         # Deleting model 'Profile'
         db.delete_table('core_profile')
 
+        # Deleting model 'Tag'
+        db.delete_table('core_tag')
+
         # Deleting model 'Feed'
         db.delete_table('core_feed')
 
@@ -103,6 +121,9 @@ class Migration(SchemaMigration):
 
         # Deleting model 'FeedItem'
         db.delete_table('core_feeditem')
+
+        # Removing M2M table for field tags on 'FeedItem'
+        db.delete_table('core_feeditem_tags')
 
         # Deleting model 'Like'
         db.delete_table('core_like')
@@ -165,6 +186,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_sample': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['core.Tag']", 'symmetrical': 'False'}),
             'teaser': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '70'}),
@@ -185,7 +207,7 @@ class Migration(SchemaMigration):
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Feed']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'start_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'subscriptions'", 'to': "orm['auth.User']"})
         },
         'core.like': {
             'Meta': {'object_name': 'Like'},
@@ -199,6 +221,11 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.CharField', [], {'max_length': '40', 'primary_key': 'True'}),
             'status': ('django.db.models.fields.CharField', [], {'default': "'NEW'", 'max_length': '10'}),
             'user': ('django.db.models.fields.related.OneToOneField', [], {'related_name': "'profile'", 'unique': 'True', 'to': "orm['auth.User']"})
+        },
+        'core.tag': {
+            'Meta': {'object_name': 'Tag'},
+            'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'name': ('django.db.models.fields.CharField', [], {'unique': 'True', 'max_length': '50'})
         }
     }
 

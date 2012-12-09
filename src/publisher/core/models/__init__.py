@@ -32,7 +32,6 @@ class Feed(models.Model):
     )
 
     publisher = models.ForeignKey(User, verbose_name=_('publisher'), related_name="feeds")
-    subscribers = models.ManyToManyField(User, through='FeedSubscriber')
     title = models.CharField(_('channel name'), max_length=70) # NEVER CHANGE: for twitter
     slug = models.CharField(_('slug'), max_length=200, editable=False)
     description = models.TextField(_('channel description'))
@@ -98,11 +97,11 @@ class FeedReview(models.Model):
     description = models.TextField(_('description'))
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
-    class Meta:
-        app_label = 'core'
-
     def __unicode__(self):
         return u'User ID %s review of Feed ID %s, with a score of %s' % (self.user.id, self.feed.id, self.score)
+
+    class Meta:
+        app_label = 'core'
 
 
 class FeedItem(models.Model):
@@ -130,17 +129,16 @@ class FeedItem(models.Model):
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 
-    class Meta:
-        app_label = 'core'
-        unique_together = ('feed', 'slug',)
-
     def __unicode__(self):
         return u'%s' % self.title
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(FeedItem, self).save(**kwargs)
+        super(FeedItem, self).save(*args, **kwargs)
 
+    class Meta:
+        app_label = 'core'
+        unique_together = ('feed', 'slug',)
 
 class Like(models.Model):
     user = models.ForeignKey(User, related_name="likes")

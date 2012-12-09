@@ -655,6 +655,9 @@ section {
 .subscriptions .feed .avatar {
   margin-left: -45px;
 }
+.subscriptions .feed .icon {
+  margin-top: 15px;
+}
 .feed-detail {
   background-color: rgba(255, 255, 255, 0.25);
   margin-top: -40px;

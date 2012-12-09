@@ -126,15 +126,22 @@ class FeedDetailSubscribe(View):
             FeedSubscriber.objects.get_or_create(feed=feed, user=register_user or request.user)
 
         if request.is_ajax():
-            errors = subscribe_form.errors
+            response = {
+                'error': subscribe_form.errors,
+                'success': reverse('feed_detail', args=[
+                    feed.publisher.username,
+                    feed.slug
+                ])
+            }
+
             if register_form:
-                errors.update(register_form.errors)
+                response['error'].update(register_form.errors)
 
             status = 200
-            if errors:
+            if response['error']:
                 status = 400
 
-            return HttpResponse(json.dumps(errors), status=status, mimetype="application/json")
+            return HttpResponse(json.dumps(response), status=status, mimetype="application/json")
 
         return self.render(user, feed, register_form, subscribe_form)
 
@@ -183,5 +190,6 @@ def feed_item_detail(request, username, feed_slug, item_slug):
         'profile': user.profile,
         'item': feed_item,
     }, RequestContext(request))
+
 
 

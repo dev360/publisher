@@ -13,7 +13,7 @@
 
     {% if feed.tags.exists %}
     <div class="tags">
-      {% for tag in feed.tags %}
+      {% for tag in feed.tags.all %}
         <span><a href="#">{{ tag.name }}</a></span>
       {% endfor %}
     </div>
@@ -76,12 +76,14 @@
             <a href="#" class="btn">Share</a>
             <a href="#" class="btn">Love</a>
           </div>
-          <div class="tags">
-            <span><a href="#">Fitness</a></span>
-            <span><a href="#">Health</a></span>
-            <span><a href="#">Nutrition</a></span>
-          </div>
+
+        {% if feed_item.tags.exists %}
+        <div class="tags">
+          {% for tag in feed_item.tags.all %}
+            <span><a href="#">{{ tag.name }}</a></span>
+          {% endfor %}
         </div>
+        {% endif %}
       {% endfor %}
     </div>
 

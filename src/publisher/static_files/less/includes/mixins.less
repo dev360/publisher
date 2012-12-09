@@ -1,11 +1,32 @@
 .button {
   display: inline-block;
   font-size: 22px;
-  padding: 20px 30px;
+  font-family:"proxima-nova-soft",sans-serif;
+  padding: 15px 25px;
+  background-color: #4C6A72;
+  color: white;
   .border-radius(3px);
-  &.dark_blue {
-    background-color: #4C6A72;
+  &.green {
+    background-color: #5EBD81;
+    &:hover {
+      background-color: darken(#5EBD81, 15%);
+    }
+  }
+  &.disclosure {
+    background-image: url('/static/img/disclosure.png');
+    background-position: right 50%;
+    background-repeat: no-repeat;
+    margin-right: 20px;
+    padding-right: 50px;
+  }
+  &:hover {
     color: white;
+    text-decoration: none;
+  }
+
+  &:active {
+    position: relative;
+    top: 0px;
   }
 }
 

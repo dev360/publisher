@@ -58,7 +58,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.transaction.TransactionMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 
@@ -101,7 +100,6 @@ INSTALLED_APPS = (
     'utils',
 
     'storages',
-    'debug_toolbar',
 )
 
 LOGIN_REDIRECT_URL = '/dashboard/'

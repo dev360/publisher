@@ -50,9 +50,9 @@ class Feed(models.Model):
         # TODO: Fix it.
         return True
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Feed, self).save(**kwargs)
+        super(Feed, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'core'

@@ -4,16 +4,15 @@
   <div class="user">
     <ul class="nav nav-tabs">
       <li {% if page_name == 'feed_subscriptions' %}class="active"{% endif %}><a href="{% url feed_subscriptions %}">My Subscriptions</a></li>
-      {% if feeds %}
+      {% if my_feeds %}
       <li class="dropdown {% if page_name == 'feed_dashboard' %}active{% endif %}">
-        <a class="dropdown-toggle"
-          data-toggle="dropdown"
-          href="#">
-            My Channels
-            <b class="caret"></b>
-          </a>
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">My Channels <b class="caret"></b></a>
         <ul class="dropdown-menu">
-          <!-- links -->
+          {% for feed in my_feeds %}
+            <li><a href="{% url feed_detail_dashboard feed.publisher.username feed.slug %}">{{ feed.title }}</a></li>
+          {% endfor %}
+          <li class="divider"></li>
+          <li><a href="{% url feed_create %}">Create</a></li>
         </ul>
       </li>
       {% else %}

@@ -31,6 +31,7 @@ class CreateFeedForm(forms.Form):
                 'class': 'input-large',
             }
 
+
     def save(self, *args, **kwargs):
         feed = None
 

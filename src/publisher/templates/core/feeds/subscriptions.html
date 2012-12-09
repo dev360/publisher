@@ -25,16 +25,59 @@
       {% for feed in feeds %}
         {% if feed.first %}
           <div class="feed">
-            <div class="avatar">
-              <img src="{{ feed.publisher.profile.gravatar_image }}" />
+            <div class="header">
+              <div class="avatar">
+                <img src="{{ feed.publisher.profile.gravatar_image }}" />
+              </div>
+              <div class="pull-right">
+                <span class=" icon icon-{{ feed.first.type }}"></span>
+              </div>
+              <h1>
+                {{ feed.title }} 
+                <span class="date">{{ feed.first.date_modified|timesince }} ago</span>
+              </h1>
             </div>
-            <div class="pull-right">
-              <span class=" icon icon-{{ feed.first.type }}"></span>
+
+              <div class="content {{feed.first.type}}">
+                <div class="content-inner">
+                  {% if feed.first.type == 'audio' %}
+                    <audio controls>
+                      <source src="{{ feed.first.file.url }}">
+                    </audio>
+                    <a href="{{ feed.first.file.url }}" target="_blank">Download</a>
+                  {% elif feed.first.type == 'picture' %}
+                    <img src="{{ feed.first.file.url }}" />
+                  {% elif feed.first.type == 'text' %}
+                    <p>{{ feed.first.text|safe }}</p>
+                  {% elif feed.first.type == 'video' %}
+                    <video height="520px" width="346px" controls>
+                      <source src="{{ feed.first.file.url }}">
+                    </video>
+
+                    <a href="{{ feed.first.file.url }}" target="_blank">Download</a>
+                  {% elif feed.first.type == 'other' %}
+                    <a href="{{ feed.first.file.url }}" target="_blank">Download</a>
+                  {% endif %}
+                </div>
+              </div>
+
+            <div class="meta">
+              <div class="meta-inner">
+                {% if feed.first.tags.exists %}
+                <div class="tags pull-right">
+                  {% for tag in feed.first.tags.all %}
+                    <span><a href="#">{{ tag.name }}</a></span>
+                  {% endfor %}
+                </div>
+                {% endif %}
+                <div class="actions">
+                  <a href="#" class="button small">22 Comments</a>
+                  <a href="#" class="button small blue">Share</a>
+                  <a href="#" class="button small red">Love</a>
+                </div>
+              </div>
             </div>
-            <h1>
-              {{ feed.title }} 
-              <span class="date">{{ feed.first.date_modified|timesince }} ago</span>
-          </h1>
+
         </div>
 
         {% endif %}
@@ -76,22 +119,6 @@
                 </div>
               </div>
 
-            <div class="meta">
-                <div class="meta-inner">
-                  {% if feed_item.tags.exists %}
-                  <div class="tags pull-right">
-                    {% for tag in feed_item.tags.all %}
-                      <span><a href="#">{{ tag.name }}</a></span>
-                    {% endfor %}
-                  </div>
-                  {% endif %}
-                  <div class="actions">
-                    <a href="#" class="button small">22 Comments</a>
-                    <a href="#" class="button small blue">Share</a>
-                    <a href="#" class="button small red">Love</a>
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         {% endif %}

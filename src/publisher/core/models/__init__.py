@@ -44,19 +44,26 @@ class Feed(models.Model):
         return u'%s' % self.title
 
     def is_subscribed(self, user):
-        return user.subscriptions.filter(feed=self).exists()
+        #return user.subscriptions.filter(feed=self).exists()
+        return True
 
     def posts_per_month(self):
-        return 4
+        query = """
+            select count(*)
+            from core_feed
+            where
+            date_created >= (CURRENT_DATE - INTERVAL '1 months')
+        """
+        return self.feed_items.extra(select={'monthly_count': query})[0].monthly_count
 
-    def subscribers(self):
-        return 1534
+    def subscribers_count(self):
+        return self.subscribers.count()
 
     def reviews_count(self):
-        return 500
+        return self.reviews.count()
 
     def likes_count(self):
-        return 1024
+        return Like.objects.filter(feed_item__in=self.feed_items.all()).count()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

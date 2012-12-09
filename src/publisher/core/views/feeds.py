@@ -16,9 +16,9 @@ from django.template import RequestContext
 from core.forms import CreateFeedForm
 from core.models import Feed, FeedItem
 
-def feed_list(request, username, feed_slug):
+def feed_detail(request, username, feed_slug):
     """
-    Users feed list
+    Users feed detail
     """
     user = get_object_or_404(User, username=username)
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)

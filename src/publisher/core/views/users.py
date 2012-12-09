@@ -43,7 +43,7 @@ def user_share(request):
 
         if form.is_valid():
             feed = form.save(user=user)
-            url = reverse('feed_detail', kwargs={
+            url = reverse('feed_detail', args={
                 'username': feed.publisher.username,
                 'slug': feed.slug
             })

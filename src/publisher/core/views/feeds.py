@@ -106,9 +106,11 @@ class FeedDetailSubscribe(View):
 
     def post(self, request, user, feed):
         register_form = None
+        register_user = None
+        subscribe_form = PaymentForm(request.POST)
+
         if self.request.user.is_anonymous():
             register_form = RegistrationForm(request.POST)
-        subscribe_form = PaymentForm(request.POST)
 
         if ((register_form and register_form.is_valid()) or register_form == None) and subscribe_form.is_valid():
             if register_form:
@@ -121,7 +123,7 @@ class FeedDetailSubscribe(View):
                     password=request.POST.get('password')
                 )
 
-            subscribe_form.save(request)
+            FeedSubscriber.objects.get_or_create(feed=feed, user=register_user or request.user)
 
         if request.is_ajax():
             errors = subscribe_form.errors

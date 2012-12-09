@@ -5,7 +5,7 @@ from django.forms import widgets
 from django.utils.safestring import mark_safe
 from django.utils.translation import ugettext as _
 
-from core.models import Feed
+from core.models import Feed, FeedSubscriber
 from core.fields import CreditCardField, ExpiryDateField, VerificationValueField
 from utils import forms
 

@@ -84,6 +84,7 @@ class FeedSubscriber(models.Model):
 
     class Meta:
         app_label = 'core'
+        unique_together = ('feed', 'user',)
 
 
 class FeedReview(models.Model):

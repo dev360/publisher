@@ -14,11 +14,20 @@ class PaymentForm(forms.Form):
     """
     Credit Card form
     """
-    name_on_card = forms.CharField(label=_('name on card'), max_length=50, required=True)
-    card_number = CreditCardField(label=_('card number'), required=True)
+    name_on_card = forms.CharField(label=_('Name on card'), max_length=50, required=True)
+    card_number = CreditCardField(label=_('Card number'), required=True)
     expiry_date = ExpiryDateField(required=True)
-    card_code = VerificationValueField(label=_('card code'), required=True)
+    card_code = VerificationValueField(label=_('CCV'), required=True)
 
+    def __init__(self, *args, **kwargs):
+        super(PaymentForm, self).__init__(*args, **kwargs)
+
+
+        for name in self.fields.keys():
+            self.fields[name].widget.attrs = {
+                'placeholder': self.fields[name].label,
+                'class': 'input-large',
+            }
 
 class CreateFeedForm(forms.Form):
     """

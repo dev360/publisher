@@ -1,0 +1,68 @@
+{% extends "base_full.html" %}
+
+{% load humanize %}
+
+{% block primary %}
+  <div class="feed-detail">
+    <div class="avatar">
+      <img src="{{ item.feed.publisher.profile.gravatar_image }}" />
+    </div>
+    <h1>{{ item.title.title }}
+      <span>{{ item.feed.title.title }}</span>
+    </h1>
+
+    {% if feed.tags.exists %}
+    <div class="tags">
+      {% for tag in feed.tags.all %}
+        <span><a href="#">{{ tag.name }}</a></span>
+      {% endfor %}
+    </div>
+    {% endif %}
+
+    <p class="lead">{{ item.teaser }}</p>
+
+    <div class="feed-items">
+        <div class="feed-item">
+          <div class="header">
+            <span class="icon icon-video"></span>
+            <h4><a href="/{{ item.feed.publisher.username }}/{{ item.feed.slug }}/{{ item.feed_item.slug }}">{{ item.feed_item.title.title }}</a></h4>
+            <span>{{ item.date_modified|timesince }} ago</span>
+          </div>
+          <div class="content">
+            {% if item.type == 'audio' %}
+              <audio controls>
+                <source src="{{ item.file.url }}">
+              </audio>
+
+              <a href="{{ item.file.url }}" target="_blank">Download</a>
+            {% elif item.type == 'picture' %}
+              <img src="{{ item.file.url }}" />
+            {% elif item.type == 'text' %}
+              {{ item.text|safe }}
+            {% elif item.type == 'video' %}
+              <video height="520px" width="346px" controls>
+                <source src="{{ item.file.url }}">
+              </video>
+
+              <a href="{{ item.file.url }}" target="_blank">Download</a>
+            {% elif item.type == 'other' %}
+              <a href="{{ item.file.url }}" target="_blank">Download</a>
+            {% endif %}
+          </div>
+          <div class="actions">
+            <a href="#" class="btn">22 Comments</a>
+            <a href="#" class="btn">Share</a>
+            <a href="#" class="btn">Love</a>
+          </div>
+
+        {% if item.tags.exists %}
+        <div class="tags">
+          {% for tag in item.tags.all %}
+            <span><a href="#">{{ tag.name }}</a></span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  
+{% endblock %}

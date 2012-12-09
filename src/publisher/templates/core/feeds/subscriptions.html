@@ -7,34 +7,46 @@
 {% block content %} 
 
 <!--<div class="well">Filter by category:</div>-->
-
-<div class="feeds">
-
-  {% if feeds %}
-    {% for feed in feeds %}
-      <div class="feed-item">
-        <div class="wrap">
-          <div class="image">
-            <img src="{{ feed.image }}" height="75px" width="75px" />
-          </div>
-          <div class="content">
-            <h3>{{ feed.title.title }}<span class="pull-right"><a href="">{{ feed.publisher.username.title }}</a></span></h3>
-              <p class="lead">{{ feed.description }}</p>
-          </div>
-        </div>
-        <div class="actions">
-          <a href="#" class="btn btn-small">Share</a>
-          <a href="#" class="btn btn-small">Like</a>
-        </div>
-      </div>
+<div class="feed-filter">
+  <label>Filter by type:</label> 
+  <select>
+    {% for filter_option in filter_options %}
+      <option value="{{ filter_option.0 }}">{{ filter_option.1 }}</option>
     {% endfor %}
-  {% else %}
-    <div>
-      <p>You have not subscribed to any feeds yet.</p>
-    </div>
-
-  {% endif %}
-  <hr />
+  </select>
+  <div class="pull-right">
+    <input type="text" placeholder="Search for a post" class="input-medium search-query">
+  </div>
 </div>
+
+<section>
+  <div class="feeds">
+    {% if feeds %}
+      {% for feed in feeds %}
+        <div class="feed-item">
+          <div class="wrap">
+            <div class="image">
+              <img src="{{ feed.image }}" height="75px" width="75px" />
+            </div>
+            <div class="content">
+              <h3>{{ feed.title.title }}<span class="pull-right"><a href="">{{ feed.publisher.username.title }}</a></span></h3>
+                <p class="lead">{{ feed.description }}</p>
+            </div>
+          </div>
+          <div class="actions">
+            <a href="#" class="btn btn-small">Share</a>
+            <a href="#" class="btn btn-small">Like</a>
+          </div>
+        </div>
+      {% endfor %}
+    {% else %}
+      <div>
+        <p>You have not subscribed to any feeds yet.</p>
+      </div>
+
+    {% endif %}
+    <hr />
+  </div>
+</section>
 
 {% endblock %}

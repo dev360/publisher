@@ -478,10 +478,11 @@ svg .title {
 }
 .button {
   display: inline-block;
-  font-size: 22px;
+  font-size: 20px;
   font-family: "proxima-nova-soft", sans-serif;
   padding: 15px 25px;
   background-color: #4C6A72;
+  text-align: center;
   color: white;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -507,6 +508,11 @@ svg .title {
 .button:active {
   position: relative;
   top: 0px;
+}
+.button span {
+  opacity: .7;
+  display: block;
+  font-size: 16px;
 }
 .avatar {
   /* selector for avatar class*/
@@ -548,6 +554,36 @@ svg .title {
   /* read above */
 
 }
+body {
+  background: #edeee7 url('/static/img/bg_body.jpg') 50% 0 repeat-x;
+}
+section.marketing {
+  background-color: white;
+  border-bottom: 1px solid #DFDFD9;
+  text-align: center;
+  padding: 50px 0 60px;
+}
+section.marketing div.container h2 {
+  color: #445F66;
+  padding: 0 120px 20px;
+}
+h1 {
+  font-size: 32px;
+  font-weight: 500;
+}
+h1 span {
+  color: #878888;
+  font-size: 14px;
+  display: block;
+  line-height: 10px;
+}
+section {
+  background: #fff;
+  padding: 0 20px;
+}
+.modal-backdrop {
+  background: #C0CED1;
+}
 .navbar {
   margin-bottom: 40px;
 }
@@ -564,40 +600,22 @@ svg .title {
 .control-group ul li {
   list-style-type: none;
 }
-.feed-detail #subscribe-btn {
-  width: 230px;
+#subscribe_form #id_card_number,
+#subscribe_form #id_name_on_card {
+  width: 409px;
+}
+.feed-detail {
+  background-color: rgba(255, 255, 255, 0.25);
+  margin-top: -40px;
+}
+.feed-detail .feed-detail-inner {
+  padding: 30px 20px;
+}
+.feed-detail .button {
+  padding: 10px 40px;
 }
 .feed-detail .avatar {
   margin-right: 20px;
-}
-.feed-detail .btn-large {
-  background: #00AE6F;
-  border-radius: 0;
-  color: #fff;
-  font-weight: 400;
-  font-family: proxima-nova-soft, sans-serif;
-  font-size: 24px;
-}
-.feed-detail .btn-large em {
-  display: block;
-  font-weight: 400;
-  font-size: 15px;
-  font-style: normal;
-}
-.feed-detail dl {
-  width: 100%;
-  display: block-inline;
-  overflow: hidden;
-  padding: 0 200px;
-}
-.feed-detail dl dt {
-  color: #4F585B;
-  float: left;
-}
-.feed-detail dl dd {
-  color: #809EA3;
-  float: left;
-  margin-right: 10px;
 }
 .feed-detail p.lead {
   color: #444A4A;
@@ -621,6 +639,31 @@ svg .title {
 .feed-detail .feed-filter input {
   margin-top: 7px;
   vertical-align: middle;
+}
+.feed-detail ul.publisher-stats {
+  display: block;
+  margin: 25px 0 30px;
+  text-align: center;
+}
+.feed-detail ul.publisher-stats span {
+  font-weight: 800;
+}
+.feed-detail p.lead {
+  text-align: center;
+  margin-bottom: ;
+}
+.feed-detail .publisher-detail {
+  *zoom: 1;
+  padding: 0;
+}
+.feed-detail .publisher-detail:before,
+.feed-detail .publisher-detail:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.feed-detail .publisher-detail:after {
+  clear: both;
 }
 .feed-detail .feed-items .feed-item {
   padding: 10px 0;
@@ -648,37 +691,26 @@ svg .title {
   display: block;
   line-height: 14px;
 }
-.feed-detail .feed-items .feed-item .content {
-  margin-bottom: 10px;
-}
-.feed-detail .feed-items .feed-item .sample {
-  background: #3C3D3F;
-  color: #E5E8E1;
-  padding: 4px 10px;
-  margin-right: -20px;
-  margin-top: -10px;
-  font-size: 16px;
-}
-.feeds .feed-item .wrap {
+.feed-detail .feeds .feed-item .wrap {
   display: inline-block;
   width: 100%;
   overflow: auto;
 }
-.feeds .feed-item .wrap .image {
+.feed-detail .feeds .feed-item .wrap .image {
   padding: 20px 10px 0 0;
   float: left;
 }
-.feeds .feed-item .wrap .content {
+.feed-detail .feeds .feed-item .wrap .content {
   float: left;
 }
-.feeds .feed-item .wrap .content h3 span {
+.feed-detail .feeds .feed-item .wrap .content h3 span {
   font-size: 12px;
 }
-.tags ul {
+.feed-detail .tags ul {
   list-style-type: none;
   margin: 0;
 }
-.tags ul li {
+.feed-detail .tags ul li {
   -webkit-border-top-right-radius: 5px;
   -moz-border-radius-topright: 5px;
   border-top-right-radius: 5px;
@@ -801,9 +833,9 @@ header.carousel-container div.carousel-container .carousel .slider-card {
   display: inline-block;
 }
 .publisher-detail .feed-info h2 {
-  line-height: 1em;
-  margin: 0;
-  font-weight: 500;
+  line-height: 1em !important;
+  margin: 0 !important;
+  font-weight: 500 !important;
 }
 span.author {
   color: #B2B2B2;

@@ -6,7 +6,21 @@ from django.utils.translation import ugettext as _
 
 class Tag(models.Model):
     """
-    Feed
+    Tag
+    """
+
+    name = models.CharField(_('name'), max_length=50, unique=True)
+
+    class Meta:
+        app_label = 'core'
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+
+class Category(models.Model):
+    """
+    Category
     """
 
     name = models.CharField(_('name'), max_length=50, unique=True)
@@ -33,13 +47,13 @@ class Feed(models.Model):
 
     publisher = models.ForeignKey(User, verbose_name=_('publisher'), related_name="feeds")
     subscribers = models.ManyToManyField(User, through='FeedSubscriber')
+    category = models.ForeignKey(Category)
     title = models.CharField(_('channel name'), max_length=70) # NEVER CHANGE: for twitter
     slug = models.CharField(_('slug'), max_length=200, editable=False)
     description = models.TextField(_('channel description'))
     image = models.URLField(_('channel image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
-    tags = models.ManyToManyField(Tag, blank=True)
 
     def __unicode__(self):
         return u'%s' % self.title

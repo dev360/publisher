@@ -1,4 +1,5 @@
 #coding=utf-8
+import json
 
 from django import http
 from django.contrib.auth.models import User
@@ -120,7 +121,18 @@ class FeedDetailSubscribe(View):
                     password=request.POST.get('password')
                 )
 
-            register_form.save(request)
+            subscribe_form.save(request)
+
+        if request.is_ajax():
+            errors = subscribe_form.errors
+            if register_form:
+                errors.update(register_form.errors)
+
+            status = 200
+            if errors:
+                status = 400
+
+            return HttpResponse(json.dumps(errors), status=status, mimetype="application/json")
 
         return self.render(user, feed, register_form, subscribe_form)
 
@@ -136,7 +148,8 @@ class FeedDetailSubscribe(View):
             'feed_items': feed_items,
             'page': 'feeds',
             'register_form': register_form,
-            'subscribe_form': subscribe_form
+            'subscribe_form': subscribe_form,
+            'filter_options': FeedItem.TYPE_CHOICES
         }, RequestContext(self.request))
 
 

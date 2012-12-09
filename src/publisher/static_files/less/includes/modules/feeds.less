@@ -3,19 +3,6 @@
   h1 span { 
   }
 
-  .tags {
-    padding: 10px 0;
-
-    span {
-      background-color: #94B4B9;
-      font-size: 15px;
-      padding: 6px 10px;
-
-      a {
-        color: #fff;
-      }
-    }
-  }
 
   dl {
     width: 100%;
@@ -70,5 +57,22 @@
     .actions {
 
     }
+  }
+}
+
+
+.tags {
+  ul {
+   list-style-type: none;
+   margin:0;
+
+   li {
+     .border-right-radius(5px);
+     .border-left-radius(25px);
+     background: #9BB3B9 url('/static/img/tag_dot.png') 0 50% no-repeat;
+     color: darken(#fff, 3%);
+     display: inline-block;
+     padding: 5px 10px 4px 28px;
+   }
   }
 }

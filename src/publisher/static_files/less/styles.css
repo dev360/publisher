@@ -481,6 +481,10 @@ svg .title {
 .chart .chart-type {
   margin-left: 10px;
 }
+.feed-detail h3 span {
+  display: block;
+  font-size: 12px;
+}
 .feeds .feed-item .wrap {
   display: inline-block;
   width: 100%;

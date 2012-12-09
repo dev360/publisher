@@ -23,9 +23,27 @@ def feed_detail(request, username, feed_slug):
     user = get_object_or_404(User, username=username)
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
 
-    return render_to_response('core/feeds/list.html', {
+    if not feed.is_subscribed(user):
+        return HttpResponseRedirect(reverse('feed_detail_subscribe'), args={ 'username': username, 'feed_slug': feed_slug })
+
+    return render_to_response('core/feeds/detail.html', {
         'profile': user.profile,
         'feed': feed,
+        'page': 'feeds',
+    }, RequestContext(request))
+
+def feed_detail_subscribe(request, username, feed_slug):
+    """
+    Users feed detail
+    """
+    user = get_object_or_404(User, username=username)
+    feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
+    feed_items = FeedItem.objects.filter(feed=feed, is_sample=True)[:3]
+
+    return render_to_response('core/feeds/detail_subscribe.html', {
+        'profile': user.profile,
+        'feed': feed,
+        'feed_items': feed_items,
         'page': 'feeds',
     }, RequestContext(request))
 

@@ -37,6 +37,12 @@ def index(request):
         'registration_form': registration_form,
     }, RequestContext(request))
 
+
+
+def channels(request):
+    return render_to_response('core/channels.html', {
+    }, RequestContext(request))
+
 def terms_of_service(request):
     return render_to_response('core/misc/terms_of_service.html', {}, RequestContext(request))
 

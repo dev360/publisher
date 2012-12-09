@@ -594,6 +594,10 @@ section {
 .control-group ul li {
   list-style-type: none;
 }
+#subscribe_form #id_card_number,
+#subscribe_form #id_name_on_card {
+  width: 409px;
+}
 .feed-detail #subscribe-btn {
   width: 230px;
 }

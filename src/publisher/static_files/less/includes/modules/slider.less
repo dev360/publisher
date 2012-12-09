@@ -1,19 +1,5 @@
-.loopingClass (@index) when (@index > 0) {
-  (~"div.carousel-container .counter_@{index}") {
-    width: @index * 475px!important;
-  }
-
-  .loopingClass(@index - 1);
-}
-// Stop loop
-.loopingClass (0) {}
-
-// Outputs stuff
-.loopingClass (10);
 
 header.carousel-container {
-  height: 405px;
-  overflow: hidden;
 
   h1 {
    font-weight: normal;
@@ -27,9 +13,4 @@ header.carousel-container {
    }
   }
 
-  div.carousel-container {
-    .carousel {
-      margin: auto 251px;
-    }
-  }
 }

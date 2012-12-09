@@ -96,7 +96,10 @@
                   <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
                 {% endif %}
               {% endif %}
-                  <p>{{ feed_item.text|safe }}</p>
+
+              {% if feed_item.text %}
+                <p>{{ feed_item.text|safe }}</p>
+              {% endif %}
               </div>
             </div>
 

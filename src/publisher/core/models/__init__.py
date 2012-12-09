@@ -38,6 +38,7 @@ class Feed(models.Model):
     image = models.URLField(_('channel image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __unicode__(self):
         return u'%s' % self.title

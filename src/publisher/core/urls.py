@@ -8,6 +8,7 @@ from core import views
 urlpatterns = patterns('',
     # Common views
     url(r'^$', views.index, name='index'),
+    url(r'^channels/$', views.channels, name='channels'),
 
     # Misc views
     url(r'^terms/$', views.terms_of_service, name='terms-of-service'),

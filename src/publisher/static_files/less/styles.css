@@ -716,6 +716,14 @@ section {
 .feed-detail section.feed-item-wrapper .content-inner {
   padding: 20px;
 }
+.feed-detail section.feed-item-wrapper .content.text p {
+  background: #ecefe7 url("/static/img/icon_quotes.png") -10px -10px no-repeat;
+  padding: 20px;
+  font-size: 22px;
+  line-height: 28px;
+  font-weight: normal;
+  margin: 0;
+}
 .feed-detail .tags ul {
   list-style-type: none;
   margin: 0;

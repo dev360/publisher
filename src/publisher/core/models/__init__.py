@@ -44,23 +44,25 @@ class Feed(models.Model):
         return u'%s' % self.title
 
     def is_subscribed(self, user):
-        """
-        Returns whether the user is subscribed
-        """
-        # TODO: Fix it.
-        return True
+        return user.subscriptions.filter(feed=self).exists()
 
     def posts_per_month(self):
-        return 4
+        query = """
+            select count(*)
+            from core_feed
+            where
+            date_created >= (CURRENT_DATE - INTERVAL '1 months')
+        """
+        return self.feed_items.extra(select={'monthly_count': query})[0].monthly_count
 
-    def subscribers(self):
-        return 1534
+    def subscribers_count(self):
+        return self.subscribers.count()
 
     def reviews_count(self):
-        return 500
+        return self.reviews.count()
 
     def likes_count(self):
-        return 1024
+        return Like.objects.filter(feed_item__in=self.feed_items.all()).count()
 
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
@@ -76,7 +78,7 @@ class FeedSubscriber(models.Model):
     """
 
     feed = models.ForeignKey(Feed, verbose_name=_('feed'), db_index=True)
-    user = models.ForeignKey(User, verbose_name=_('user'), db_index=True)
+    user = models.ForeignKey(User, verbose_name=_('user'), related_name='subscriptions', db_index=True)
     start_date = models.DateTimeField(_('start date'), auto_now_add=True)
 
     class Meta:

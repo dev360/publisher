@@ -4,9 +4,9 @@
 
 {% block primary %}
   <div class="feed-detail">
-    <h3>{{ feed.title.title }}
+    <h1>{{ feed.title.title }}
       <span>By: {{ feed.publisher.get_full_name.title }}</span>
-    </h3>
+    </h1>
     <div class="tags">
       <span><a href="#">Fitness</a></span>
       <span><a href="#">Health</a></span>
@@ -17,7 +17,7 @@
       <dt>Posts Per Month:</dt>
       <dd>{{ feed.posts_per_month|intcomma }}</dd>
       <dt>Subscribers:</dt>
-      <dd>{{ feed.subscribers|intcomma }}</dd>
+      <dd>{{ feed.subscribers_count|intcomma }}</dd>
       <dt>Reviews:</dt>
       <dd>{{ feed.reviews_count|intcomma }}</dd>
       <dt>Loves:</dt>

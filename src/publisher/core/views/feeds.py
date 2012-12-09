@@ -1,4 +1,5 @@
 #coding=utf-8
+import json
 
 from django import http
 from django.contrib.auth.models import User
@@ -74,8 +75,8 @@ def feed_detail(request, username, feed_slug):
     feed = get_object_or_404(Feed, publisher=user, slug=feed_slug)
     filter_options = FeedItem.TYPE_CHOICES
 
-    if not feed.is_subscribed(user):
-        return HttpResponseRedirect(reverse('feed_detail_subscribe'), args={ 'username': username, 'feed_slug': feed_slug })
+    if request.user.is_anonymous() or not feed.is_subscribed(request.user):
+        return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
 
     return render_to_response('core/feeds/detail.html', {
         'profile': user.profile,
@@ -120,7 +121,18 @@ class FeedDetailSubscribe(View):
                     password=request.POST.get('password')
                 )
 
-            register_form.save(request)
+            subscribe_form.save(request)
+
+        if request.is_ajax():
+            errors = subscribe_form.errors
+            if register_form:
+                errors.update(register_form.errors)
+
+            status = 200
+            if errors:
+                status = 400
+
+            return HttpResponse(json.dumps(errors), status=status, mimetype="application/json")
 
         return self.render(user, feed, register_form, subscribe_form)
 

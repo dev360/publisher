@@ -726,6 +726,7 @@ section {
 }
 header.carousel-container {
   height: 405px;
+  overflow: hidden;
 }
 header.carousel-container h1 {
   font-weight: normal;
@@ -737,6 +738,18 @@ header.carousel-container h1 span {
   color: #878888;
   font-size: 64px;
   display: inline;
+}
+header.carousel-container div.carousel-container {
+  position: absolute;
+  left: 0px;
+  right: 0px;
+  overflow-x: scroll;
+}
+header.carousel-container div.carousel-container .carousel {
+  width: 1000000px;
+}
+header.carousel-container div.carousel-container .carousel .slider-card {
+  float: left;
 }
 .slider-card {
   -webkit-border-radius: 3px;

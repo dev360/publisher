@@ -86,7 +86,7 @@
             <div class="header">
 
               <span class="icon icon-{{ feed_item.type }}"></span>
-              <h3>{{ feed_item.title.title }}
+              <h3><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a>
                 <span>{{ feed_item.date_modified|timesince }} ago</span>
               </h3>
             </div>

@@ -4,57 +4,56 @@
 
 {% block primary %}
   <div class="feed-detail">
-
-    <a id="subscribe-btn" href="#subscribe" role="button" class="btn btn-primary btn-large pull-right" data-toggle="modal">Subscribe! <em>$2/Month</em></a>
-
-    <div id="subscribe" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
-      <form id="subscribe_form" method="post">
-        {% csrf_token %}
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-          <h3>Subscribe</h3>
+    <div class="feed-detail-inner">
+      <a id="subscribe-btn" href="#subscribe" role="button" class="button green pull-right" data-toggle="modal">Subscribe! <span>$2/Month</span></a>
+      <div id="subscribe" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+        <form id="subscribe_form" method="post">
+          {% csrf_token %}
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3>Subscribe</h3>
+          </div>
+          <div class="modal-body">
+            {{ register_form.as_ul }}
+            {% if register_form %}<hr>{% endif %}
+            {{ subscribe_form }}
+          </div>
+          <div class="modal-footer">
+            <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+            <button class="btn btn-primary" type="submit">Subscribe</button>
+          </div>
+        </form>
+      </div>
+      <div class="publisher-detail">
+        <div class="avatar">
+          <img src="{{ feed.publisher.profile.gravatar_image }}" />
         </div>
-        <div class="modal-body">
-          {{ register_form.as_ul }}
-          {% if register_form %}<hr>{% endif %}
-          {{ subscribe_form }}
+
+        <div class="feed-info">
+          <h2>{{ feed.title.title }}</h2>
+          <span class="author">{{ feed.publisher.get_full_name.title }} test</span>
+
+          {% if feed.tags.exists %}
+          <div class="tags">
+            <ul>
+              {% for tag in feed.tags %}
+                <li><a href="#">{{ tag.name }}</a></li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
         </div>
-        <div class="modal-footer">
-          <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
-          <button class="btn btn-primary" type="submit">Subscribe</button>
-        </div>
-      </form>
+      </div>
+
+      <ul class="publisher-stats">
+        <li>Posts Per Month: <span>{{ feed.posts_per_month|intcomma }}</span></li>
+        <li>Subscribers: <span>{{ feed.subscribers_count|intcomma }}</span></li>
+        <li>Reviews: <span>{{ feed.reviews_count|intcomma }}</span></li>
+        <li>Loves: <span>{{ feed.likes_count|intcomma }}</span></li>
+      </ul>
+
+      <p class="lead">{{ feed.description }}</p>
     </div>
-
-
-    <div class="avatar">
-      <img src="{{ feed.publisher.profile.gravatar_image }}" />
-    </div>
-    <h1>{{ feed.title.title }}
-      <span>By: {{ feed.publisher.get_full_name.title }}</span>
-
-    </h1>
-
-    {% if feed.tags.exists %}
-    <div class="tags">
-      {% for tag in feed.tags.all %}
-        <span><a href="#">{{ tag.name }}</a></span>
-      {% endfor %}
-    </div>
-    {% endif %}
-
-    <dl>
-      <dt>Posts Per Month:</dt>
-      <dd>{{ feed.posts_per_month|intcomma }}</dd>
-      <dt>Subscribers:</dt>
-      <dd>{{ feed.subscribers_count|intcomma }}</dd>
-      <dt>Reviews:</dt>
-      <dd>{{ feed.reviews_count|intcomma }}</dd>
-      <dt>Loves:</dt>
-      <dd>{{ feed.likes_count|intcomma }}</dd>
-    </dl>
-
-    <p class="lead">{{ feed.description }}</p>
 
     <div class="feed-filter">
       <label>Filter by type:</label> 
@@ -78,7 +77,7 @@
             <div class="header">
 
               <span class="icon icon-{{ feed_item.type }}"></span>
-              <h3>{{ feed_item.title.title }}
+              <h3><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a>
                 <span>{{ feed_item.date_modified|timesince }} ago</span>
               </h3>
             </div>

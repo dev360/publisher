@@ -47,7 +47,7 @@
         <div class="feed-item">
           <div class="header">
             <span class="icon icon-video"></span>
-            <h4>{{ feed_item.title.title }}</h4>
+            <h4><a href="/{{ feed.publisher.username }}/{{ feed.slug }}/{{ feed_item.slug }}">{{ feed_item.title.title }}</a></h4>
             <span>{{ feed_item.date_modified|timesince }} ago</span>
           </div>
           <div class="content">

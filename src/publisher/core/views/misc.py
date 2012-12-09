@@ -19,6 +19,7 @@ from django.template import RequestContext
 from django.conf import settings
 
 from auth.forms import AuthenticationForm, RegistrationForm
+from core.models import Feed
 
 
 def index(request):
@@ -31,6 +32,7 @@ def index(request):
 
 
     return render_to_response('core/index.html', {
+        'feeds': Feed.objects.all(),
         'login_form': login_form,
         'registration_form': registration_form,
     }, RequestContext(request))

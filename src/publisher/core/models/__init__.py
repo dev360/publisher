@@ -4,6 +4,20 @@ from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext as _
 
 
+class Tag(models.Model):
+    """
+    Feed
+    """
+
+    name = models.CharField(_('name'), max_length=50, unique=True)
+
+    class Meta:
+        app_label = 'core'
+
+    def __unicode__(self):
+        return u'%s' % self.name
+
+
 class Feed(models.Model):
     """
     Feed
@@ -48,9 +62,9 @@ class Feed(models.Model):
     def likes_count(self):
         return 1024
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(Feed, self).save(**kwargs)
+        super(Feed, self).save(*args, **kwargs)
 
     class Meta:
         app_label = 'core'
@@ -109,6 +123,7 @@ class FeedItem(models.Model):
     is_sample = models.BooleanField(_('is sample'), default=False)
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES, default='other', blank=True)
     file = models.FileField(_('file'), upload_to='attachments', blank=True)
+    tags = models.ManyToManyField(Tag)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
 

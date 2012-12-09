@@ -13,23 +13,9 @@ from django.views.decorators.cache import cache_page
 from django.core.paginator import Paginator, InvalidPage, EmptyPage
 from django.template import RequestContext
 
+from core.models import FeedSubscriber
 from core.forms import CreateFeedForm
 
-
-@login_required
-def dashboard(request):
-    """
-    User detail view
-    """
-    user = get_object_or_404(User, username=request.user.username)
-    feeds = user.feeds.all()
-    channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
-
-    return render_to_response('core/users/dashboard.html', {
-        'profile': user.profile,
-        'feeds': feeds,
-        'page_name': 'feeds',
-    }, RequestContext(request))
 
 
 def user_share(request):

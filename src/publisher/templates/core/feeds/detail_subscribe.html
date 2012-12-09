@@ -69,6 +69,9 @@
       {% for feed_item in feed.feed_items.all %}
         {% if feed_item.is_sample %}
           <div class="feed-item">
+            <span class="sample pull-right">
+              Sample Post
+            </span>
             <div class="header">
               <span class="icon icon-video"></span>
               <h4>{{ feed_item.title.title }}</h4>

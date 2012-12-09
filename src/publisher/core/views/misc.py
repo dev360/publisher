@@ -27,7 +27,10 @@ def index(request):
     registration_form = RegistrationForm()
 
 
-    return render_to_response('core/index.html', {}, RequestContext(request))
+    return render_to_response('core/index.html', {
+        'login_form': login_form,
+        'registration_form': registration_form,
+    }, RequestContext(request))
 
 def terms_of_service(request):
     return render_to_response('core/misc/terms_of_service.html', {}, RequestContext(request))

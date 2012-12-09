@@ -4,19 +4,19 @@ $(function(){
     var url = form.attr('action');
     var data = form.serialize();
 
+    form.find('ul.errorlist').remove();
+
     $.ajax({
       url: url,
       type: 'POST',
       dataType: 'json',
       data: data,
       success: function(data, status, request) {
-        // TODO: alert and close
+        location.href = data['success_url'];
       },
       error: function(request) {
-        var data = JSON.parse(request.responseText);
+        var data = JSON.parse(request.responseText)['error'];
         var el;
-
-        form.find('ul.errorlist').remove();
 
         for (var key in data) {
           el = form.find('#id_' + key + ',#id_' + key + '_0').closest('li');

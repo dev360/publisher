@@ -39,6 +39,7 @@ class Feed(models.Model):
     image = models.URLField(_('channel image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __unicode__(self):
         return u'%s' % self.title
@@ -57,7 +58,7 @@ class Feed(models.Model):
         return results[0].monthly_count if len(results) > 0 else 0
 
     def subscribers_count(self):
-        return self.subscribers.count()
+        return self.feedsubscriber_set.count()
 
     def reviews_count(self):
         return self.reviews.count()
@@ -84,6 +85,7 @@ class FeedSubscriber(models.Model):
 
     class Meta:
         app_label = 'core'
+        unique_together = ('feed', 'user',)
 
 
 class FeedReview(models.Model):
@@ -98,11 +100,11 @@ class FeedReview(models.Model):
     description = models.TextField(_('description'))
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
 
-    class Meta:
-        app_label = 'core'
-
     def __unicode__(self):
         return u'User ID %s review of Feed ID %s, with a score of %s' % (self.user.id, self.feed.id, self.score)
+
+    class Meta:
+        app_label = 'core'
 
 
 class FeedItem(models.Model):
@@ -126,21 +128,20 @@ class FeedItem(models.Model):
     is_sample = models.BooleanField(_('is sample'), default=False)
     type = models.CharField(_('type'), max_length=50, choices=TYPE_CHOICES, default='other', blank=True)
     file = models.FileField(_('file'), upload_to='attachments', blank=True)
-    tags = models.ManyToManyField(Tag)
+    tags = models.ManyToManyField(Tag, blank=True)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
     date_modified = models.DateTimeField(_('date modified'), auto_now=True)
-
-    class Meta:
-        app_label = 'core'
-        unique_together = ('feed', 'slug',)
 
     def __unicode__(self):
         return u'%s' % self.title
 
-    def save(self, **kwargs):
+    def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
-        super(FeedItem, self).save(**kwargs)
+        super(FeedItem, self).save(*args, **kwargs)
 
+    class Meta:
+        app_label = 'core'
+        unique_together = ('feed', 'slug',)
 
 class Like(models.Model):
     user = models.ForeignKey(User, related_name="likes")

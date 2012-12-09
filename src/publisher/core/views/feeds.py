@@ -27,7 +27,7 @@ def feed_create(request):
     Creates a feed
     """
     user = get_object_or_404(User, id=request.user.id)
-    my_feeds = Feed.objects.filter(publisher=user, )
+    my_feeds = Feed.objects.filter(publisher=user)
 
     form = CreateFeedForm()
 
@@ -96,8 +96,14 @@ class FeedDetailSubscribe(View):
         self.args = args
         self.kwargs = kwargs
 
-        user = get_object_or_404(User, username=kwargs.get('username'))
-        feed = get_object_or_404(Feed, publisher=user, slug=kwargs.get('feed_slug'))
+        username = kwargs.get('username')
+        slug = kwargs.get('feed_slug')
+
+        user = get_object_or_404(User, username=username)
+        feed = get_object_or_404(Feed, publisher=user, slug=slug)
+
+        if request.user.is_authenticated() and feed.is_subscribed(request.user):
+            return HttpResponseRedirect(reverse('feed_detail', args=[username, slug]))
 
         return handler(request, user, feed)
 
@@ -106,9 +112,11 @@ class FeedDetailSubscribe(View):
 
     def post(self, request, user, feed):
         register_form = None
+        register_user = None
+        subscribe_form = PaymentForm(request.POST)
+
         if self.request.user.is_anonymous():
             register_form = RegistrationForm(request.POST)
-        subscribe_form = PaymentForm(request.POST)
 
         if ((register_form and register_form.is_valid()) or register_form == None) and subscribe_form.is_valid():
             if register_form:
@@ -121,18 +129,25 @@ class FeedDetailSubscribe(View):
                     password=request.POST.get('password')
                 )
 
-            subscribe_form.save(request)
+            FeedSubscriber.objects.get_or_create(feed=feed, user=register_user or request.user)
 
         if request.is_ajax():
-            errors = subscribe_form.errors
+            response = {
+                'error': subscribe_form.errors,
+                'success_url': reverse('feed_detail', args=[
+                    feed.publisher.username,
+                    feed.slug
+                ])
+            }
+
             if register_form:
-                errors.update(register_form.errors)
+                response['error'].update(register_form.errors)
 
             status = 200
-            if errors:
+            if response['error']:
                 status = 400
 
-            return HttpResponse(json.dumps(errors), status=status, mimetype="application/json")
+            return HttpResponse(json.dumps(response), status=status, mimetype="application/json")
 
         return self.render(user, feed, register_form, subscribe_form)
 
@@ -181,5 +196,6 @@ def feed_item_detail(request, username, feed_slug, item_slug):
         'profile': user.profile,
         'item': feed_item,
     }, RequestContext(request))
+
 
 

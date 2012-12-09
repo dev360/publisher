@@ -587,10 +587,31 @@ h1 span {
 .control-group ul li {
   list-style-type: none;
 }
+.feed-detail #subscribe-btn {
+  width: 230px;
+}
+.feed-detail .avatar {
+  margin-right: 20px;
+}
+.feed-detail .btn-large {
+  background: #00AE6F;
+  border-radius: 0;
+  color: #fff;
+  font-weight: 400;
+  font-family: proxima-nova-soft, sans-serif;
+  font-size: 24px;
+}
+.feed-detail .btn-large em {
+  display: block;
+  font-weight: 400;
+  font-size: 15px;
+  font-style: normal;
+}
 .feed-detail dl {
   width: 100%;
   display: block-inline;
   overflow: hidden;
+  padding: 0 200px;
 }
 .feed-detail dl dt {
   color: #4F585B;

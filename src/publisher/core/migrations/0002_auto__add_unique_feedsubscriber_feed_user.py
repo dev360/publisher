@@ -8,28 +8,24 @@ from django.db import models
 class Migration(SchemaMigration):
 
     def forwards(self, orm):
-        # Adding model 'Tag'
-        db.create_table('core_tag', (
-            ('id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('name', self.gf('django.db.models.fields.CharField')(unique=True, max_length=50)),
-        ))
-        db.send_create_signal('core', ['Tag'])
+        # Adding unique constraint on 'FeedSubscriber', fields ['feed', 'user']
+        db.create_unique('core_feedsubscriber', ['feed_id', 'user_id'])
 
-        # Adding M2M table for field tags on 'FeedItem'
-        db.create_table('core_feeditem_tags', (
+        # Adding M2M table for field tags on 'Feed'
+        db.create_table('core_feed_tags', (
             ('id', models.AutoField(verbose_name='ID', primary_key=True, auto_created=True)),
-            ('feeditem', models.ForeignKey(orm['core.feeditem'], null=False)),
+            ('feed', models.ForeignKey(orm['core.feed'], null=False)),
             ('tag', models.ForeignKey(orm['core.tag'], null=False))
         ))
-        db.create_unique('core_feeditem_tags', ['feeditem_id', 'tag_id'])
+        db.create_unique('core_feed_tags', ['feed_id', 'tag_id'])
 
 
     def backwards(self, orm):
-        # Deleting model 'Tag'
-        db.delete_table('core_tag')
+        # Removing unique constraint on 'FeedSubscriber', fields ['feed', 'user']
+        db.delete_unique('core_feedsubscriber', ['feed_id', 'user_id'])
 
-        # Removing M2M table for field tags on 'FeedItem'
-        db.delete_table('core_feeditem_tags')
+        # Removing M2M table for field tags on 'Feed'
+        db.delete_table('core_feed_tags')
 
 
     models = {
@@ -78,7 +74,7 @@ class Migration(SchemaMigration):
             'price_plan': ('django.db.models.fields.IntegerField', [], {'default': '1'}),
             'publisher': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'feeds'", 'to': "orm['auth.User']"}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'subscribers': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['auth.User']", 'through': "orm['core.FeedSubscriber']", 'symmetrical': 'False'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['core.Tag']", 'symmetrical': 'False', 'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '70'})
         },
         'core.feeditem': {
@@ -90,7 +86,7 @@ class Migration(SchemaMigration):
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'is_sample': ('django.db.models.fields.BooleanField', [], {'default': 'False'}),
             'slug': ('django.db.models.fields.CharField', [], {'max_length': '200'}),
-            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['core.Tag']", 'symmetrical': 'False'}),
+            'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': "orm['core.Tag']", 'symmetrical': 'False', 'blank': 'True'}),
             'teaser': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'text': ('django.db.models.fields.TextField', [], {'blank': 'True'}),
             'title': ('django.db.models.fields.CharField', [], {'max_length': '70'}),
@@ -107,11 +103,11 @@ class Migration(SchemaMigration):
             'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'reviews'", 'to': "orm['auth.User']"})
         },
         'core.feedsubscriber': {
-            'Meta': {'object_name': 'FeedSubscriber'},
+            'Meta': {'unique_together': "(('feed', 'user'),)", 'object_name': 'FeedSubscriber'},
             'feed': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['core.Feed']"}),
             'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'start_date': ('django.db.models.fields.DateTimeField', [], {'auto_now_add': 'True', 'blank': 'True'}),
-            'user': ('django.db.models.fields.related.ForeignKey', [], {'to': "orm['auth.User']"})
+            'user': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'subscriptions'", 'to': "orm['auth.User']"})
         },
         'core.like': {
             'Meta': {'object_name': 'Like'},

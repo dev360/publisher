@@ -2,7 +2,7 @@ import logging
 
 from django.contrib import admin
 
-from core.models import Feed, FeedReview, FeedItem, FeedSubscriber
+from core.models import Feed, FeedReview, FeedItem, FeedSubscriber, Tag
 
 log = logging.getLogger(__name__)  # Get an instance of a logger
 
@@ -28,4 +28,8 @@ class FeedItemAdmin(admin.ModelAdmin):
     list_display = ('feed', 'title',)
     raw_id_fields = ('feed',)
 admin.site.register(FeedItem, FeedItemAdmin)
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = ('name',)
+admin.site.register(Tag, TagAdmin)
 

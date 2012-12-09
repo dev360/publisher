@@ -39,6 +39,7 @@ class Feed(models.Model):
     image = models.URLField(_('channel image'), null=True, blank=True)
     price_plan = models.IntegerField(_('price plan'), choices=PRICE_CHOICES, default=1)
     date_created = models.DateTimeField(_('date created'), auto_now_add=True)
+    tags = models.ManyToManyField(Tag, blank=True)
 
     def __unicode__(self):
         return u'%s' % self.title
@@ -57,7 +58,7 @@ class Feed(models.Model):
         return results[0].monthly_count if len(results) > 0 else 0
 
     def subscribers_count(self):
-        return self.subscribers.count()
+        return self.feedsubscriber_set.count()
 
     def reviews_count(self):
         return self.reviews.count()

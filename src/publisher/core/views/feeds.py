@@ -75,7 +75,7 @@ def feed_detail(request, username, feed_slug):
     filter_options = FeedItem.TYPE_CHOICES
 
     if not feed.is_subscribed(user):
-        return HttpResponseRedirect(reverse('feed_detail_subscribe'), args={ 'username': username, 'feed_slug': feed_slug })
+        return HttpResponseRedirect(reverse('feed_detail_subscribe', args=[username, feed_slug]))
 
     return render_to_response('core/feeds/detail.html', {
         'profile': user.profile,

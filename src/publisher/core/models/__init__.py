@@ -44,11 +44,7 @@ class Feed(models.Model):
         return u'%s' % self.title
 
     def is_subscribed(self, user):
-        """
-        Returns whether the user is subscribed
-        """
-        # TODO: Fix it.
-        return True
+        return user.subscriptions.filter(feed=self).exists()
 
     def posts_per_month(self):
         return 4
@@ -76,7 +72,7 @@ class FeedSubscriber(models.Model):
     """
 
     feed = models.ForeignKey(Feed, verbose_name=_('feed'), db_index=True)
-    user = models.ForeignKey(User, verbose_name=_('user'), db_index=True)
+    user = models.ForeignKey(User, verbose_name=_('user'), related_name='subscriptions', db_index=True)
     start_date = models.DateTimeField(_('start date'), auto_now_add=True)
 
     class Meta:

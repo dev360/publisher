@@ -20,7 +20,7 @@ from auth.forms import ProfileForm
 
 @login_required
 def profile_index(request):
-    url = reverse('dashboard')
+    url = reverse('feed_subscriptions')
     return HttpResponseRedirect(url)
 
 @login_required

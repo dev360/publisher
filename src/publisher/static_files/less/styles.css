@@ -478,10 +478,11 @@ svg .title {
 }
 .button {
   display: inline-block;
-  font-size: 22px;
+  font-size: 20px;
   font-family: "proxima-nova-soft", sans-serif;
   padding: 15px 25px;
   background-color: #4C6A72;
+  text-align: center;
   color: white;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
@@ -507,6 +508,11 @@ svg .title {
 .button:active {
   position: relative;
   top: 0px;
+}
+.button span {
+  opacity: .7;
+  display: block;
+  font-size: 16px;
 }
 .avatar {
   /* selector for avatar class*/
@@ -587,25 +593,18 @@ h1 span {
 .control-group ul li {
   list-style-type: none;
 }
-.feed-detail #subscribe-btn {
-  width: 230px;
+.feed-detail {
+  background-color: rgba(255, 255, 255, 0.25);
+  margin-top: -40px;
+}
+.feed-detail .feed-detail-inner {
+  padding: 30px 20px;
+}
+.feed-detail .button {
+  padding: 10px 40px;
 }
 .feed-detail .avatar {
   margin-right: 20px;
-}
-.feed-detail .btn-large {
-  background: #00AE6F;
-  border-radius: 0;
-  color: #fff;
-  font-weight: 400;
-  font-family: proxima-nova-soft, sans-serif;
-  font-size: 24px;
-}
-.feed-detail .btn-large em {
-  display: block;
-  font-weight: 400;
-  font-size: 15px;
-  font-style: normal;
 }
 .feed-detail dl {
   width: 100%;
@@ -644,6 +643,31 @@ h1 span {
 .feed-detail .feed-filter input {
   margin-top: 7px;
   vertical-align: middle;
+}
+.feed-detail ul.publisher-stats {
+  display: block;
+  margin: 25px 0 30px;
+  text-align: center;
+}
+.feed-detail ul.publisher-stats span {
+  font-weight: 800;
+}
+.feed-detail p.lead {
+  text-align: center;
+  margin-bottom: ;
+}
+.feed-detail .publisher-detail {
+  *zoom: 1;
+  padding: 0;
+}
+.feed-detail .publisher-detail:before,
+.feed-detail .publisher-detail:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.feed-detail .publisher-detail:after {
+  clear: both;
 }
 .feeds .feed-item .wrap {
   display: inline-block;
@@ -744,9 +768,9 @@ header.carousel-container h1 span {
   display: inline-block;
 }
 .publisher-detail .feed-info h2 {
-  line-height: 1em;
-  margin: 0;
-  font-weight: 500;
+  line-height: 1em !important;
+  margin: 0 !important;
+  font-weight: 500 !important;
 }
 span.author {
   color: #B2B2B2;

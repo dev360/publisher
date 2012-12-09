@@ -148,7 +148,8 @@ class FeedDetailSubscribe(View):
             'feed_items': feed_items,
             'page': 'feeds',
             'register_form': register_form,
-            'subscribe_form': subscribe_form
+            'subscribe_form': subscribe_form,
+            'filter_options': FeedItem.TYPE_CHOICES
         }, RequestContext(self.request))
 
 

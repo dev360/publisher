@@ -12,17 +12,34 @@
             <li><a href="{% url feed_detail_dashboard feed.publisher.username feed.slug %}">{{ feed.title }}</a></li>
           {% endfor %}
           <li class="divider"></li>
-          <li><a href="{% url feed_create %}">Create</a></li>
+          <li><a href="#create-feed" data-toggle="modal">Create</a></li>
         </ul>
       </li>
       {% else %}
-      <li {% if page_name == 'feed_create' %}class="active"{% endif %}><a href="{% url feed_create %}">Create Channel</a></li>
+      <li><a href="#create-feed" data-toggle="modal">Create Channel</a></li>
       {% endif %}
     </ul>
     <div class=" tab-pane active">
     {% block content %}
     {% endblock %}
     </div>
+  </div>
+
+  <div id="create-feed" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+    <form enctype="multipart/form-data" action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form" class="form-inline">
+      {% csrf_token %}
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+        <h3>Create Channel</h3>
+      </div>
+      <div class="modal-body">
+        {{ form.as_ul }}
+      </div>
+      <div class="modal-footer">
+        <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+        <button class="btn btn-primary" type="submit">Sign Me UP!</button>
+      </div>
+    </form>
   </div>
 
 {% endblock %}

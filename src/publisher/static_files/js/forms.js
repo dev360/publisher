@@ -19,7 +19,7 @@ $(function(){
         var el;
 
         for (var key in data) {
-          el = form.find('#id_' + key + ',#id_' + key + '_0').closest('li');
+          el = form.find('#id_' + key + ',#id_' + key + '_0').closest('div');
           el.prepend('<ul class="errorlist">' + "<li>" + data[key].join("</li><li>") + "</li>" + '</ul>');
         }
       }

@@ -50,6 +50,12 @@ class Feed(models.Model):
 
         return user.subscriptions.filter(feed=self).exists()
 
+    def first(self):
+        try:
+            return self.feed_items.all().order_by('-date_created')[0]
+        except IndexError:
+            return None
+
     def posts_per_month(self):
         query = """
             select count(*)

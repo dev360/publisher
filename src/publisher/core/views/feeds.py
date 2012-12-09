@@ -93,6 +93,7 @@ def feed_subscriptions(request):
     channel_name = '{0} Channels'.format(user.get_full_name().title() + "'s")
     form = CreateFeedForm()
 
+
     return render_to_response('core/feeds/subscriptions.html', {
         'profile': user.profile,
         'feeds': feeds,
@@ -169,6 +170,7 @@ class FeedDetailSubscribe(View):
                 )
 
             FeedSubscriber.objects.get_or_create(feed=feed, user=register_user or request.user)
+
 
         if request.is_ajax():
             response = {

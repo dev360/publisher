@@ -571,6 +571,7 @@ h1 span {
   margin-right: 10px;
 }
 .feed-detail .feed-filter input {
+  margin-top: 7px;
   vertical-align: middle;
 }
 .feeds .feed-item .wrap {

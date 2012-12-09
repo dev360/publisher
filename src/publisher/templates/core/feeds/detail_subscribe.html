@@ -50,7 +50,7 @@
     <p class="lead">{{ feed.description }}</p>
 
     <div class="feed-filter">
-      <label>Filter by type:</label> <select><option>Videos</option></select>
+      <label>Filter by type:</label> 
       <select>
         {% for filter_option in filter_options %}
           <option value="{{ filter_option.0 }}">{{ filter_option.1 }}</option>

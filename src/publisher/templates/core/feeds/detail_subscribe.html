@@ -85,9 +85,7 @@
             <div class="content">
               {% if feed_item.type == 'audio' %}
                 <audio controls>
-          <span><a href="#">Fitness</a></span>
                   <source src="{{ feed_item.file.url }}">
-          <span><a href="#">Nutrition</a></span>
                 </audio>
                 <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
               {% elif feed_item.type == 'picture' %}

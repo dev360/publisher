@@ -5,7 +5,7 @@
 {% block primary %}
   <div class="feed-detail">
 
-    <a id="subscribe-btn" href="#subscribe" role="button" class="btn btn-primary btn-large pull-right" data-toggle="modal">Subscribe <em>$2/Month</em></a>
+    <a id="subscribe-btn" href="#subscribe" role="button" class="btn btn-primary btn-large pull-right" data-toggle="modal">Subscribe! <em>$2/Month</em></a>
 
     <div id="subscribe" class="modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
       <form id="subscribe_form" method="post">
@@ -26,6 +26,10 @@
       </form>
     </div>
 
+
+    <div class="avatar">
+      <img src="{{ feed.publisher.profile.gravatar_image }}" />
+    </div>
     <h1>{{ feed.title.title }}
       <span>By: {{ feed.publisher.get_full_name.title }}</span>
 

@@ -1,5 +1,7 @@
 {% extends "base_full.html" %}
 
+{% load humanize %}
+
 {% block primary %}
   <div class="feed-detail">
 
@@ -24,8 +26,9 @@
       </form>
     </div>
 
-    <h1>Crossfit extreme
-      <span>By: Danny Lopez-Calleja </span>
+    <h1>{{ feed.title.title }}
+      <span>By: {{ feed.publisher.get_full_name.title }}</span>
+
     </h1>
     <div class="tags">
       <span><a href="#">Fitness</a></span>
@@ -35,49 +38,78 @@
 
     <dl>
       <dt>Posts Per Month:</dt>
-      <dd>2 </dd>
+      <dd>{{ feed.posts_per_month|intcomma }}</dd>
       <dt>Subscribers:</dt>
-      <dd>2,340 </dd>
+      <dd>{{ feed.subscribers_count|intcomma }}</dd>
       <dt>Reviews:</dt>
-      <dd>8 </dd>
+      <dd>{{ feed.reviews_count|intcomma }}</dd>
       <dt>Loves:</dt>
-      <dd>88</dd>
+      <dd>{{ feed.likes_count|intcomma }}</dd>
     </dl>
 
-    <p class="lead">
-    Dry hopping infusion alpha acid length dunkle pilsner goblet
-hops, barley bunghole. autolysis units of bitterness acid rest
-    </p>
+    <p class="lead">{{ feed.description }}</p>
 
     <div class="feed-filter">
-      Filter by type: <select><option>Videos</option></select>
+      Filter by type: 
+      <select>
+        {% for filter_option in filter_options %}
+          <option value="{{ filter_option.0 }}">{{ filter_option.1 }}</option>
+        {% endfor %}
+      </select>
       <input type="text" placeholder="Search for a post" class="input-medium search-query">
     </div>
 
     <div class="feed-items">
-      <div class="feed-item">
-        <div class="header">
-          <span class="sample-icon">Sample Post</span>
-          <span class="icon icon-video"></span>
-          <h4>Trust your coach & practice!</h4>
-          <span>2 days ago</span>
+      {% for feed_item in feed.feed_items.all %}
+        {% if feed_item.is_sample %}
+          <div class="feed-item">
+            <div class="header">
+              <span class="icon icon-video"></span>
+              <h4>{{ feed_item.title.title }}</h4>
+              <span>{{ feed_item.date_modified|timesince }} ago</span>
         </div>
         <div class="content">
-          <img src="http://placehold.it/600x200" />
+            </div>
         </div>
-        <div class="actions">
+            <div class="content">
           <a href="#" class="btn">Share</a>
-          <a href="#" class="btn">Love</a>
+              {% if feed_item.type == 'audio' %}
         </div>
-        <div class="tags">
+                <audio controls>
           <span><a href="#">Fitness</a></span>
-          <span><a href="#">Health</a></span>
+                  <source src="{{ feed_item.file.url }}">
           <span><a href="#">Nutrition</a></span>
-        </div>
+                </audio>
 
-      </div>
+                <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+              {% elif feed_item.type == 'picture' %}
+                <img src="{{ feed_item.file.url }}" />
+              {% elif feed_item.type == 'text' %}
+                {{ feed_item.text|safe }}
+              {% elif feed_item.type == 'video' %}
+                <video height="520px" width="346px" controls>
+                  <source src="{{ feed_item.file.url }}">
+                </video>
+
+                <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+              {% elif feed_item.type == 'other' %}
+                <a href="{{ feed_item.file.url }}" target="_blank">Download</a>
+              {% endif %}
+            </div>
+            <div class="actions">
+              <a href="#" class="btn">22 Comments</a>
+              <a href="#" class="btn">Share</a>
+              <a href="#" class="btn">Love</a>
+            </div>
+            <div class="tags">
+              <span><a href="#">Fitness</a></span>
+              <span><a href="#">Health</a></span>
+              <span><a href="#">Nutrition</a></span>
+            </div>
+          </div>
+        {% endif %}
+      {% endfor %}
     </div>
-
   </div>
-  
+
 {% endblock %}

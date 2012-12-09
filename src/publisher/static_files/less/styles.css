@@ -784,6 +784,29 @@ section {
   display: inline-block;
   padding: 5px 10px 4px 28px;
 }
+.tags ul {
+  list-style-type: none;
+  margin: 0;
+  height: 40px;
+}
+.tags ul li {
+  -webkit-border-top-right-radius: 5px;
+  -moz-border-radius-topright: 5px;
+  border-top-right-radius: 5px;
+  -webkit-border-bottom-right-radius: 5px;
+  -moz-border-radius-bottomright: 5px;
+  border-bottom-right-radius: 5px;
+  -webkit-border-top-left-radius: 25px;
+  -moz-border-radius-topleft: 25px;
+  border-top-left-radius: 25px;
+  -webkit-border-bottom-left-radius: 25px;
+  -moz-border-radius-bottomleft: 25px;
+  border-bottom-left-radius: 25px;
+  background: #9bb3b9 url('/static/img/tag_dot.png') 0 50% no-repeat;
+  color: #f7f7f7;
+  display: inline-block;
+  padding: 5px 10px 4px 28px;
+}
 header.carousel-container h1 {
   font-weight: normal;
   font-size: 64px;
@@ -796,11 +819,11 @@ header.carousel-container h1 span {
   display: inline;
 }
 .slider-wrapper {
-  position: relative;
+  position: absolute;
   height: 239px;
   width: 475px;
   overflow: hidden;
-  margin: 50px auto;
+  margin: 50px 242px;
 }
 .slider-card {
   -webkit-border-radius: 3px;

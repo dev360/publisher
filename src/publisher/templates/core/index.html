@@ -38,8 +38,6 @@
               <ul>
               {% for tag in feed_item.tags.all %}
                 <li>{{ tag.name }}</li>
-              {% empty %}
-                <li>None..</li>
               {% endfor %}
               </ul>
             </div>

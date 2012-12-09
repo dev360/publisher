@@ -587,7 +587,7 @@
         "model": "core.feed", 
         "fields": {
             "publisher": 1, 
-            "description": "This are awesome samples to mix", 
+            "description": "These are awesome samples to mix", 
             "title": "Sample Packs", 
             "image": "http://f.cl.ly/items/1a1q0D432S1x1T093201/Image%202012.12.08%203:31:38%20PM.png", 
             "price_plan": 3, 

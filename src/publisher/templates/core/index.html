@@ -61,16 +61,16 @@
 {% block extra_scripts %}
   <script type="text/javascript">
     var count = 0;
-    var el = $('.slider-card').parent().children().hide();
+    var el = $('.slider-card').parent().parent().children().hide();
     var old = el.last();
 
     function changeNews() {
-      old.fadeOut(100);
-      old = $(el[count++]).fadeIn(250);
+      old.fadeOut(1000);
+      old = $(el[count++]).fadeIn(1000);
 
       setTimeout(function() {
         changeNews();
-      }, 3000);
+      }, 6000);
 
       if (count == el.length) {
         count = 0;

@@ -60,80 +60,49 @@
 
   .feed-items {
     .feed-item {
-
-      padding: 10px 0;
-
       .icon { 
-        width: 50px;
-        height: 50px;
+        width: 52px;
+        height: 52px;
         display: inline-block;
-        background: #94B4B9;
         float: left;
-        margin-right: 5px;
-        margin-top: 5px;
-      }
-
-      .header { 
-
-        border-bottom: 1px solid #E5E7E2;
-        margin-bottom: 10px;
-
-        h3 { 
-          font-size: 28px;
-          font-weight: 400;
-
-          span {
-            color: #8A8A8A;
-            font-size: 18px; 
-            display: block;
-            line-height: 14px;
-          }
+        margin-right: 10px;
+        &.icon-text {
+          background: transparent url('/static/img/icn_text.png') top left no-repeat;
         }
       }
     }
   }
-  
-
-    
-
-.feeds {
-  .feed-item { 
-
-      .sample {
-        padding: 10px 4px;
-        background: #3C3D3F;
-        
-      }
-
-    .wrap {
-      display: inline-block;
-      width: 100%;
-      overflow: auto;
-      
-
-      .image { 
-        padding: 20px 10px 0 0;
-        float: left;
-      }
 
 
+  section.feed-item-wrapper {
+    padding: 0;
+    margin: 0;
 
-      .content { 
-        float: left;
-
-        h3 span {
-          font-size: 12px;
-          
+    header.feed-title {
+      h3 {
+        font-weight: 500;
+        font-size: 32px;
+        line-height: 1;
+        margin: 0 0 4px 0;
+        a {
+          color: #3C3D3F;
         }
 
       }
+      span.date {
+        color: #848484;
+      }
     }
 
-    .actions {
+    header.feed-title, .content-inner {
+      .clearfix();
+      border-bottom: 1px solid #DFE0D9;
+    }
 
+    .feed-header-inner, .content-inner {
+      padding: 20px;
     }
   }
-}
 
 
 .tags {

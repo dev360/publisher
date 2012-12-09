@@ -669,50 +669,52 @@ section {
 .feed-detail .publisher-detail:after {
   clear: both;
 }
-.feed-detail .feed-items .feed-item {
-  padding: 10px 0;
-}
 .feed-detail .feed-items .feed-item .icon {
-  width: 50px;
-  height: 50px;
+  width: 52px;
+  height: 52px;
   display: inline-block;
-  background: #94B4B9;
   float: left;
-  margin-right: 5px;
-  margin-top: 5px;
+  margin-right: 10px;
 }
-.feed-detail .feed-items .feed-item .header {
-  border-bottom: 1px solid #E5E7E2;
-  margin-bottom: 10px;
+.feed-detail .feed-items .feed-item .icon.icon-text {
+  background: transparent url('/static/img/icn_text.png') top left no-repeat;
 }
-.feed-detail .feed-items .feed-item .header h3 {
-  font-size: 28px;
-  font-weight: 400;
+.feed-detail section.feed-item-wrapper {
+  padding: 0;
+  margin: 0;
 }
-.feed-detail .feed-items .feed-item .header h3 span {
-  color: #8A8A8A;
-  font-size: 18px;
-  display: block;
-  line-height: 14px;
+.feed-detail section.feed-item-wrapper header.feed-title h3 {
+  font-weight: 500;
+  font-size: 32px;
+  line-height: 1;
+  margin: 0 0 4px 0;
 }
-.feed-detail .feeds .feed-item .sample {
-  padding: 10px 4px;
-  background: #3C3D3F;
+.feed-detail section.feed-item-wrapper header.feed-title h3 a {
+  color: #3C3D3F;
 }
-.feed-detail .feeds .feed-item .wrap {
-  display: inline-block;
-  width: 100%;
-  overflow: auto;
+.feed-detail section.feed-item-wrapper header.feed-title span.date {
+  color: #848484;
 }
-.feed-detail .feeds .feed-item .wrap .image {
-  padding: 20px 10px 0 0;
-  float: left;
+.feed-detail section.feed-item-wrapper header.feed-title,
+.feed-detail section.feed-item-wrapper .content-inner {
+  *zoom: 1;
+  border-bottom: 1px solid #DFE0D9;
 }
-.feed-detail .feeds .feed-item .wrap .content {
-  float: left;
+.feed-detail section.feed-item-wrapper header.feed-title:before,
+.feed-detail section.feed-item-wrapper .content-inner:before,
+.feed-detail section.feed-item-wrapper header.feed-title:after,
+.feed-detail section.feed-item-wrapper .content-inner:after {
+  display: table;
+  content: "";
+  line-height: 0;
 }
-.feed-detail .feeds .feed-item .wrap .content h3 span {
-  font-size: 12px;
+.feed-detail section.feed-item-wrapper header.feed-title:after,
+.feed-detail section.feed-item-wrapper .content-inner:after {
+  clear: both;
+}
+.feed-detail section.feed-item-wrapper .feed-header-inner,
+.feed-detail section.feed-item-wrapper .content-inner {
+  padding: 20px;
 }
 .feed-detail .tags ul {
   list-style-type: none;
